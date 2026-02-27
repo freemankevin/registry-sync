@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-02-26T07:09:43.246120+00:00",
+  "updated_at": "2026-02-27T03:42:59.109301+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 10,
-  "total_versions": 59,
+  "total_versions": 67,
   "images": [
     {
       "name": "library/elasticsearch",
       "description": "Elasticsearch 搜索引擎和分析引擎",
       "repository": "library__elasticsearch",
-      "total_versions": 2,
-      "latest_version": "9.3.0",
-      "updated": "2026-02-19T03:57:11+00:00",
+      "total_versions": 3,
+      "latest_version": "9.3.1",
+      "updated": "2026-02-27T03:41:53+00:00",
       "size": "",
       "layers": 0,
       "stars": 0,
@@ -20,6 +20,16 @@
         "ARM64"
       ],
       "versions": [
+        {
+          "version": "9.3.1",
+          "digest": "sha256:2cc6bb7210e693c9ee96a2d37833dbd8d3edaacfc0e468d9daa04cb7a125e9a0",
+          "created_at": "2026-02-27T03:41:53+00:00",
+          "synced_at": "2026-02-27T03:41:53+00:00",
+          "target": "ghcr.io/freemankevin/library__elasticsearch:9.3.1",
+          "source": "docker.io/library/elasticsearch:9.3.1",
+          "size": "",
+          "layers": 0
+        },
         {
           "version": "9.3.0",
           "digest": "sha256:d6dbcf006047aafb87719e6e0b673c2067a760c902bd207059e84b27b22e2bb2",
@@ -538,9 +548,9 @@
       "name": "freelabspace/postgresql-postgis",
       "description": "PostgreSQL 数据库 + PostGIS 扩展",
       "repository": "freelabspace__postgresql-postgis",
-      "total_versions": 16,
-      "latest_version": "18.1",
-      "updated": "2026-01-22T03:43:43+00:00",
+      "total_versions": 23,
+      "latest_version": "18.2",
+      "updated": "2026-02-27T03:42:55+00:00",
       "size": "",
       "layers": 0,
       "stars": 0,
@@ -550,12 +560,32 @@
       ],
       "versions": [
         {
+          "version": "18.2",
+          "digest": "sha256:90101c8ede5595dd5bcca4739563b3cea1838f53a8740033668ab9744e13166f",
+          "created_at": "2026-02-27T03:42:55+00:00",
+          "synced_at": "2026-02-27T03:42:55+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:18.2",
+          "source": "docker.io/freelabspace/postgresql-postgis:18.2",
+          "size": "",
+          "layers": 0
+        },
+        {
           "version": "18.1",
           "digest": "sha256:a6ad698279b7888ab53a190272a9e37376851f5f1c6758f9e5e8ce8ac08c40d7",
           "created_at": "2026-01-22T03:43:43+00:00",
           "synced_at": "2026-01-22T03:43:43+00:00",
           "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:18.1",
           "source": "docker.io/freelabspace/postgresql-postgis:18.1",
+          "size": "",
+          "layers": 0
+        },
+        {
+          "version": "17.8",
+          "digest": "sha256:36d2721903a542e13e3a645f067850c7b03c371fe82d775245834ef2597ccb90",
+          "created_at": "2026-02-27T03:42:46+00:00",
+          "synced_at": "2026-02-27T03:42:46+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:17.8",
+          "source": "docker.io/freelabspace/postgresql-postgis:17.8",
           "size": "",
           "layers": 0
         },
@@ -590,6 +620,16 @@
           "layers": 0
         },
         {
+          "version": "16.12",
+          "digest": "sha256:0748b5565217da8147cbfbdc38d32c07f5d4522f36469b614bc929c4a66355a7",
+          "created_at": "2026-02-27T03:42:42+00:00",
+          "synced_at": "2026-02-27T03:42:42+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:16.12",
+          "source": "docker.io/freelabspace/postgresql-postgis:16.12",
+          "size": "",
+          "layers": 0
+        },
+        {
           "version": "16.11",
           "digest": "sha256:5741d922d3d85eba6e9819e275e4bccc7d4d2140a86d232a057498d39fb15a7e",
           "created_at": "2026-01-23T01:43:07+00:00",
@@ -611,11 +651,21 @@
         },
         {
           "version": "16.9",
-          "digest": "sha256:8cb61800c50a23b9c9ccba5823592ab7e3023a7c0399312328edaa62a1b21726",
-          "created_at": "2026-01-23T01:42:33+00:00",
-          "synced_at": "2026-01-23T01:42:33+00:00",
+          "digest": "sha256:db8c0b76857412d89f0140e73327b358576ccca7da4b1613366692575fcb648b",
+          "created_at": "2026-02-27T03:42:26+00:00",
+          "synced_at": "2026-02-27T03:42:26+00:00",
           "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:16.9",
           "source": "docker.io/freelabspace/postgresql-postgis:16.9",
+          "size": "",
+          "layers": 0
+        },
+        {
+          "version": "15.16",
+          "digest": "sha256:673c6cbb08df6a959b5192c2677318d6cace93f43696e5f03144438f98dda796",
+          "created_at": "2026-02-27T03:42:29+00:00",
+          "synced_at": "2026-02-27T03:42:29+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:15.16",
+          "source": "docker.io/freelabspace/postgresql-postgis:15.16",
           "size": "",
           "layers": 0
         },
@@ -650,6 +700,26 @@
           "layers": 0
         },
         {
+          "version": "15.9",
+          "digest": "sha256:966b31dc70790ab8feec6634be098416349d39768c46e9003d1eda643e152981",
+          "created_at": "2026-02-27T03:42:18+00:00",
+          "synced_at": "2026-02-27T03:42:18+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:15.9",
+          "source": "docker.io/freelabspace/postgresql-postgis:15.9",
+          "size": "",
+          "layers": 0
+        },
+        {
+          "version": "14.21",
+          "digest": "sha256:bf60dc422f509be7d8214cdbc7b8d8cf8d119a29737500a616c5bf01dc912ea8",
+          "created_at": "2026-02-27T03:42:10+00:00",
+          "synced_at": "2026-02-27T03:42:10+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:14.21",
+          "source": "docker.io/freelabspace/postgresql-postgis:14.21",
+          "size": "",
+          "layers": 0
+        },
+        {
           "version": "14.20",
           "digest": "sha256:870a63a3c2f91f21f49291ec9f0217d3ee2d99f54bcffb333419edceae525068",
           "created_at": "2026-01-23T01:41:29+00:00",
@@ -680,10 +750,20 @@
           "layers": 0
         },
         {
+          "version": "14.9",
+          "digest": "sha256:09c7de6a0137681598d3d34eaaa3400233d4e1d82e60335c74c80b735a403073",
+          "created_at": "2026-02-27T03:42:03+00:00",
+          "synced_at": "2026-02-27T03:42:03+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:14.9",
+          "source": "docker.io/freelabspace/postgresql-postgis:14.9",
+          "size": "",
+          "layers": 0
+        },
+        {
           "version": "13.23",
-          "digest": "sha256:0f58fa4d21f3ed3d0e727fe1d71a7aef1e5193fe12533dfa3fd5a804a35a2a2c",
-          "created_at": "2026-02-26T07:09:30+00:00",
-          "synced_at": "2026-02-26T07:09:30+00:00",
+          "digest": "sha256:18fa70c43dfb5c58c42d9e9cc1f2afaa55817fbe15fdd24c5d596b19ed06f750",
+          "created_at": "2026-02-27T03:41:48+00:00",
+          "synced_at": "2026-02-27T03:41:48+00:00",
           "target": "ghcr.io/freemankevin/freelabspace__postgresql-postgis:13.23",
           "source": "docker.io/freelabspace/postgresql-postgis:13.23",
           "size": "",
