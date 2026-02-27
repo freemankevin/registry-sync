@@ -83,8 +83,10 @@ jobs:
 
       - name: Login to quay.io (optional)
         uses: docker/login-action@v3
-        if: secrets.QUAY_USERNAME != ''
+        if: ${{ env.QUAY_USERNAME != '' }}
         continue-on-error: true
+        env:
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
