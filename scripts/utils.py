@@ -160,7 +160,8 @@ def load_env_files(project_root: Path = None) -> bool:
     for env_file in env_files:
         env_path = project_root / env_file
         if env_path.exists():
-            load_dotenv(dotenv_path=env_path, override=True)
+            # override=False 确保已存在的环境变量（如系统环境变量）不会被覆盖
+            load_dotenv(dotenv_path=env_path, override=False)
             loaded = True
             # 打印调试信息（仅用于排查问题）
             # print(f"[DEBUG] Loaded env file: {env_path}")

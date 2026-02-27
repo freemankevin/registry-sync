@@ -94,6 +94,8 @@ jobs:
 
       - name: Update manifest versions
         id: update
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🔄 检查并更新镜像版本..."
           python3 main.py update --max-workers 3
