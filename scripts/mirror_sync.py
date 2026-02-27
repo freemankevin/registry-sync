@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+n#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 镜像同步工具
@@ -29,6 +29,7 @@ class MirrorSync:
         self.max_retries = max_retries
         self.retry_delay = retry_delay
         self.mirrored_images = []
+        self.failed_images = []  # 记录失败的镜像
         self.success_count = 0
         self.fail_count = 0
         self._lock = threading.Lock()
@@ -228,9 +229,16 @@ class MirrorSync:
         else:
             print(f"❌ Failed to mirror {source_image}")
             
-            # 线程安全地更新失败计数
+            # 线程安全地更新失败计数和列表
             with self._lock:
                 self.fail_count += 1
+                self.failed_images.append({
+                    'name': image_name,
+                    'source': source_image,
+                    'target': target_image,
+                    'version': version,
+                    'description': description
+                })
             return False
     
     def sync_from_manifest(
@@ -343,12 +351,19 @@ class MirrorSync:
 
         # 打印统计
         print(f"\n📊 Summary:")
-        print(f"   Total: {len(self.mirrored_images)}")
+        print(f"   Total: {len(self.mirrored_images) + len(self.failed_images)}")
         print(f"   Success: {self.success_count}")
         print(f"   Failed: {self.fail_count}")
+        
+        # 显示失败的镜像列表
+        if self.failed_images:
+            print(f"\n❌ Failed Images ({len(self.failed_images)}):")
+            for img in self.failed_images:
+                print(f"   - {img['source']} ({img['description']})")
 
         # 返回简单的统计结果
         return {
             'success_count': self.success_count,
-            'fail_count': self.fail_count
+            'fail_count': self.fail_count,
+            'failed_images': self.failed_images
         }

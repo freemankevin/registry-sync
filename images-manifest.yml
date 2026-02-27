@@ -75,8 +75,8 @@ images:
   tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
   sync_all_matching: false
 - source: gcr.io/google-samples/node-hello:1.0
-  enabled: true
-  description: Google Sample - Node.js Hello
+  enabled: false
+  description: Google Sample - Node.js Hello (镜像不存在或无法访问)
   tag_pattern: ^[0-9]+\.[0-9]+$
   sync_all_matching: false
 - source: gcr.io/google-samples/hello-app:2.0
@@ -102,8 +102,8 @@ images:
   exclude_pattern: .*-rc.*|.*-beta.*
   sync_all_matching: false
 - source: gcr.io/istio-release/istiod:1.29.0
-  enabled: true
-  description: Istiod
+  enabled: false
+  description: Istiod (镜像不存在或无法访问)
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*-rc.*|.*-beta.*
   sync_all_matching: false
@@ -158,8 +158,8 @@ images:
   exclude_pattern: .*-rc.*|.*beta.*
   sync_all_matching: false
 - source: quay.io/argoproj/argocd:v2.13
-  enabled: true
-  description: Argo CD - Declarative GitOps
+  enabled: false
+  description: Argo CD - Declarative GitOps (镜像不存在或无法访问)
   tag_pattern: ^v[0-9]+\.[0-9]+$
   exclude_pattern: .*-rc.*|.*beta.*
   sync_all_matching: false
