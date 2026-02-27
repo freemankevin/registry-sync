@@ -118,7 +118,7 @@ jobs:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 开始同步镜像..."
-          python3 main.py --debug sync --owner ${{ env.GITHUB_OWNER }} --registry ${{ env.GHCR_REGISTRY }} --max-workers 2 --max-retries 5 --retry-delay 3
+          python3 main.py --debug sync --owner ${{ env.GITHUB_OWNER }} --registry ${{ env.GHCR_REGISTRY }} --max-workers 2 --max-retries 5 --retry-delay 3 --continue-on-error
 
           # 提取同步统计
           if [ -f images.json ]; then
