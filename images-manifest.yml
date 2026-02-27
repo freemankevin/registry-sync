@@ -1,5 +1,5 @@
 images:
-- source: library/elasticsearch:9.3.0
+- source: library/elasticsearch:9.3.1
   enabled: true
   description: Elasticsearch 搜索引擎和分析引擎
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
@@ -39,7 +39,7 @@ images:
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*--.*
   sync_all_matching: false
-- source: freelabspace/postgresql-postgis:18.1
+- source: freelabspace/postgresql-postgis:18.2
   enabled: true
   description: PostgreSQL 数据库 + PostGIS 扩展
   tag_pattern: ^(1[3-8])\.[0-9]+$
@@ -67,4 +67,4 @@ config:
   retention:
     max_versions: 3
     cleanup_old_versions: false
-  last_checked: '2026-02-24T03:55:40.157914+00:00'
+  last_checked: '2026-02-27T03:41:31.350981+00:00'
