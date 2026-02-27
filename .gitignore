@@ -36,6 +36,9 @@ nb-configuration.xml
 web/node_modules/
 logs/
 
+# Environment variables (只忽略实际的配置文件，保留示例文件)
+.env
+
 # Frontend development
 web/images.json
 

@@ -6,9 +6,18 @@
 
 import argparse
 import yaml
+import os
 from pathlib import Path
 
-from .docker_hub_api import DockerHubAPI
+# 加载环境变量
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+from .registry_api import RegistryAPI
+from .ghcr_api import GHCRRegistryAPI
 from .manifest_manager import ManifestManager
 from .mirror_sync import MirrorSync
 from .utils import setup_logger, COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_RED, COLOR_CYAN, COLOR_RESET
@@ -39,12 +48,25 @@ def cmd_update(args):
     
     # 初始化 API 和管理器
     max_workers = getattr(args, 'max_workers', 5)
-    api = DockerHubAPI(logger, max_workers=max_workers)
+    registry_api = RegistryAPI(logger, max_workers=max_workers)
+    
+    # 从环境变量获取 GHCR token
+    ghcr_token = os.environ.get('GHCR_TOKEN')
+    ghcr_api = GHCRRegistryAPI(logger, token=ghcr_token) if ghcr_token else None
+    
+    if not ghcr_api:
+        print(f"{COLOR_YELLOW}⚠️  未设置 GHCR_TOKEN，无法更新 GHCR 镜像版本信息{COLOR_RESET}")
+    
     manager = ManifestManager(manifest_file, logger)
     
     # 更新版本
     use_concurrency = getattr(args, 'concurrency', True)
-    updated_count = manager.update_versions(api, dry_run=args.dry_run, use_concurrency=use_concurrency)
+    updated_count = manager.update_versions(
+        registry_api, 
+        ghcr_api=ghcr_api,
+        dry_run=args.dry_run, 
+        use_concurrency=use_concurrency
+    )
     
     if updated_count > 0 and not args.dry_run:
         print(f"\n{COLOR_GREEN}✓ 成功更新 {updated_count} 个镜像版本{COLOR_RESET}\n")
@@ -82,7 +104,7 @@ def cmd_sync(args):
     max_retries = getattr(args, 'max_retries', 3)
     retry_delay = getattr(args, 'retry_delay', 2.0)
 
-    api = DockerHubAPI(logger, max_workers=max_workers)
+    api = RegistryAPI(logger, max_workers=max_workers)
     sync = MirrorSync(
         args.registry,
         args.owner,

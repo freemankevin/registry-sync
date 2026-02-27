@@ -276,7 +276,7 @@ class MirrorSync:
                 # 获取所有匹配的版本
                 print(f"\n🔍 Fetching all matching versions for {image_name}...")
                 all_versions = api.get_all_matching_versions(
-                    image_name, tag_pattern, exclude_pattern
+                    source, tag_pattern, exclude_pattern
                 )
 
                 if all_versions:
