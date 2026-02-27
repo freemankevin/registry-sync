@@ -130,9 +130,7 @@ class MirrorSync:
                 cmd = [
                     'regctl', 'image', 'copy',
                     '--verbosity', 'info',
-                    '--digest-tags',
-                    '--include-external',
-                    '--referrers',
+                    '--force-recursive',
                     source, target
                 ]
 
