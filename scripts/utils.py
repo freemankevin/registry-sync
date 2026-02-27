@@ -130,6 +130,64 @@ def get_ghcr_image_name(source_image: str, owner: str, tag: str = None) -> str:
     return f"ghcr.io/{owner}/{ghcr_path}:{tag}"
 
 
+def load_env_files(project_root: Path = None) -> bool:
+    """加载环境变量文件
+    
+    按以下顺序加载：
+    1. .env.local (本地开发环境，优先级最高)
+    2. .env (通用环境配置)
+    
+    Args:
+        project_root: 项目根目录路径
+        
+    Returns:
+        是否成功加载了任何环境变量文件
+    """
+    try:
+        from dotenv import load_dotenv
+    except ImportError:
+        # python-dotenv 未安装
+        return False
+    
+    if project_root is None:
+        project_root = Path(__file__).parent.parent
+    
+    loaded = False
+    
+    # 按优先级顺序加载 .env 文件
+    env_files = ['.env.local', '.env']
+    
+    for env_file in env_files:
+        env_path = project_root / env_file
+        if env_path.exists():
+            load_dotenv(dotenv_path=env_path, override=True)
+            loaded = True
+            # 打印调试信息（仅用于排查问题）
+            # print(f"[DEBUG] Loaded env file: {env_path}")
+    
+    return loaded
+
+
+def get_env_variable(name: str, default: str = None, required: bool = False) -> str:
+    """获取环境变量，支持调试输出
+    
+    Args:
+        name: 环境变量名称
+        default: 默认值
+        required: 是否为必需变量
+        
+    Returns:
+        环境变量值或默认值
+    """
+    import os
+    value = os.environ.get(name, default)
+    
+    if required and not value:
+        raise ValueError(f"Required environment variable '{name}' is not set")
+    
+    return value
+
+
 def setup_logger(name: str, debug: bool = False, log_dir: Path = None) -> logging.Logger:
     """设置日志记录器"""
     logger = logging.getLogger(name)

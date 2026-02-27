@@ -38,6 +38,7 @@ logs/
 
 # Environment variables (只忽略实际的配置文件，保留示例文件)
 .env
+.env.local
 
 # Frontend development
 web/images.json

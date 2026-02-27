@@ -9,18 +9,15 @@ import yaml
 import os
 from pathlib import Path
 
-# 加载环境变量
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass
-
 from .registry_api import RegistryAPI
 from .ghcr_api import GHCRRegistryAPI
 from .manifest_manager import ManifestManager
 from .mirror_sync import MirrorSync
-from .utils import setup_logger, COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_RED, COLOR_CYAN, COLOR_RESET
+from .utils import setup_logger, load_env_files, get_env_variable, COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_RED, COLOR_CYAN, COLOR_RESET
+
+# 确保环境变量已加载（如果之前没有加载）
+PROJECT_ROOT = Path(__file__).parent.parent
+load_env_files(PROJECT_ROOT)
 
 # ==================== 配置 ====================
 
@@ -51,7 +48,20 @@ def cmd_update(args):
     registry_api = RegistryAPI(logger, max_workers=max_workers)
     
     # 从环境变量获取 GHCR token
-    ghcr_token = os.environ.get('GHCR_TOKEN')
+    ghcr_token = get_env_variable('GHCR_TOKEN')
+    
+    # 调试信息（仅在 debug 模式下显示）
+    if args.debug:
+        if ghcr_token:
+            masked_token = ghcr_token[:4] + '*' * (len(ghcr_token) - 8) + ghcr_token[-4:] if len(ghcr_token) > 8 else '****'
+            print(f"{COLOR_CYAN}[DEBUG] GHCR_TOKEN loaded: {masked_token}{COLOR_RESET}")
+        else:
+            print(f"{COLOR_YELLOW}[DEBUG] GHCR_TOKEN not found in environment variables{COLOR_RESET}")
+            # 显示所有可用的环境变量（用于调试）
+            env_vars = [k for k in os.environ.keys() if 'TOKEN' in k.upper() or 'GHCR' in k.upper() or 'GITHUB' in k.upper()]
+            if env_vars:
+                print(f"{COLOR_CYAN}[DEBUG] Available token-related env vars: {env_vars}{COLOR_RESET}")
+    
     ghcr_api = GHCRRegistryAPI(logger, token=ghcr_token) if ghcr_token else None
     
     if not ghcr_api:
@@ -130,11 +140,10 @@ def cmd_sync(args):
         print(f"\n{COLOR_CYAN}📝 生成镜像列表 JSON...{COLOR_RESET}")
         try:
             from scripts.generate_images_json import generate_images_json
-            import os
             
             output_file = args.output or OUTPUT_FILE
             # 从环境变量获取 GHCR_TOKEN
-            token = os.environ.get('GHCR_TOKEN')
+            token = get_env_variable('GHCR_TOKEN')
             generate_images_json(
                 manifest_file,
                 output_file,
