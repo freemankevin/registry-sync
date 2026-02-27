@@ -11,6 +11,35 @@ from typing import Optional, List, Dict
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from datetime import datetime, timezone
+from urllib.parse import quote
+
+
+def encode_package_name(name: str) -> str:
+    """对包名进行 URL 编码
+    
+    GitHub API 要求包名中的斜杠进行 URL 编码
+    例如: docker-io/library/elasticsearch -> docker-io%2Flibrary%2Felasticsearch
+    
+    Args:
+        name: 包名
+        
+    Returns:
+        URL 编码后的包名
+    """
+    return quote(name, safe='')  # safe='' 确保斜杠也被编码
+
+
+def decode_package_name(encoded_name: str) -> str:
+    """对 URL 编码的包名进行解码
+    
+    Args:
+        encoded_name: URL 编码后的包名
+        
+    Returns:
+        原始包名
+    """
+    from urllib.parse import unquote
+    return unquote(encoded_name)
 
 
 class GHCRRegistryAPI:
@@ -132,7 +161,9 @@ class GHCRRegistryAPI:
             # 或: GET /users/{username}/packages/container/{package_name}/versions
             
             # 首先尝试组织端点
-            url = f"{self.base_url}/orgs/{owner}/packages/container/{repository}/versions"
+            # 对包名进行 URL 编码（斜杠需要编码为 %2F）
+            encoded_repo = encode_package_name(repository)
+            url = f"{self.base_url}/orgs/{owner}/packages/container/{encoded_repo}/versions"
             
             if self.logger:
                 self.logger.debug(f"获取 {owner}/{repository} 的标签列表")
@@ -160,7 +191,7 @@ class GHCRRegistryAPI:
                 if response.status_code == 404 and use_org_endpoint:
                     if self.logger:
                         self.logger.debug(f"组织端点返回 404，尝试用户端点")
-                    url = f"{self.base_url}/users/{owner}/packages/container/{repository}/versions"
+                    url = f"{self.base_url}/users/{owner}/packages/container/{encoded_repo}/versions"
                     use_org_endpoint = False
                     continue
                 
