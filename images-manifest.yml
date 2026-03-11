@@ -15,7 +15,7 @@ images:
   tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*BETA.*|.*RC.*|.*SNAPSHOT.*
   sync_all_matching: false
-- source: library/nginx:1.29.5-alpine
+- source: library/nginx:1.29.6-alpine
   enabled: true
   description: High-performance HTTP server and reverse proxy
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+-alpine$
@@ -90,13 +90,13 @@ images:
   description: BusyBox - The Swiss Army Knife of embedded Linux
   tag_pattern: ^[0-9]+\.[0-9]+$
   sync_all_matching: false
-- source: gcr.io/istio-release/pilot:1.29.0
+- source: gcr.io/istio-release/pilot:1.29.1
   enabled: true
   description: Service mesh traffic management and configuration
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*-rc.*|.*-beta.*
   sync_all_matching: false
-- source: gcr.io/istio-release/proxyv2:1.29.0
+- source: gcr.io/istio-release/proxyv2:1.29.1
   enabled: true
   description: Service mesh sidecar proxy
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
@@ -170,13 +170,13 @@ images:
   tag_pattern: ^[0-9]+\.[0-9]+$
   exclude_pattern: .*-rc.*|.*alpha.*|.*beta.*
   sync_all_matching: false
-- source: quay.io/jetstack/cert-manager-controller:v1.19.4
+- source: quay.io/jetstack/cert-manager-controller:v1.20.0
   enabled: true
   description: Kubernetes certificate management controller
   tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*-rc.*|.*alpha.*|.*beta.*
   sync_all_matching: false
-- source: quay.io/jetstack/cert-manager-webhook:v1.19.4
+- source: quay.io/jetstack/cert-manager-webhook:v1.20.0
   enabled: true
   description: Admission webhook for cert-manager
   tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
@@ -196,4 +196,4 @@ config:
   retention:
     max_versions: 3
     cleanup_old_versions: false
-  last_checked: '2026-03-08T03:55:48.558353+00:00'
+  last_checked: '2026-03-11T03:53:11.393357+00:00'
