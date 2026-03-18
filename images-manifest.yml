@@ -20,7 +20,7 @@ images:
   description: High-performance HTTP server and reverse proxy
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+-alpine$
   sync_all_matching: false
-- source: library/rabbitmq:4.2.4-management-alpine
+- source: library/rabbitmq:4.2.5-management-alpine
   enabled: true
   description: Message broker with management plugin
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+-management-alpine$
@@ -196,4 +196,4 @@ config:
   retention:
     max_versions: 3
     cleanup_old_versions: false
-  last_checked: '2026-03-11T03:53:11.393357+00:00'
+  last_checked: '2026-03-18T04:07:43.816808+00:00'
