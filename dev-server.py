@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 from urllib.parse import unquote
 
-PORT = 8000
+PORT = 7886
 PROJECT_ROOT = Path(__file__).parent
 
 class DevHandler(http.server.SimpleHTTPRequestHandler):
@@ -34,10 +34,14 @@ class DevHandler(http.server.SimpleHTTPRequestHandler):
             return str(PROJECT_ROOT / 'web' / path.lstrip('/'))
     
     def end_headers(self):
-        """添加必要的 CORS 头"""
+        """添加必要的 CORS 头和缓存控制"""
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        if self.path == '/images.json':
+            self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
+            self.send_header('Pragma', 'no-cache')
+            self.send_header('Expires', '0')
         super().end_headers()
     
     def log_message(self, format, *args):

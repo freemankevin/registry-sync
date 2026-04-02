@@ -56,6 +56,11 @@
             </div>
             
             <div class="flex items-center gap-3">
+                <button onclick="toggleHotReload()" class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110 group hot-reload-btn" id="hotReloadBtn" title="Hot Reload Active" aria-label="Toggle hot reload">
+                    <i id="hotReloadIcon" class="fas fa-sync-alt text-lg text-secondary group-hover:text-green-400 transition-colors"></i>
+                    <span id="hotReloadDot" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                </button>
+
                 <button onclick="toggleTheme()" class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110 group" id="themeBtn" title="Dark Mode" aria-label="Toggle theme">
                     <i id="themeIcon" class="fas fa-sun text-xl text-secondary group-hover:text-amber-400 transition-colors"></i>
                 </button>

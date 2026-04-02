@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "sync": "node sync-data.js",
-    "dev": "node sync-data.js && npx serve . -p 3000",
+    "dev": "node sync-data.js && npx serve . -p 7886",
     "build": "echo 'No build step needed - static HTML/CSS/JS'",
-    "preview": "node sync-data.js && npx serve . -p 3000"
+    "preview": "node sync-data.js && npx serve . -p 7886"
   },
   "keywords": [
     "docker",

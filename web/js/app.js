@@ -888,6 +888,84 @@ function sampleData() {
   ];
 }
 
+// ── Hot Reload ─────────────────────────────────
+let lastUpdateTime = null;
+let hotReloadInterval = 30000; // 30 seconds
+let hotReloadTimer = null;
+let isHotReloadActive = true;
+
+function updateHotReloadUI() {
+  const btn = document.getElementById('hotReloadBtn');
+  const dot = document.getElementById('hotReloadDot');
+  const icon = document.getElementById('hotReloadIcon');
+  
+  if (!btn) return;
+  
+  if (isHotReloadActive) {
+    btn.classList.remove('hot-reload-paused');
+    btn.title = 'Hot Reload Active (30s)';
+    if (icon) icon.style.opacity = '1';
+  } else {
+    btn.classList.add('hot-reload-paused');
+    btn.title = 'Hot Reload Paused';
+    if (icon) icon.style.opacity = '0.5';
+  }
+}
+
+async function checkForUpdates() {
+  const btn = document.getElementById('hotReloadBtn');
+  if (btn) btn.classList.add('hot-reload-checking');
+  
+  try {
+    const res = await fetch('/images.json', { cache: 'no-store' });
+    if (!res.ok) return;
+    
+    const data = await res.json();
+    const newUpdateTime = data.updated_at;
+    
+    if (lastUpdateTime && newUpdateTime && newUpdateTime !== lastUpdateTime) {
+      console.log('[Hot Reload] Detected update:', newUpdateTime);
+      showToast('镜像列表已更新', 'blue');
+      processData(data);
+    }
+    
+    lastUpdateTime = newUpdateTime;
+  } catch (e) {
+    console.error('[Hot Reload] Check failed:', e);
+  } finally {
+    if (btn) btn.classList.remove('hot-reload-checking');
+  }
+}
+
+function startHotReload() {
+  if (hotReloadTimer) clearInterval(hotReloadTimer);
+  hotReloadTimer = setInterval(checkForUpdates, hotReloadInterval);
+  isHotReloadActive = true;
+  updateHotReloadUI();
+  console.log('[Hot Reload] Started, interval:', hotReloadInterval / 1000, 's');
+}
+
+function stopHotReload() {
+  if (hotReloadTimer) {
+    clearInterval(hotReloadTimer);
+    hotReloadTimer = null;
+  }
+  isHotReloadActive = false;
+  updateHotReloadUI();
+  console.log('[Hot Reload] Stopped');
+}
+
+function toggleHotReload() {
+  if (isHotReloadActive) {
+    stopHotReload();
+    showToast('热更新已暂停', 'gray');
+  } else {
+    startHotReload();
+    showToast('热更新已启动', 'green');
+  }
+}
+
 // ── Boot ──────────────────────────────────────
 initTheme();
 loadImages();
+startHotReload();

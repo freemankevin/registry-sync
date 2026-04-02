@@ -24,7 +24,35 @@ class ManifestManager:
         self.manifest_file = manifest_file
         self.logger = logger
         self.manifest = None
+        self._last_mtime = None
         self._load_manifest()
+    
+    def _get_file_mtime(self) -> float:
+        """获取文件最后修改时间"""
+        try:
+            return self.manifest_file.stat().st_mtime
+        except Exception:
+            return 0
+    
+    def check_and_reload(self) -> bool:
+        """检查文件是否变更，如有变更则重新加载
+        
+        Returns:
+            是否重新加载了文件
+        """
+        current_mtime = self._get_file_mtime()
+        if self._last_mtime is None:
+            self._last_mtime = current_mtime
+            return False
+        
+        if current_mtime > self._last_mtime:
+            if self.logger:
+                self.logger.info(f"检测到清单文件变更，重新加载: {self.manifest_file}")
+            self._load_manifest()
+            self._last_mtime = current_mtime
+            return True
+        
+        return False
     
     def _load_manifest(self) -> None:
         """加载清单文件"""

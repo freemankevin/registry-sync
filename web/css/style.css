@@ -1206,4 +1206,30 @@ button[onclick="toggleTheme()"]:hover i {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
         
+        /* Hot Reload Button Styles */
+        .hot-reload-btn {
+            position: relative;
+        }
+        
+        #hotReloadDot {
+            display: block;
+        }
+        
+        .hot-reload-paused #hotReloadDot {
+            display: none;
+        }
+        
+        .hot-reload-paused #hotReloadIcon {
+            opacity: 0.5;
+        }
+        
+        @keyframes syncSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hot-reload-checking #hotReloadIcon {
+            animation: syncSpin 1s linear infinite;
+        }
+        
 
