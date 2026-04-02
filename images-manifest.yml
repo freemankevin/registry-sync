@@ -60,59 +60,6 @@ images:
     wget, ping, nslookup, dig, telnet, nc, tcpdump
   tag_pattern: ^latest$|^[0-9]+\.[0-9]+$
   sync_all_matching: false
-- source: gcr.io/kubeflow-images-public/katib/v1beta1/katib-controller:v0.9.0
-  enabled: true
-  description: Kubernetes native AutoML controller
-  tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: gcr.io/kubeflow-images-public/katib/v1beta1/katib-db-manager:v0.9.0
-  enabled: true
-  description: Database manager for Katib experiments
-  tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: gcr.io/kubeflow-images-public/katib/v1beta1/katib-ui:v0.9.0
-  enabled: true
-  description: Web user interface for Katib
-  tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: gcr.io/google-samples/node-hello:1.0
-  enabled: false
-  description: Google Sample - Node.js Hello (镜像不存在或无法访问)
-  tag_pattern: ^[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: gcr.io/google-samples/hello-app:2.0
-  enabled: true
-  description: Sample Hello World application
-  tag_pattern: ^[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: gcr.io/google-containers/busybox:1.27
-  enabled: true
-  description: BusyBox - The Swiss Army Knife of embedded Linux
-  tag_pattern: ^[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: gcr.io/istio-release/pilot:1.29.1
-  enabled: true
-  description: Service mesh traffic management and configuration
-  tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*-beta.*
-  sync_all_matching: false
-- source: gcr.io/istio-release/proxyv2:1.29.1
-  enabled: true
-  description: Service mesh sidecar proxy
-  tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*-beta.*
-  sync_all_matching: false
-- source: gcr.io/istio-release/istiod:1.29.0
-  enabled: false
-  description: Istiod (镜像不存在或无法访问)
-  tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*-beta.*
-  sync_all_matching: false
-- source: gcr.io/google-containers/pause:3.2
-  enabled: true
-  description: Kubernetes infrastructure pause container
-  tag_pattern: ^[0-9]+\.[0-9]+$
-  sync_all_matching: false
 - source: gcr.io/google-containers/etcd:3.4.9
   enabled: true
   description: Distributed reliable key-value store
@@ -124,74 +71,11 @@ images:
   description: MinIO AIStor - High-performance object storage for AI workloads
   tag_pattern: ^RELEASE\.[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}-[0-9]{2}-[0-9]{2}Z$
   sync_all_matching: false
-- source: quay.io/openshift/origin-cli:4.22
-  enabled: true
-  description: OpenShift command-line interface
-  tag_pattern: ^[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*-alpha.*
-  sync_all_matching: false
-- source: quay.io/openshift/origin-docker-builder:4.22
-  enabled: true
-  description: OpenShift Docker build strategy implementation
-  tag_pattern: ^[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*-alpha.*
-  sync_all_matching: false
-- source: quay.io/podman/stable:v5.8
-  enabled: true
-  description: Container management tool without daemon
-  tag_pattern: ^v[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: quay.io/buildah/stable:v1.43
-  enabled: true
-  description: OCI container image building tool
-  tag_pattern: ^v[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: quay.io/skopeo/stable:v1.22
-  enabled: true
-  description: Container image inspection and transfer tool
-  tag_pattern: ^v[0-9]+\.[0-9]+$
-  sync_all_matching: false
-- source: quay.io/prometheus-operator/prometheus-operator:v0.90.1
-  enabled: true
-  description: Kubernetes operator for Prometheus monitoring
-  tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*
-  sync_all_matching: false
 - source: quay.io/prometheus/prometheus:v3.10.0
   enabled: true
   description: Systems and service monitoring system
-  tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
+  tag_pattern: ^latest$|^v[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*-rc.*|.*beta.*
-  sync_all_matching: false
-- source: quay.io/argoproj/argocd:v2.13
-  enabled: false
-  description: Argo CD - Declarative GitOps (镜像不存在或无法访问)
-  tag_pattern: ^v[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*beta.*
-  sync_all_matching: false
-- source: quay.io/keycloak/keycloak:26.5
-  enabled: true
-  description: Identity and access management solution
-  tag_pattern: ^[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*alpha.*|.*beta.*
-  sync_all_matching: false
-- source: quay.io/jetstack/cert-manager-controller:v1.20.1
-  enabled: true
-  description: Kubernetes certificate management controller
-  tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*alpha.*|.*beta.*
-  sync_all_matching: false
-- source: quay.io/jetstack/cert-manager-webhook:v1.20.1
-  enabled: true
-  description: Admission webhook for cert-manager
-  tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*alpha.*|.*beta.*
-  sync_all_matching: false
-- source: quay.io/thanos/thanos:v0.41.0
-  enabled: true
-  description: Highly available Prometheus setup with long-term storage
-  tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
-  exclude_pattern: .*-rc.*|.*alpha.*|.*beta.*
   sync_all_matching: false
 config:
   registry: ghcr.io
@@ -201,4 +85,4 @@ config:
   retention:
     max_versions: 3
     cleanup_old_versions: false
-  last_checked: '2026-03-28T04:02:56.686236+00:00'
+  last_checked: '2026-04-02T09:57:39.946469+00:00'
