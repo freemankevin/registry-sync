@@ -126,7 +126,7 @@ jobs:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 开始同步镜像..."
-          python3 scripts/main.py sync --owner ${{ env.GITHUB_OWNER }} --registry ${{ env.GHCR_REGISTRY }} --max-workers 2 --max-retries 5 --retry-delay 3 --continue-on-error -D
+          python3 scripts/main.py -D sync --owner ${{ env.GITHUB_OWNER }} --registry ${{ env.GHCR_REGISTRY }} --max-workers 2 --max-retries 5 --retry-delay 3 --continue-on-error
 
           # 提取同步统计
           if [ -f images.json ]; then
@@ -142,7 +142,7 @@ jobs:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🗑️  清理旧镜像..."
-          python3 scripts/main.py cleanup --owner ${{ env.GITHUB_OWNER }} --force -D
+          python3 scripts/main.py -D cleanup --owner ${{ env.GITHUB_OWNER }} --force
       
       - name: Cleanup preview (scheduled)
         if: ${{ github.event_name == 'schedule' }}
@@ -150,7 +150,7 @@ jobs:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🗑️  预览需要清理的旧镜像（不实际删除）..."
-          python3 scripts/main.py cleanup --owner ${{ env.GITHUB_OWNER }} -D
+          python3 scripts/main.py -D cleanup --owner ${{ env.GITHUB_OWNER }}
 
       - name: Commit sync results
         if: success()
