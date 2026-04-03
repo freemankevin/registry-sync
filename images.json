@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-02T09:58:35.043512+00:00",
+  "updated_at": "2026-04-03T00:54:59.165274+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
-  "total_images": 13,
-  "total_versions": 47,
+  "total_images": 12,
+  "total_versions": 46,
   "images": [
     {
       "name": "library/elasticsearch",
@@ -665,33 +665,6 @@
           "target": "ghcr.io/freemankevin/quay-io/minio/aistor/minio:RELEASE.2026-03-26T21-24-40Z",
           "source": "quay.io/minio/aistor/minio:RELEASE.2026-03-26T21-24-40Z",
           "size": "284 MB",
-          "layers": 8
-        }
-      ]
-    },
-    {
-      "name": "quay.io/prometheus/prometheus",
-      "description": "Systems and service monitoring system",
-      "repository": "quay-io/prometheus/prometheus",
-      "total_versions": 1,
-      "latest_version": "v3.10.0",
-      "updated": "2026-02-27T07:35:15+00:00",
-      "size": "256 MB",
-      "layers": 8,
-      "stars": 0,
-      "platforms": [
-        "AMD64",
-        "ARM64"
-      ],
-      "versions": [
-        {
-          "version": "v3.10.0",
-          "digest": "sha256:7571a304e67fbd794be02422b13627dc7de822152f74e99e2bef95d29eceecde",
-          "created_at": "2026-02-27T07:35:15+00:00",
-          "synced_at": "2026-02-27T07:35:15+00:00",
-          "target": "ghcr.io/freemankevin/quay-io/prometheus/prometheus:v3.10.0",
-          "source": "quay.io/prometheus/prometheus:v3.10.0",
-          "size": "256 MB",
           "layers": 8
         }
       ]
