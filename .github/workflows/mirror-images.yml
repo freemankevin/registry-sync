@@ -153,14 +153,18 @@ jobs:
           echo "::endgroup::"
 
       - name: Commit sync results
-        if: always()  # 改为总是执行，这样即使有同步失败也会提交JSON
+        if: always()
         run: |
           git add images.json || true
           
           if ! git diff --staged --quiet; then
             git commit -m "chore: update sync results [skip ci]"
+            # Pull remote changes with rebase before push
+            git pull --rebase origin main || true
             git push -q
           elif [ -n "$(git log @{u}.. --oneline)" ]; then
+            # Pull remote changes with rebase before push
+            git pull --rebase origin main || true
             git push -q
           fi
 
