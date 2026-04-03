@@ -170,7 +170,8 @@ def generate_images_json(
     registry: str = "ghcr.io",
     owner: str = "",
     token: str = None,
-    logger=None
+    logger=None,
+    failed_images: List[Dict] = None
 ) -> Dict:
     """从 GHCR 生成镜像列表 JSON（包含所有版本）
     
@@ -181,6 +182,7 @@ def generate_images_json(
         owner: 仓库所有者
         token: GitHub Personal Access Token (可选)
         logger: 日志记录器
+        failed_images: 同步失败的镜像列表
         
     Returns:
         生成的镜像数据
@@ -188,7 +190,8 @@ def generate_images_json(
     if not logger:
         logger = setup_logger('generate', False, project_root / 'logs')
     
-    # 加载清单文件
+    failed_images = failed_images or []
+    
     with open(manifest_file, 'r', encoding='utf-8') as f:
         manifest = yaml.safe_load(f)
     
@@ -363,16 +366,29 @@ def generate_images_json(
                 print(f"   📌 最新版本: {versions[0]['version'] if versions else 'N/A'}")
             else:
                 print(f"   ⚠️  未找到任何标签")
-                logger.warning(f"仓库 {owner}/{ghcr_path} 可能不存在或需要认证")
+                    logger.warning(f"仓库 {owner}/{ghcr_path} 可能不存在或需要认证")
     
-    # 生成输出数据
+    failed_images_data = []
+    for failed in failed_images:
+        failed_images_data.append({
+            'name': failed.get('name', ''),
+            'source': failed.get('source', ''),
+            'target': failed.get('target', ''),
+            'version': failed.get('version', ''),
+            'description': failed.get('description', ''),
+            'sync_status': 'failed',
+            'failed_at': datetime.now(timezone.utc).isoformat()
+        })
+    
     output_data = {
         'updated_at': datetime.now(timezone.utc).isoformat(),
         'registry': registry,
         'owner': owner,
         'total_images': len(images),
         'total_versions': total_versions,
-        'images': images
+        'total_failed': len(failed_images_data),
+        'images': images,
+        'failed_images': failed_images_data
     }
     
     # 保存到文件
@@ -381,7 +397,9 @@ def generate_images_json(
         json.dump(output_data, f, indent=2, ensure_ascii=False)
     
     print(f"\n✅ 已生成 {output_file}")
-    print(f"📊 总计: {len(images)} 个镜像，{total_versions} 个版本")
+    print(f"📊 总计: {len(images)} 个镜像成功，{total_versions} 个版本")
+    if failed_images_data:
+        print(f"❌ 失败: {len(failed_images_data)} 个镜像")
     
     return output_data
 

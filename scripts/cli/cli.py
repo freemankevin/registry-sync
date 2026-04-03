@@ -101,25 +101,24 @@ def cmd_sync(args):
     if result['fail_count'] > 0:
         print(f"\nFailed to sync {result['fail_count']} images")
 
-    if result['fail_count'] == 0 or args.continue_on_error:
-        print("\nGenerating images.json...")
-        try:
-            from scripts.core.generate_images_json import generate_images_json
-            
-            output_file = args.output or OUTPUT_FILE
-            token = get_env_variable('GHCR_TOKEN')
-            generate_images_json(
-                manifest_file,
-                output_file,
-                args.registry,
-                args.owner,
-                token=token,
-                logger=logger
-            )
-        except Exception as e:
-            logger.error(f"生成镜像列表失败: {str(e)}")
-            if not args.continue_on_error:
-                return 1
+    print("\nGenerating images.json...")
+    try:
+        from scripts.core.generate_images_json import generate_images_json
+        
+        output_file = args.output or OUTPUT_FILE
+        token = get_env_variable('GHCR_TOKEN')
+        generate_images_json(
+            manifest_file,
+            output_file,
+            args.registry,
+            args.owner,
+            token=token,
+            logger=logger,
+            failed_images=result.get('failed_images', [])
+        )
+    except Exception as e:
+        logger.error(f"生成镜像列表失败: {str(e)}")
+        return 1
 
     return 0 if result['fail_count'] == 0 else 1
 
