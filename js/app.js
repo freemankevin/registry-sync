@@ -295,7 +295,11 @@ function updateStats() {
   const total    = allImages.length;
   const versions = allImages.reduce((s, img) => s + Math.max(img.versions.length, 1), 0);
   const avgVersions = total ? (versions / total).toFixed(1) : '0';
-  const failedCount = failedImages.length;
+  
+  // Filter failed count based on current filter
+  const filteredFailedCount = currentFilter === 'all' 
+    ? failedImages.length 
+    : failedImages.filter(i => i.sourceType === currentFilter).length;
 
   // latest update this week
   const weekAgo = Date.now() - 7 * 86400000;
@@ -346,13 +350,13 @@ function updateStats() {
   setText('statSub', '+' + total + ' this week');
 
   // Update failed count if element exists
-  setText('statFailedCount', failedCount);
+  setText('statFailedCount', filteredFailedCount);
   
   // Update failed info in Total Mirrors card
   const failedInfoEl = document.getElementById('statFailedInfo');
   if (failedInfoEl) {
-    if (failedCount > 0) {
-      failedInfoEl.textContent = `${failedCount} failed`;
+    if (filteredFailedCount > 0) {
+      failedInfoEl.textContent = `${filteredFailedCount} failed`;
       failedInfoEl.classList.remove('hidden');
     } else {
       failedInfoEl.classList.add('hidden');
@@ -896,15 +900,21 @@ function renderList(filtered) {
   const pagEl    = document.getElementById('pagination');
   const failedSection = document.getElementById('failedSection');
 
-  // Render failed images section if there are failed images
-  if (failedImages.length > 0 && failedList && failedSection) {
+  // Filter failed images by current source type
+  const filteredFailed = failedImages.filter(img => {
+    if (currentFilter === 'all') return true;
+    return img.sourceType === currentFilter;
+  });
+
+  // Render failed images section if there are failed images matching the filter
+  if (filteredFailed.length > 0 && failedList && failedSection) {
     failedSection.classList.remove('hidden');
-    failedList.innerHTML = failedImages.map((img, i) => buildFailedCard(img, i)).join('');
+    failedList.innerHTML = filteredFailed.map((img, i) => buildFailedCard(img, i)).join('');
     
     // Update failed count in section header
     const failedCountEl = document.getElementById('failedSectionCount');
     if (failedCountEl) {
-      failedCountEl.textContent = failedImages.length;
+      failedCountEl.textContent = filteredFailed.length;
     }
   } else if (failedSection) {
     failedSection.classList.add('hidden');
