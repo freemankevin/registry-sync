@@ -153,7 +153,7 @@ jobs:
           echo "::endgroup::"
 
       - name: Commit sync results
-        if: success()
+        if: always()  # 改为总是执行，这样即使有同步失败也会提交JSON
         run: |
           git add images.json || true
           
