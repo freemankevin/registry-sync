@@ -895,17 +895,22 @@ button:focus {
     outline: none;
 }
 
+/* Header buttons - no outline on hover or focus */
+header button:focus,
+header button:focus-visible,
+header button:hover,
+header a:focus,
+header a:focus-visible,
+header a:hover {
+    outline: none;
+    box-shadow: none;
+}
+
 button:focus-visible,
 select:focus-visible,
 input:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
-}
-
-/* Header buttons hover effect */
-header button:hover,
-header a:hover {
-    outline: none;
 }
 
 /* Theme toggle button - same hover style as other header buttons */
