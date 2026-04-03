@@ -15,7 +15,7 @@ let currentPage   = 1;
 
 // ── Source detection ──────────────────────────
 function getSourceType(img) {
-  const src = (img.source || '').toLowerCase();
+  const src = (img.source || img.name || '').toLowerCase();
   if (src.startsWith('gcr.io/')   || src.startsWith('us.gcr.io/') ||
       src.startsWith('k8s.gcr.io/') || src.startsWith('registry.k8s.io/')) return 'google';
   if (src.startsWith('quay.io/') || src.includes('redhat'))                 return 'redhat';
@@ -87,15 +87,14 @@ function processData(data) {
 
     const versions = img.versions || [];
     const latestVer = img.latest_version || img.version || (versions[0] && (versions[0].version || versions[0].tag)) || 'latest';
-    const latestSrc = (versions[0] && versions[0].source) || img.source || '';
+    const latestSrc = (versions[0] && versions[0].source) || img.source || (name.startsWith('ghcr.io/') || name.startsWith('gcr.io/') || name.startsWith('quay.io/') ? name : '');
     const latestSize = (versions[0] && versions[0].size) || img.size || '';
     const latestTarget = (versions[0] && versions[0].target) || '';
 
-    // Ensure numeric fields
     const stars = Number(img.stars || img.pulls || 0);
     const layers = Number(img.layers || 0);
 
-    const sourceType = getSourceType({ source: latestSrc || img.source || '' });
+    const sourceType = getSourceType({ source: latestSrc, name: name });
     
     const record = {
       name,
@@ -123,7 +122,7 @@ function processData(data) {
     const name = img.name || '';
     if (!name) return;
 
-    const sourceType = getSourceType({ source: img.source || '' });
+    const sourceType = getSourceType({ source: img.source || '', name: name });
     
     const record = {
       name,
