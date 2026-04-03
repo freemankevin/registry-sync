@@ -348,10 +348,7 @@ class GHCRRegistryAPI:
             镜像信息字典
         """
         try:
-            # 获取所有标签
             tags = self.get_repository_tags(owner, repository)
-            
-            # 查找匹配的标签
             for t in tags:
                 if t['name'] == tag:
                     return {
@@ -359,10 +356,143 @@ class GHCRRegistryAPI:
                         'digest': t.get('digest', ''),
                         'created_at': t.get('created_at')
                     }
-            
             return None
-        
         except Exception as e:
             if self.logger:
                 self.logger.error(f"获取镜像信息失败 {owner}/{repository}:{tag}: {str(e)}")
             return None
+    
+    def get_package_versions(self, owner: str, repository: str) -> List[Dict]:
+        """获取 package 的所有版本（包括无标签的版本）
+        
+        Args:
+            owner: 仓库所有者
+            repository: 仓库名称
+            
+        Returns:
+            版本列表，包含 id、name、tags、created_at 等信息
+        """
+        try:
+            encoded_repo = encode_package_name(repository)
+            url = f"{self.base_url}/users/{owner}/packages/container/{encoded_repo}/versions"
+            
+            if self.logger:
+                self.logger.debug(f"获取 {owner}/{repository} 的所有版本")
+            
+            versions = []
+            page = 1
+            per_page = 100
+            
+            while True:
+                params = {'page': page, 'per_page': per_page}
+                response = self.session.get(url, params=params, timeout=30)
+                
+                if response.status_code == 404:
+                    url = f"{self.base_url}/orgs/{owner}/packages/container/{encoded_repo}/versions"
+                    response = self.session.get(url, params=params, timeout=30)
+                    if response.status_code == 404:
+                        if self.logger:
+                            self.logger.warning(f"仓库 {owner}/{repository} 不存在")
+                        return []
+                
+                response.raise_for_status()
+                data = response.json()
+                
+                if not data:
+                    break
+                
+                for version in data:
+                    metadata = version.get('metadata', {})
+                    container_tags = metadata.get('container', {}).get('tags', [])
+                    created_at = version.get('created_at')
+                    
+                    versions.append({
+                        'id': version.get('id'),
+                        'name': version.get('name'),
+                        'tags': container_tags,
+                        'created_at': created_at,
+                        'url': version.get('url')
+                    })
+                
+                if len(data) < per_page:
+                    break
+                page += 1
+            
+            return versions
+        except Exception as e:
+            if self.logger:
+                self.logger.error(f"获取版本列表失败 {owner}/{repository}: {str(e)}")
+            return []
+    
+    def delete_package_version(self, owner: str, repository: str, version_id: int) -> bool:
+        """删除指定的 package 版本
+        
+        Args:
+            owner: 仓库所有者
+            repository: 仓库名称
+            version_id: 版本 ID
+            
+        Returns:
+            是否删除成功
+        """
+        try:
+            encoded_repo = encode_package_name(repository)
+            url = f"{self.base_url}/users/{owner}/packages/container/{encoded_repo}/versions/{version_id}"
+            
+            if self.logger:
+                self.logger.debug(f"删除版本 {owner}/{repository}/{version_id}")
+            
+            response = self.session.delete(url, timeout=30)
+            
+            if response.status_code == 404:
+                url = f"{self.base_url}/orgs/{owner}/packages/container/{encoded_repo}/versions/{version_id}"
+                response = self.session.delete(url, timeout=30)
+            
+            if response.status_code == 204:
+                if self.logger:
+                    self.logger.info(f"成功删除版本 {version_id}")
+                return True
+            else:
+                if self.logger:
+                    self.logger.error(f"删除版本失败: {response.status_code} - {response.text[:200]}")
+                return False
+        except Exception as e:
+            if self.logger:
+                self.logger.error(f"删除版本异常 {owner}/{repository}/{version_id}: {str(e)}")
+            return False
+    
+    def delete_package(self, owner: str, repository: str) -> bool:
+        """删除整个 package
+        
+        Args:
+            owner: 仓库所有者
+            repository: 仓库名称
+            
+        Returns:
+            是否删除成功
+        """
+        try:
+            encoded_repo = encode_package_name(repository)
+            url = f"{self.base_url}/users/{owner}/packages/container/{encoded_repo}"
+            
+            if self.logger:
+                self.logger.info(f"删除 package {owner}/{repository}")
+            
+            response = self.session.delete(url, timeout=30)
+            
+            if response.status_code == 404:
+                url = f"{self.base_url}/orgs/{owner}/packages/container/{encoded_repo}"
+                response = self.session.delete(url, timeout=30)
+            
+            if response.status_code == 204:
+                if self.logger:
+                    self.logger.info(f"成功删除 package {repository}")
+                return True
+            else:
+                if self.logger:
+                    self.logger.error(f"删除 package 失败: {response.status_code} - {response.text[:200]}")
+                return False
+        except Exception as e:
+            if self.logger:
+                self.logger.error(f"删除 package 异常 {owner}/{repository}: {str(e)}")
+            return False

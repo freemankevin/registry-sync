@@ -13,6 +13,7 @@ from scripts.api.registry_api import RegistryAPI
 from scripts.api.ghcr_api import GHCRRegistryAPI
 from scripts.core.manifest_manager import ManifestManager
 from scripts.core.mirror_sync import MirrorSync
+from scripts.core.cleanup import ImageCleanup
 from scripts.utils import setup_logger, load_env_files, get_env_variable, COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE, COLOR_RED, COLOR_CYAN, COLOR_RESET
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
@@ -203,6 +204,53 @@ def cmd_run(args):
     return ret
 
 
+def cmd_cleanup(args):
+    """清理旧镜像"""
+    logger = setup_logger('cleanup', args.debug, LOGS_DIR)
+    
+    dry_run = not args.force if hasattr(args, 'force') else args.dry_run
+    
+    print(f"\n{COLOR_BLUE}{'='*80}{COLOR_RESET}")
+    print(f"{COLOR_GREEN}🗑️  清理旧镜像{COLOR_RESET}")
+    print(f"{COLOR_BLUE}{'='*80}{COLOR_RESET}")
+    print(f"📍 目标仓库所有者: {args.owner}")
+    print(f"📄 清单文件: {args.manifest or MANIFEST_FILE}")
+    print(f"🔄 模式: {'预演 (不会实际删除)' if dry_run else '实际删除'}")
+    print(f"{COLOR_BLUE}{'='*80}{COLOR_RESET}\n")
+    
+    manifest_file = args.manifest or MANIFEST_FILE
+    
+    if not manifest_file.exists():
+        logger.error(f"清单文件不存在: {manifest_file}")
+        return 1
+    
+    ghcr_token = get_env_variable('GHCR_TOKEN')
+    
+    if not ghcr_token:
+        print(f"{COLOR_RED}✗ 未设置 GHCR_TOKEN 环境变量{COLOR_RESET}")
+        print(f"{COLOR_YELLOW}提示: 需要设置具有删除权限的 GitHub Token{COLOR_RESET}")
+        return 1
+    
+    if args.debug:
+        masked_token = ghcr_token[:4] + '*' * (len(ghcr_token) - 8) + ghcr_token[-4:] if len(ghcr_token) > 8 else '****'
+        print(f"{COLOR_CYAN}[DEBUG] GHCR_TOKEN: {masked_token}{COLOR_RESET}")
+    
+    cleanup = ImageCleanup(
+        args.owner,
+        ghcr_token,
+        logger,
+        max_workers=args.max_workers if hasattr(args, 'max_workers') else 3
+    )
+    
+    result = cleanup.run_cleanup(manifest_file, dry_run=dry_run)
+    
+    if result['total_failed'] > 0:
+        print(f"\n{COLOR_RED}有 {result['total_failed']} 个删除操作失败{COLOR_RESET}")
+        return 1
+    
+    return 0
+
+
 # ==================== 主函数 ====================
 
 def main():
@@ -340,6 +388,25 @@ def main():
                            action='store_true',
                            help='禁用并发处理')
     parser_run.set_defaults(func=cmd_run)
+    
+    # cleanup 命令
+    parser_cleanup = subparsers.add_parser('cleanup', help='清理旧镜像')
+    parser_cleanup.add_argument('--owner',
+                              type=str,
+                              required=True,
+                              help='目标仓库所有者')
+    parser_cleanup.add_argument('--dry-run',
+                              action='store_true',
+                              default=True,
+                              help='预演模式，不实际删除 (默认: True)')
+    parser_cleanup.add_argument('--force',
+                              action='store_true',
+                              help='实际执行删除操作（需要谨慎）')
+    parser_cleanup.add_argument('--max-workers',
+                              type=int,
+                              default=3,
+                              help='最大并发数 (默认: 3)')
+    parser_cleanup.set_defaults(func=cmd_cleanup)
     
     # 解析参数
     args = parser.parse_args()

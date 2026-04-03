@@ -25,6 +25,12 @@ on:
       - 'scripts/main.py'
       - 'scripts/**'
   workflow_dispatch:
+    inputs:
+      cleanup:
+        description: 'Force cleanup old images'
+        required: false
+        default: 'false'
+        type: boolean
 
 defaults:
   run:
@@ -120,7 +126,7 @@ jobs:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "🚀 开始同步镜像..."
-          python3 scripts/main.py --debug sync --owner ${{ env.GITHUB_OWNER }} --registry ${{ env.GHCR_REGISTRY }} --max-workers 2 --max-retries 5 --retry-delay 3 --continue-on-error
+          python3 scripts/main.py sync --owner ${{ env.GITHUB_OWNER }} --registry ${{ env.GHCR_REGISTRY }} --max-workers 2 --max-retries 5 --retry-delay 3 --continue-on-error -D
 
           # 提取同步统计
           if [ -f images.json ]; then
@@ -129,6 +135,22 @@ jobs:
             echo "success_count=$success" >> $GITHUB_OUTPUT
             echo "fail_count=$failed" >> $GITHUB_OUTPUT
           fi
+      
+      - name: Cleanup old images (optional)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.cleanup == 'true' }}
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🗑️  清理旧镜像..."
+          python3 scripts/main.py cleanup --owner ${{ env.GITHUB_OWNER }} --force -D
+      
+      - name: Cleanup preview (scheduled)
+        if: ${{ github.event_name == 'schedule' }}
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🗑️  预览需要清理的旧镜像（不实际删除）..."
+          python3 scripts/main.py cleanup --owner ${{ env.GITHUB_OWNER }} -D
 
       - name: Commit sync results
         if: success()
