@@ -418,10 +418,18 @@ function setText(id, val) {
     }
   }
 
-  // Fallback: construct path from source
+  // Fallback: construct path from source - remove original registry prefix
   let mirrorPath = src;
   if (!src.startsWith('ghcr.io/')) {
-    const cleaned = src.replace(/[:\/]/g, '_').replace(/^_/, '');
+    // Remove original registry prefix (docker.io/, gcr.io/, quay.io/, etc.)
+    let cleaned = src;
+    // Remove version tag from source if present
+    const colonIdx = cleaned.lastIndexOf(':');
+    if (colonIdx > 0) {
+      cleaned = cleaned.substring(0, colonIdx);
+    }
+    // Remove registry prefix (e.g., docker.io/, gcr.io/, quay.io/, registry.k8s.io/)
+    cleaned = cleaned.replace(/^(docker\.io\/|gcr\.io\/|us\.gcr\.io\/|k8s\.gcr\.io\/|registry\.k8s\.io\/|quay\.io\/)/, '');
     mirrorPath = `ghcr.io/freemankevin/${cleaned}`;
   }
 
