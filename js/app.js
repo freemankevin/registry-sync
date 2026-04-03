@@ -1094,7 +1094,7 @@ function generateNotifications(data) {
 
 function updateNotificationUI() {
   const badge = document.getElementById('notificationBadge');
-  const dot = document.getElementById('notificationDot');
+  const bell = document.getElementById('notificationBell');
   const list = document.getElementById('notificationList');
   
   const failedCount = notifications.filter(n => n.type === 'error').length;
@@ -1108,11 +1108,11 @@ function updateNotificationUI() {
     }
   }
   
-  if (dot) {
+  if (bell) {
     if (failedCount > 0) {
-      dot.classList.remove('hidden');
+      bell.classList.add('bell-shake');
     } else {
-      dot.classList.add('hidden');
+      bell.classList.remove('bell-shake');
     }
   }
   

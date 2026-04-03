@@ -57,11 +57,10 @@
             
             <div class="flex items-center gap-3">
                 <div class="relative">
-                    <button onclick="toggleNotifications()" class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110 group" id="notificationBtn" title="Notifications" aria-label="View notifications">
-                        <i class="fas fa-bell text-lg text-secondary group-hover:text-amber-400 transition-colors"></i>
+                    <button onclick="toggleNotifications()" class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110 group relative" id="notificationBtn" title="Notifications" aria-label="View notifications">
+                        <i id="notificationBell" class="fas fa-bell text-lg text-secondary group-hover:text-amber-400 transition-colors"></i>
+                        <span id="notificationBadge" class="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-semibold hidden">0</span>
                     </button>
-                    <span id="notificationDot" class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full notification-dot hidden"></span>
-                    <span id="notificationBadge" class="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-semibold hidden border-2">0</span>
                     <div id="notificationPanel" class="absolute right-0 top-14 w-96 max-h-[80vh] overflow-y-auto surface rounded-2xl shadow-2xl border border-muted hidden z-50">
                         <div class="p-4 border-b border-muted">
                             <div class="flex items-center justify-between">
