@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-07T04:18:01.595407+00:00",
+  "updated_at": "2026-04-08T04:20:50.822332+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 11,
-  "total_versions": 38,
+  "total_versions": 39,
   "total_failed": 0,
   "images": [
     {
@@ -64,9 +64,9 @@
       "name": "library/nginx",
       "description": "High-performance HTTP server and reverse proxy",
       "repository": "library/nginx",
-      "total_versions": 1,
-      "latest_version": "1.29.7-alpine",
-      "updated": "2026-04-04T00:33:25+00:00",
+      "total_versions": 2,
+      "latest_version": "1.29.8-alpine",
+      "updated": "2026-04-08T04:20:30+00:00",
       "size": "67 MB",
       "layers": 7,
       "stars": 0,
@@ -75,6 +75,16 @@
         "ARM64"
       ],
       "versions": [
+        {
+          "version": "1.29.8-alpine",
+          "digest": "sha256:2c4de29ca0588f9b56ced6691e0c605c2fd00501478e2e12949ba062304bc1ca",
+          "created_at": "2026-04-08T04:20:30+00:00",
+          "synced_at": "2026-04-08T04:20:30+00:00",
+          "target": "ghcr.io/freemankevin/library/nginx:1.29.8-alpine",
+          "source": "docker.io/library/nginx:1.29.8-alpine",
+          "size": "67 MB",
+          "layers": 7
+        },
         {
           "version": "1.29.7-alpine",
           "digest": "sha256:e7257f1ef28ba17cf7c248cb8ccf6f0c6e0228ab9c315c152f9c203cd34cf6d1",
@@ -93,7 +103,7 @@
       "repository": "library/rabbitmq",
       "total_versions": 1,
       "latest_version": "4.2.5-management-alpine",
-      "updated": "2026-04-03T04:57:03+00:00",
+      "updated": "2026-04-08T04:20:37+00:00",
       "size": "215 MB",
       "layers": 9,
       "stars": 0,
@@ -104,9 +114,9 @@
       "versions": [
         {
           "version": "4.2.5-management-alpine",
-          "digest": "sha256:b618738ea52cb6d0073ee9f0412ede133411ecacd7afa40f17be748a6d9a9ee1",
-          "created_at": "2026-04-03T04:57:03+00:00",
-          "synced_at": "2026-04-03T04:57:03+00:00",
+          "digest": "sha256:43553fb6af12bfcf0ed95fbb1c4c658d2b96eed021daf5153749a35ffb87d13d",
+          "created_at": "2026-04-08T04:20:37+00:00",
+          "synced_at": "2026-04-08T04:20:37+00:00",
           "target": "ghcr.io/freemankevin/library/rabbitmq:4.2.5-management-alpine",
           "source": "docker.io/library/rabbitmq:4.2.5-management-alpine",
           "size": "215 MB",
@@ -120,7 +130,7 @@
       "repository": "library/redis",
       "total_versions": 1,
       "latest_version": "8.6.2",
-      "updated": "2026-04-07T04:17:34+00:00",
+      "updated": "2026-04-08T04:20:25+00:00",
       "size": "138 MB",
       "layers": 6,
       "stars": 0,
@@ -131,9 +141,9 @@
       "versions": [
         {
           "version": "8.6.2",
-          "digest": "sha256:0a8c973565d4cbeca3174f0ec64b8b58d2fbe6c74d7fbc980474c1748f737d9c",
-          "created_at": "2026-04-07T04:17:34+00:00",
-          "synced_at": "2026-04-07T04:17:34+00:00",
+          "digest": "sha256:970b561d234882c50495c69ffae28f94b6ad8d526f91f9b4ccdd8031466e11a2",
+          "created_at": "2026-04-08T04:20:25+00:00",
+          "synced_at": "2026-04-08T04:20:25+00:00",
           "target": "ghcr.io/freemankevin/library/redis:8.6.2",
           "source": "docker.io/library/redis:8.6.2",
           "size": "138 MB",
