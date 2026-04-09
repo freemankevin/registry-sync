@@ -1,5 +1,5 @@
 images:
-- source: library/elasticsearch:9.3.2
+- source: library/elasticsearch:9.3.3
   enabled: true
   description: Distributed, RESTful search and analytics engine
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
@@ -74,4 +74,4 @@ config:
   retention:
     max_versions: 3
     cleanup_old_versions: false
-  last_checked: '2026-04-08T04:20:12.987088+00:00'
+  last_checked: '2026-04-09T04:16:27.615459+00:00'
