@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-09T04:17:08.312348+00:00",
+  "updated_at": "2026-04-10T04:31:07.118480+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 11,
@@ -140,7 +140,7 @@
       "repository": "library/redis",
       "total_versions": 1,
       "latest_version": "8.6.2",
-      "updated": "2026-04-08T04:20:25+00:00",
+      "updated": "2026-04-10T04:30:39+00:00",
       "size": "138 MB",
       "layers": 6,
       "stars": 0,
@@ -151,9 +151,9 @@
       "versions": [
         {
           "version": "8.6.2",
-          "digest": "sha256:970b561d234882c50495c69ffae28f94b6ad8d526f91f9b4ccdd8031466e11a2",
-          "created_at": "2026-04-08T04:20:25+00:00",
-          "synced_at": "2026-04-08T04:20:25+00:00",
+          "digest": "sha256:1f073813b641755b70b0200da64131bbeeb4ec5b633ca67772229b49820caafa",
+          "created_at": "2026-04-10T04:30:39+00:00",
+          "synced_at": "2026-04-10T04:30:39+00:00",
           "target": "ghcr.io/freemankevin/library/redis:8.6.2",
           "source": "docker.io/library/redis:8.6.2",
           "size": "138 MB",
