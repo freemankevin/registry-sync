@@ -61,7 +61,7 @@ images:
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*-alpha.*|.*-beta.*|.*-rc.*
   sync_all_matching: false
-- source: quay.io/minio/aistor/minio:RELEASE.2026-03-26T21-24-40Z
+- source: quay.io/minio/aistor/minio:RELEASE.2026-04-11T03-20-12Z
   enabled: true
   description: MinIO AIStor - High-performance object storage for AI workloads
   tag_pattern: ^RELEASE\.[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}-[0-9]{2}-[0-9]{2}Z$
@@ -74,4 +74,4 @@ config:
   retention:
     max_versions: 3
     cleanup_old_versions: false
-  last_checked: '2026-04-09T04:16:27.615459+00:00'
+  last_checked: '2026-04-12T04:32:26.100317+00:00'
