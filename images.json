@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-18T04:16:27.681030+00:00",
+  "updated_at": "2026-04-19T04:37:33.563534+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 11,
@@ -177,7 +177,7 @@
       "repository": "kartoza/geoserver",
       "total_versions": 2,
       "latest_version": "2.28.3",
-      "updated": "2026-04-04T00:34:05+00:00",
+      "updated": "2026-04-19T04:37:31+00:00",
       "size": "1.8 GB",
       "layers": 15,
       "stars": 0,
@@ -188,9 +188,9 @@
       "versions": [
         {
           "version": "2.28.3",
-          "digest": "sha256:44d3eae996c98729d79628ffdb242608343e0165222ea51413a0f6e5238c5c12",
-          "created_at": "2026-04-04T00:34:05+00:00",
-          "synced_at": "2026-04-04T00:34:05+00:00",
+          "digest": "sha256:b367d2cb583d12f12dc7e79ba431d51538775c80a109ccd2d147166cfe66d841",
+          "created_at": "2026-04-19T04:37:31+00:00",
+          "synced_at": "2026-04-19T04:37:31+00:00",
           "target": "ghcr.io/freemankevin/kartoza/geoserver:2.28.3",
           "source": "docker.io/kartoza/geoserver:2.28.3",
           "size": "1.8 GB",
