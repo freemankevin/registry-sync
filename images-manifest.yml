@@ -1,5 +1,5 @@
 images:
-- source: library/elasticsearch:9.3.2
+- source: library/elasticsearch:9.3.3
   enabled: true
   description: Distributed, RESTful search and analytics engine
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
@@ -10,7 +10,7 @@ images:
   tag_pattern: ^v[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*BETA.*|.*RC.*|.*SNAPSHOT.*
   sync_all_matching: false
-- source: library/nginx:1.29.7-alpine
+- source: library/nginx:1.30.0-alpine
   enabled: true
   description: High-performance HTTP server and reverse proxy
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+-alpine$
@@ -61,7 +61,7 @@ images:
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
   exclude_pattern: .*-alpha.*|.*-beta.*|.*-rc.*
   sync_all_matching: false
-- source: quay.io/minio/aistor/minio:RELEASE.2026-03-26T21-24-40Z
+- source: quay.io/minio/aistor/minio:RELEASE.2026-04-14T21-32-45Z
   enabled: true
   description: MinIO AIStor - High-performance object storage for AI workloads
   tag_pattern: ^RELEASE\.[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}-[0-9]{2}-[0-9]{2}Z$
@@ -74,4 +74,4 @@ config:
   retention:
     max_versions: 3
     cleanup_old_versions: false
-  last_checked: '2026-04-04T04:00:33.884963+00:00'
+  last_checked: '2026-04-15T04:29:54.190579+00:00'

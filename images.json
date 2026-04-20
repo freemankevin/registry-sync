@@ -1,18 +1,18 @@
 {
-  "updated_at": "2026-04-07T02:20:17.550836+00:00",
+  "updated_at": "2026-04-20T04:44:23.040595+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
-  "total_images": 11,
-  "total_versions": 38,
+  "total_images": 10,
+  "total_versions": 43,
   "total_failed": 0,
   "images": [
     {
       "name": "library/elasticsearch",
       "description": "Distributed, RESTful search and analytics engine",
       "repository": "library/elasticsearch",
-      "total_versions": 1,
-      "latest_version": "9.3.2",
-      "updated": "2026-04-03T04:51:02+00:00",
+      "total_versions": 2,
+      "latest_version": "9.3.3",
+      "updated": "2026-04-15T04:30:06+00:00",
       "size": "1.2 GB",
       "layers": 12,
       "stars": 0,
@@ -21,6 +21,16 @@
         "ARM64"
       ],
       "versions": [
+        {
+          "version": "9.3.3",
+          "digest": "sha256:84465eca262e3324da194d73eb05acdb9f6c1c8ad877e08790cbf31d5ead226c",
+          "created_at": "2026-04-15T04:30:06+00:00",
+          "synced_at": "2026-04-15T04:30:06+00:00",
+          "target": "ghcr.io/freemankevin/library/elasticsearch:9.3.3",
+          "source": "docker.io/library/elasticsearch:9.3.3",
+          "size": "1.2 GB",
+          "layers": 12
+        },
         {
           "version": "9.3.2",
           "digest": "sha256:56282e41f1d9c8dc437e4c99d132cf9f154def73b6ea8a25ac969a28c2f529c6",
@@ -64,9 +74,9 @@
       "name": "library/nginx",
       "description": "High-performance HTTP server and reverse proxy",
       "repository": "library/nginx",
-      "total_versions": 1,
-      "latest_version": "1.29.7-alpine",
-      "updated": "2026-04-04T00:33:25+00:00",
+      "total_versions": 3,
+      "latest_version": "1.30.0-alpine",
+      "updated": "2026-04-18T04:15:56+00:00",
       "size": "67 MB",
       "layers": 7,
       "stars": 0,
@@ -75,6 +85,26 @@
         "ARM64"
       ],
       "versions": [
+        {
+          "version": "1.30.0-alpine",
+          "digest": "sha256:0272e4604ed93c1792f03695a033a6e8546840f86e0de20a884bb17d2c924883",
+          "created_at": "2026-04-18T04:15:56+00:00",
+          "synced_at": "2026-04-18T04:15:56+00:00",
+          "target": "ghcr.io/freemankevin/library/nginx:1.30.0-alpine",
+          "source": "docker.io/library/nginx:1.30.0-alpine",
+          "size": "67 MB",
+          "layers": 7
+        },
+        {
+          "version": "1.29.8-alpine",
+          "digest": "sha256:582c496ccf79d8aa6f8203a79d32aaf7ffd8b13362c60a701a2f9ac64886c93d",
+          "created_at": "2026-04-11T04:04:48+00:00",
+          "synced_at": "2026-04-11T04:04:48+00:00",
+          "target": "ghcr.io/freemankevin/library/nginx:1.29.8-alpine",
+          "source": "docker.io/library/nginx:1.29.8-alpine",
+          "size": "67 MB",
+          "layers": 7
+        },
         {
           "version": "1.29.7-alpine",
           "digest": "sha256:e7257f1ef28ba17cf7c248cb8ccf6f0c6e0228ab9c315c152f9c203cd34cf6d1",
@@ -93,7 +123,7 @@
       "repository": "library/rabbitmq",
       "total_versions": 1,
       "latest_version": "4.2.5-management-alpine",
-      "updated": "2026-04-03T04:57:03+00:00",
+      "updated": "2026-04-18T04:16:00+00:00",
       "size": "215 MB",
       "layers": 9,
       "stars": 0,
@@ -104,9 +134,9 @@
       "versions": [
         {
           "version": "4.2.5-management-alpine",
-          "digest": "sha256:b618738ea52cb6d0073ee9f0412ede133411ecacd7afa40f17be748a6d9a9ee1",
-          "created_at": "2026-04-03T04:57:03+00:00",
-          "synced_at": "2026-04-03T04:57:03+00:00",
+          "digest": "sha256:c7afed4c4ebebaea7fb32ac9d2db4c5ae1da8c535f13cf1fa0f77e3fa8a9959b",
+          "created_at": "2026-04-18T04:16:00+00:00",
+          "synced_at": "2026-04-18T04:16:00+00:00",
           "target": "ghcr.io/freemankevin/library/rabbitmq:4.2.5-management-alpine",
           "source": "docker.io/library/rabbitmq:4.2.5-management-alpine",
           "size": "215 MB",
@@ -120,7 +150,7 @@
       "repository": "library/redis",
       "total_versions": 1,
       "latest_version": "8.6.2",
-      "updated": "2026-04-03T04:51:43+00:00",
+      "updated": "2026-04-10T04:30:39+00:00",
       "size": "138 MB",
       "layers": 6,
       "stars": 0,
@@ -131,9 +161,9 @@
       "versions": [
         {
           "version": "8.6.2",
-          "digest": "sha256:009cc37796fbdbe1b631b4cc0582bed167e5e403ed8bcd06f77eb6cb5aeb6f93",
-          "created_at": "2026-04-03T04:51:43+00:00",
-          "synced_at": "2026-04-03T04:51:43+00:00",
+          "digest": "sha256:1f073813b641755b70b0200da64131bbeeb4ec5b633ca67772229b49820caafa",
+          "created_at": "2026-04-10T04:30:39+00:00",
+          "synced_at": "2026-04-10T04:30:39+00:00",
           "target": "ghcr.io/freemankevin/library/redis:8.6.2",
           "source": "docker.io/library/redis:8.6.2",
           "size": "138 MB",
@@ -147,7 +177,7 @@
       "repository": "kartoza/geoserver",
       "total_versions": 2,
       "latest_version": "2.28.3",
-      "updated": "2026-04-04T00:34:05+00:00",
+      "updated": "2026-04-19T04:37:31+00:00",
       "size": "1.8 GB",
       "layers": 15,
       "stars": 0,
@@ -158,9 +188,9 @@
       "versions": [
         {
           "version": "2.28.3",
-          "digest": "sha256:44d3eae996c98729d79628ffdb242608343e0165222ea51413a0f6e5238c5c12",
-          "created_at": "2026-04-04T00:34:05+00:00",
-          "synced_at": "2026-04-04T00:34:05+00:00",
+          "digest": "sha256:b367d2cb583d12f12dc7e79ba431d51538775c80a109ccd2d147166cfe66d841",
+          "created_at": "2026-04-19T04:37:31+00:00",
+          "synced_at": "2026-04-19T04:37:31+00:00",
           "target": "ghcr.io/freemankevin/kartoza/geoserver:2.28.3",
           "source": "docker.io/kartoza/geoserver:2.28.3",
           "size": "1.8 GB",
@@ -549,9 +579,9 @@
       "name": "quay.io/minio/aistor/minio",
       "description": "MinIO AIStor - High-performance object storage for AI workloads",
       "repository": "minio/aistor/minio",
-      "total_versions": 1,
-      "latest_version": "RELEASE.2026-03-26T21-24-40Z",
-      "updated": "2026-04-03T04:54:33+00:00",
+      "total_versions": 3,
+      "latest_version": "RELEASE.2026-04-14T21-32-45Z",
+      "updated": "2026-04-15T04:30:43+00:00",
       "size": "284 MB",
       "layers": 8,
       "stars": 0,
@@ -560,6 +590,26 @@
         "ARM64"
       ],
       "versions": [
+        {
+          "version": "RELEASE.2026-04-14T21-32-45Z",
+          "digest": "sha256:3fe2c9acc9bf79ce982fa61d4befb97556a34e44e278395152ed54de471bb95d",
+          "created_at": "2026-04-15T04:30:43+00:00",
+          "synced_at": "2026-04-15T04:30:43+00:00",
+          "target": "ghcr.io/freemankevin/minio/aistor/minio:RELEASE.2026-04-14T21-32-45Z",
+          "source": "quay.io/minio/aistor/minio:RELEASE.2026-04-14T21-32-45Z",
+          "size": "284 MB",
+          "layers": 8
+        },
+        {
+          "version": "RELEASE.2026-04-11T03-20-12Z",
+          "digest": "sha256:c98e3f121a9208290f1b718345408d9084877ba4e2826ba82117ad7cf0ee3ddf",
+          "created_at": "2026-04-12T04:33:16+00:00",
+          "synced_at": "2026-04-12T04:33:16+00:00",
+          "target": "ghcr.io/freemankevin/minio/aistor/minio:RELEASE.2026-04-11T03-20-12Z",
+          "source": "quay.io/minio/aistor/minio:RELEASE.2026-04-11T03-20-12Z",
+          "size": "284 MB",
+          "layers": 8
+        },
         {
           "version": "RELEASE.2026-03-26T21-24-40Z",
           "digest": "sha256:dfd89c5b568cc1e570b329eaaa3bb9f06522c013b9064874a752662ea7772599",
