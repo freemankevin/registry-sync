@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-20T04:53:27.551638+00:00",
+  "updated_at": "2026-04-21T04:34:57.633122+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 11,
@@ -12,7 +12,7 @@
       "repository": "library/elasticsearch",
       "total_versions": 2,
       "latest_version": "9.3.3",
-      "updated": "2026-04-15T04:30:06+00:00",
+      "updated": "2026-04-21T04:34:41+00:00",
       "size": "1.2 GB",
       "layers": 12,
       "stars": 0,
@@ -23,9 +23,9 @@
       "versions": [
         {
           "version": "9.3.3",
-          "digest": "sha256:84465eca262e3324da194d73eb05acdb9f6c1c8ad877e08790cbf31d5ead226c",
-          "created_at": "2026-04-15T04:30:06+00:00",
-          "synced_at": "2026-04-15T04:30:06+00:00",
+          "digest": "sha256:2f3054e283b5fc121cb011fc2423fdb737ba72e8af6e88619c7aebf637ed792c",
+          "created_at": "2026-04-21T04:34:41+00:00",
+          "synced_at": "2026-04-21T04:34:41+00:00",
           "target": "ghcr.io/freemankevin/library/elasticsearch:9.3.3",
           "source": "docker.io/library/elasticsearch:9.3.3",
           "size": "1.2 GB",
