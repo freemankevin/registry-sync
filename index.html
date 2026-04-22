@@ -40,14 +40,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen flex flex-col">
 
     <!-- Header -->
     <header class="surface border-b sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 group">
                 <div class="w-10 h-10 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-                    <i class="fab fa-docker text-xl group-hover:rotate-6 transition-transform" style="color: #3b82f6;"></i>
+                    <i class="fa-brands fa-docker text-xl group-hover:rotate-6 transition-transform" style="color: #3b82f6;"></i>
                 </div>
                 <div>
                     <h1 class="text-2xl text-primary tracking-tight group-hover:text-accent-blue transition-colors" style="font-family: 'Great Vibes', cursive;" data-i18n="title">Registry Sync</h1>
@@ -69,7 +69,7 @@
                    rel="noopener noreferrer"
                    class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110"
                    aria-label="View on GitHub" title="freemankevin/registry-sync">
-                    <i class="fab fa-github text-xl"></i>
+                    <i class="fa-brands fa-github text-xl"></i>
                 </a>
             </div>
         </div>
@@ -131,15 +131,15 @@
                 <span data-i18n="filters.github">GitHub Container</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-github">0</span>
             </button>
             <button onclick="setFilter('google')" class="filter-tab text-secondary" data-filter="google" aria-pressed="false">
-                <svg class="mr-1.5 inline align-middle" viewBox="0 0 24 24" width="16" height="16"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                <i class="fa-brands fa-google mr-1.5" style="color: #4285F4;"></i>
                 <span data-i18n="filters.google">Google Container</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-google">0</span>
             </button>
             <button onclick="setFilter('redhat')" class="filter-tab text-secondary" data-filter="redhat" aria-pressed="false">
-                <i class="fab fa-redhat mr-1.5" style="color: #EE0000;"></i>
+                <i class="fa-brands fa-redhat mr-1.5" style="color: #EE0000;"></i>
                 <span data-i18n="filters.redhat">Red Hat Quay</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-redhat">0</span>
             </button>
             <button onclick="setFilter('aws')" class="filter-tab text-secondary" data-filter="aws" aria-pressed="false">
-                <svg class="mr-1.5 inline align-middle" viewBox="0 0 1706 1024" width="16" height="16"><path d="M480.938667 371.858286c0 21.065143 2.267429 38.15619 6.241523 50.688 4.534857 12.53181 10.24 26.185143 18.16381 40.984381 2.852571 4.559238 3.974095 9.118476 3.974095 13.116952 0 5.680762-3.413333 11.385905-10.776381 17.066667l-35.766857 23.917714c-5.12 3.413333-10.215619 5.12-14.750476 5.12-5.680762 0-11.361524-2.82819-17.017905-7.94819a176.103619 176.103619 0 0 1-20.431238-26.770286c-5.680762-9.679238-11.361524-20.504381-17.603048-33.596953-44.27581 52.394667-99.888762 78.57981-166.863238 78.57981-47.689143 0-85.699048-13.653333-113.517714-41.008762-27.794286-27.306667-42.008381-63.780571-42.008381-109.32419 0-48.420571 17.042286-87.698286 51.663238-117.321143 34.620952-29.598476 80.579048-44.422095 139.044572-44.422096 19.309714 0 39.15581 1.706667 60.17219 4.559239 20.992 2.852571 42.569143 7.41181 65.26781 12.531809V196.461714c0-43.27619-9.094095-73.45981-26.672762-91.111619-18.16381-17.65181-48.810667-26.185143-92.525715-26.185143-19.870476 0-40.301714 2.267429-61.293714 7.387429-20.992 5.12-41.447619 11.385905-61.293714 19.358476a162.499048 162.499048 0 0 1-19.870476 7.41181c-3.974095 1.145905-6.826667 1.706667-9.069715 1.706666-7.94819 0-11.946667-5.680762-11.946666-17.651809V69.485714c0-9.118476 1.145905-15.945143 3.998476-19.943619 2.82819-3.974095 7.94819-7.972571 15.896381-11.946666C143.798857 27.355429 167.643429 18.773333 195.462095 11.946667c27.794286-7.387429 57.319619-10.800762 88.527238-10.800762 67.535238 0 116.931048 15.36 148.72381 46.128762 31.207619 30.72 47.104 77.433905 47.104 140.068571v184.515048h1.121524zm-230.424381 86.552381c18.724571 0 38.034286-3.413333 58.465524-10.24 20.431238-6.826667 38.595048-19.358476 53.906285-36.449524 9.094095-10.825143 15.896381-22.77181 19.309715-36.449524 3.413333-13.653333 5.656381-30.183619 5.65638-49.542095v-23.893334a472.551619 472.551619 0 0 0-52.199619-9.703619 426.25219 426.25219 0 0 0-53.... (line truncated to 2000 chars)
+                <i class="fa-brands fa-aws mr-1.5" style="color: #FF9900;"></i>
                 <span data-i18n="filters.aws">AWS ECR</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-aws">0</span>
             </button>
         </nav>
