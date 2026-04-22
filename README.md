@@ -17,6 +17,7 @@ chmod +x startup.sh
 - GitHub Container Registry (GHCR)
 - Google Container Registry (GCR)
 - Red Hat Quay
+- AWS ECR Public (public.ecr.aws)
 
 ## 核心功能
 

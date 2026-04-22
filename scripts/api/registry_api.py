@@ -21,7 +21,8 @@ class RegistryAPI:
         'dockerhub': 'hub.docker.com',
         'gcr': 'gcr.io',
         'quay': 'quay.io',
-        'ghcr': 'ghcr.io'
+        'ghcr': 'ghcr.io',
+        'ecr': 'public.ecr.aws'
     }
     
     def __init__(self, logger=None, max_workers: int = 5):
@@ -51,7 +52,7 @@ class RegistryAPI:
             image: 镜像地址，如 gcr.io/project/image:tag
             
         Returns:
-            仓库类型: 'dockerhub', 'gcr', 'quay', 'ghcr'
+            仓库类型: 'dockerhub', 'gcr', 'quay', 'ghcr', 'ecr'
         """
         if image.startswith('gcr.io/') or image.startswith('registry.k8s.io/'):
             return 'gcr'
@@ -59,6 +60,8 @@ class RegistryAPI:
             return 'quay'
         elif image.startswith('ghcr.io/'):
             return 'ghcr'
+        elif image.startswith('public.ecr.aws/'):
+            return 'ecr'
         else:
             return 'dockerhub'
     
@@ -95,6 +98,10 @@ class RegistryAPI:
             # ghcr.io/owner/repo
             repo = image.replace('ghcr.io/', '').split(':')[0]
             return (registry, repo, 'ghcr.io')
+        elif registry == 'ecr':
+            # public.ecr.aws/namespace/repo (e.g., public.ecr.aws/amazoncorretto/amazoncorretto)
+            repo = image.replace('public.ecr.aws/', '').split(':')[0]
+            return (registry, repo, 'public.ecr.aws')
         
         return (registry, image.split(':')[0], 'dockerhub')
     
@@ -301,6 +308,58 @@ class RegistryAPI:
         
         return matching_tags
     
+    def _get_ecr_tags(
+        self, 
+        repository: str, 
+        tag_pattern: str,
+        exclude_pattern: Optional[str] = None,
+        max_pages: int = 5
+    ) -> List[str]:
+        """获取 AWS ECR Public 镜像的标签列表
+        
+        AWS ECR Public Gallery API: https://gallery.ecr.aws/api
+        ECR Public 使用标准的 Docker Registry API v2
+        """
+        matching_tags = []
+        
+        url = f"https://public.ecr.aws/v2/{repository}/tags/list"
+        
+        try:
+            response = self.session.get(url, timeout=30)
+            
+            if response.status_code == 404:
+                if self.logger:
+                    self.logger.debug(f"ECR Public 仓库不存在: {repository}")
+                return []
+            
+            if response.status_code == 401:
+                if self.logger:
+                    self.logger.debug(f"ECR Public 仓库需要认证，跳过: {repository}")
+                return []
+            
+            response.raise_for_status()
+            data = response.json()
+            
+            tags = data.get('tags', [])
+            
+            for tag_name in tags:
+                if not tag_name:
+                    continue
+                    
+                if not re.match(tag_pattern, tag_name):
+                    continue
+                
+                if exclude_pattern and re.match(exclude_pattern, tag_name):
+                    continue
+                
+                matching_tags.append(tag_name)
+                
+        except Exception as e:
+            if self.logger:
+                self.logger.debug(f"获取 ECR Public 标签失败 {repository}: {str(e)}")
+        
+        return matching_tags
+    
     def get_all_matching_versions(
         self, 
         image: str,
@@ -328,6 +387,8 @@ class RegistryAPI:
             matching_tags = self._get_quay_tags(repository, tag_pattern, exclude_pattern, max_pages)
         elif registry == 'gcr':
             matching_tags = self._get_gcr_tags(repository, tag_pattern, exclude_pattern, max_pages, registry_url)
+        elif registry == 'ecr':
+            matching_tags = self._get_ecr_tags(repository, tag_pattern, exclude_pattern, max_pages)
         elif registry == 'ghcr':
             # GHCR 需要通过 GitHub API 或直接跳过
             if self.logger:

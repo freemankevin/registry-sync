@@ -1,4 +1,39 @@
 images:
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:8-al2023-headless
+  enabled: true
+  description: Amazon Corretto 8 JDK - headless minimal runtime (Amazon Linux 2023)
+  tag_pattern: ^8\.[0-9]+\.[0-9]+-al2023-headless$
+  sync_all_matching: false
+  retention:
+    max_versions: 3
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:11-al2023-headless
+  enabled: true
+  description: Amazon Corretto 11 JDK - headless minimal runtime (Amazon Linux 2023)
+  tag_pattern: ^11\.[0-9]+\.[0-9]+-al2023-headless$
+  sync_all_matching: false
+  retention:
+    max_versions: 3
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023-headless
+  enabled: true
+  description: Amazon Corretto 17 JDK - headless minimal runtime (Amazon Linux 2023)
+  tag_pattern: ^17\.[0-9]+\.[0-9]+-al2023-headless$
+  sync_all_matching: false
+  retention:
+    max_versions: 3
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:21-al2023-headless
+  enabled: true
+  description: Amazon Corretto 21 JDK - headless minimal runtime (Amazon Linux 2023)
+  tag_pattern: ^21\.[0-9]+\.[0-9]+-al2023-headless$
+  sync_all_matching: false
+  retention:
+    max_versions: 3
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:25-al2023-headless
+  enabled: true
+  description: Amazon Corretto 25 JDK - headless minimal runtime (Amazon Linux 2023)
+  tag_pattern: ^25\.[0-9]+\.[0-9]+-al2023-headless$
+  sync_all_matching: false
+  retention:
+    max_versions: 3
 - source: library/elasticsearch:9.3.3
   enabled: true
   description: Distributed, RESTful search and analytics engine
