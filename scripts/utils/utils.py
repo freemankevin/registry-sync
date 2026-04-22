@@ -52,6 +52,9 @@ def parse_image_name(image: str) -> Tuple[str, str, str]:
     elif image.startswith('registry.k8s.io/'):
         registry = 'registry.k8s.io'
         path = image[len('registry.k8s.io/'):]
+    elif image.startswith('public.ecr.aws/'):
+        registry = 'public.ecr.aws'
+        path = image[len('public.ecr.aws/'):]
     else:
         # 默认为 docker.io，且可能是官方镜像（无斜杠）或用户镜像
         registry = 'docker.io'
