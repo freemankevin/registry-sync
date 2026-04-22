@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-22T06:25:09.654726+00:00",
+  "updated_at": "2026-04-22T06:32:43.989328+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 16,
@@ -9,10 +9,10 @@
     {
       "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
       "description": "Amazon Corretto 8 JDK (Amazon Linux 2023)",
-      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "repository": "amazoncorretto/amazoncorretto",
       "total_versions": 1,
       "latest_version": "8-al2023",
-      "updated": "2026-04-22T05:07:11+00:00",
+      "updated": "2026-04-22T06:32:10+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -24,9 +24,9 @@
         {
           "version": "8-al2023",
           "digest": "sha256:b5457bb0245ea9e1b63a246c0eb889bfb11ff32f2c949f9e4dfdb54effa189d1",
-          "created_at": "2026-04-22T05:07:11+00:00",
-          "synced_at": "2026-04-22T05:07:11+00:00",
-          "target": "ghcr.io/freemankevin/public.ecr.aws/amazoncorretto/amazoncorretto:8-al2023",
+          "created_at": "2026-04-22T06:32:10+00:00",
+          "synced_at": "2026-04-22T06:32:10+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:8-al2023",
           "source": "public.ecr.aws/amazoncorretto/amazoncorretto:8-al2023",
           "size": "256 MB",
           "layers": 8
@@ -36,10 +36,10 @@
     {
       "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
       "description": "Amazon Corretto 11 JDK (Amazon Linux 2023)",
-      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "repository": "amazoncorretto/amazoncorretto",
       "total_versions": 1,
       "latest_version": "11-al2023",
-      "updated": "2026-04-22T06:24:32+00:00",
+      "updated": "2026-04-22T06:32:07+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -51,9 +51,9 @@
         {
           "version": "11-al2023",
           "digest": "sha256:557f4d5f3a8ce2f866d63c34daefcded67369686714c2b4e6770c8a41887c277",
-          "created_at": "2026-04-22T06:24:32+00:00",
-          "synced_at": "2026-04-22T06:24:32+00:00",
-          "target": "ghcr.io/freemankevin/public.ecr.aws/amazoncorretto/amazoncorretto:11-al2023",
+          "created_at": "2026-04-22T06:32:07+00:00",
+          "synced_at": "2026-04-22T06:32:07+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:11-al2023",
           "source": "public.ecr.aws/amazoncorretto/amazoncorretto:11-al2023",
           "size": "256 MB",
           "layers": 8
@@ -63,10 +63,10 @@
     {
       "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
       "description": "Amazon Corretto 17 JDK (Amazon Linux 2023)",
-      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "repository": "amazoncorretto/amazoncorretto",
       "total_versions": 1,
       "latest_version": "17-al2023",
-      "updated": "2026-04-22T06:24:32+00:00",
+      "updated": "2026-04-22T06:32:06+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -78,9 +78,9 @@
         {
           "version": "17-al2023",
           "digest": "sha256:8b9c5294f9393fe8f8b05e4ab607548757a898fc3011c9f61ff81a0292b9c5a6",
-          "created_at": "2026-04-22T06:24:32+00:00",
-          "synced_at": "2026-04-22T06:24:32+00:00",
-          "target": "ghcr.io/freemankevin/public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023",
+          "created_at": "2026-04-22T06:32:06+00:00",
+          "synced_at": "2026-04-22T06:32:06+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:17-al2023",
           "source": "public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023",
           "size": "256 MB",
           "layers": 8
@@ -90,10 +90,10 @@
     {
       "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
       "description": "Amazon Corretto 21 JDK (Amazon Linux 2023)",
-      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "repository": "amazoncorretto/amazoncorretto",
       "total_versions": 1,
       "latest_version": "21-al2023",
-      "updated": "2026-04-22T06:24:32+00:00",
+      "updated": "2026-04-22T06:32:13+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -105,9 +105,9 @@
         {
           "version": "21-al2023",
           "digest": "sha256:1f9c84b30ca4a492f71b02a775c4dee8c24a2eea555dc1256090058d220f0718",
-          "created_at": "2026-04-22T06:24:32+00:00",
-          "synced_at": "2026-04-22T06:24:32+00:00",
-          "target": "ghcr.io/freemankevin/public.ecr.aws/amazoncorretto/amazoncorretto:21-al2023",
+          "created_at": "2026-04-22T06:32:13+00:00",
+          "synced_at": "2026-04-22T06:32:13+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:21-al2023",
           "source": "public.ecr.aws/amazoncorretto/amazoncorretto:21-al2023",
           "size": "256 MB",
           "layers": 8
@@ -117,10 +117,10 @@
     {
       "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
       "description": "Amazon Corretto 25 JDK (Amazon Linux 2023)",
-      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "repository": "amazoncorretto/amazoncorretto",
       "total_versions": 1,
       "latest_version": "25-al2023",
-      "updated": "2026-04-22T06:24:39+00:00",
+      "updated": "2026-04-22T06:32:15+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -132,9 +132,9 @@
         {
           "version": "25-al2023",
           "digest": "sha256:baa5d9d71db795ace56201e5e311ee67837560b0ecf05f2cf5748ad4677bd0f1",
-          "created_at": "2026-04-22T06:24:39+00:00",
-          "synced_at": "2026-04-22T06:24:39+00:00",
-          "target": "ghcr.io/freemankevin/public.ecr.aws/amazoncorretto/amazoncorretto:25-al2023",
+          "created_at": "2026-04-22T06:32:15+00:00",
+          "synced_at": "2026-04-22T06:32:15+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:25-al2023",
           "source": "public.ecr.aws/amazoncorretto/amazoncorretto:25-al2023",
           "size": "256 MB",
           "layers": 8
