@@ -1,36 +1,36 @@
 images:
-- source: public.ecr.aws/amazoncorretto/amazoncorretto:8u482-al2023
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:8-al2023
   enabled: true
-  description: Amazon Corretto 8 JDK - headless minimal runtime (Amazon Linux 2023)
-  tag_pattern: ^8u[0-9]+-al2023$
+  description: Amazon Corretto 8 JDK (Amazon Linux 2023)
+  tag_pattern: ^8-al2023$
   sync_all_matching: false
   retention:
     max_versions: 3
-- source: public.ecr.aws/amazoncorretto/amazoncorretto:11-al2023-headless
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:11-al2023
   enabled: true
-  description: Amazon Corretto 11 JDK - headless minimal runtime (Amazon Linux 2023)
-  tag_pattern: ^11\.[0-9]+\.[0-9]+-al2023-headless$
+  description: Amazon Corretto 11 JDK (Amazon Linux 2023)
+  tag_pattern: ^11-al2023$
   sync_all_matching: false
   retention:
     max_versions: 3
-- source: public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023-headless
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023
   enabled: true
-  description: Amazon Corretto 17 JDK - headless minimal runtime (Amazon Linux 2023)
-  tag_pattern: ^17\.[0-9]+\.[0-9]+-al2023-headless$
+  description: Amazon Corretto 17 JDK (Amazon Linux 2023)
+  tag_pattern: ^17-al2023$
   sync_all_matching: false
   retention:
     max_versions: 3
-- source: public.ecr.aws/amazoncorretto/amazoncorretto:21-al2023-headless
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:21-al2023
   enabled: true
-  description: Amazon Corretto 21 JDK - headless minimal runtime (Amazon Linux 2023)
-  tag_pattern: ^21\.[0-9]+\.[0-9]+-al2023-headless$
+  description: Amazon Corretto 21 JDK (Amazon Linux 2023)
+  tag_pattern: ^21-al2023$
   sync_all_matching: false
   retention:
     max_versions: 3
-- source: public.ecr.aws/amazoncorretto/amazoncorretto:25-al2023-headless
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:25-al2023
   enabled: true
-  description: Amazon Corretto 25 JDK - headless minimal runtime (Amazon Linux 2023)
-  tag_pattern: ^25\.[0-9]+\.[0-9]+-al2023-headless$
+  description: Amazon Corretto 25 JDK (Amazon Linux 2023)
+  tag_pattern: ^25-al2023$
   sync_all_matching: false
   retention:
     max_versions: 3
