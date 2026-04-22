@@ -1,8 +1,8 @@
 images:
-- source: public.ecr.aws/amazoncorretto/amazoncorretto:8-al2023-headless
+- source: public.ecr.aws/amazoncorretto/amazoncorretto:8u482-al2023
   enabled: true
   description: Amazon Corretto 8 JDK - headless minimal runtime (Amazon Linux 2023)
-  tag_pattern: ^8\.[0-9]+\.[0-9]+-al2023-headless$
+  tag_pattern: ^8u[0-9]+-al2023$
   sync_all_matching: false
   retention:
     max_versions: 3
