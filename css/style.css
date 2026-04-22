@@ -356,6 +356,24 @@
             box-shadow: 0 2px 8px rgba(59, 130, 246, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
         }
         
+        /* Filter tab icons - unified sizing */
+        .filter-tab img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+            vertical-align: middle;
+        }
+        
+        /* GitHub icon in filter tabs - dark mode invert */
+        .filter-tab img[alt="GitHub"] {
+            filter: invert(0);
+            transition: filter 0.3s ease;
+        }
+        
+        html.dark .filter-tab img[alt="GitHub"] {
+            filter: invert(1);
+        }
+        
         /* Badge */
         .badge {
             display: inline-flex;
@@ -1114,13 +1132,21 @@ input:focus-visible {
         .source-icon-github {
             background: linear-gradient(135deg, rgba(36, 41, 47, 0.08) 0%, rgba(36, 41, 47, 0.04) 100%);
             border-color: rgba(36, 41, 47, 0.15);
-            color: #24292f;
         }
 
         html.dark .source-icon-github {
             background: linear-gradient(135deg, rgba(201, 209, 217, 0.12) 0%, rgba(201, 209, 217, 0.04) 100%);
             border-color: rgba(201, 209, 217, 0.25);
-            color: #c9d1d9;
+        }
+        
+        /* GitHub icon dark mode fix - invert colors */
+        .source-icon-github img {
+            filter: invert(0);
+            transition: filter 0.3s ease;
+        }
+        
+        html.dark .source-icon-github img {
+            filter: invert(1);
         }
 
         .source-icon-google {
@@ -1151,6 +1177,31 @@ input:focus-visible {
         html.dark .source-icon-aws {
             background: linear-gradient(135deg, rgba(255, 153, 0, 0.12) 0%, rgba(255, 153, 0, 0.04) 100%);
             border-color: rgba(255, 153, 0, 0.25);
+        }
+        
+        /* Unified icon sizing - all icons same size regardless of SVG aspect ratio */
+        .source-icon-docker img,
+        .source-icon-github img,
+        .source-icon-google img,
+        .source-icon-redhat img,
+        .source-icon-aws img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+        
+        /* Grayscale for failed images */
+        .source-icon-docker img.grayscale,
+        .source-icon-github img.grayscale,
+        .source-icon-google img.grayscale,
+        .source-icon-redhat img.grayscale,
+        .source-icon-aws img.grayscale {
+            filter: grayscale(1);
+            opacity: 0.6;
+        }
+        
+        html.dark .source-icon-github img.grayscale {
+            filter: grayscale(1) invert(1);
         }
         
         /* Custom Select Dropdown */
