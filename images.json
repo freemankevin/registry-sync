@@ -1,11 +1,91 @@
 {
-  "updated_at": "2026-04-22T04:31:55.107308+00:00",
+  "updated_at": "2026-04-22T04:54:18.518224+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
-  "total_images": 11,
+  "total_images": 16,
   "total_versions": 44,
-  "total_failed": 0,
+  "total_failed": 1,
   "images": [
+    {
+      "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "description": "Amazon Corretto 8 JDK - headless minimal runtime (Amazon Linux 2023)",
+      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "total_versions": 0,
+      "latest_version": null,
+      "updated": "",
+      "size": "",
+      "layers": 0,
+      "stars": 0,
+      "platforms": [
+        "AMD64",
+        "ARM64"
+      ],
+      "versions": []
+    },
+    {
+      "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "description": "Amazon Corretto 11 JDK - headless minimal runtime (Amazon Linux 2023)",
+      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "total_versions": 0,
+      "latest_version": null,
+      "updated": "",
+      "size": "",
+      "layers": 0,
+      "stars": 0,
+      "platforms": [
+        "AMD64",
+        "ARM64"
+      ],
+      "versions": []
+    },
+    {
+      "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "description": "Amazon Corretto 17 JDK - headless minimal runtime (Amazon Linux 2023)",
+      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "total_versions": 0,
+      "latest_version": null,
+      "updated": "",
+      "size": "",
+      "layers": 0,
+      "stars": 0,
+      "platforms": [
+        "AMD64",
+        "ARM64"
+      ],
+      "versions": []
+    },
+    {
+      "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "description": "Amazon Corretto 21 JDK - headless minimal runtime (Amazon Linux 2023)",
+      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "total_versions": 0,
+      "latest_version": null,
+      "updated": "",
+      "size": "",
+      "layers": 0,
+      "stars": 0,
+      "platforms": [
+        "AMD64",
+        "ARM64"
+      ],
+      "versions": []
+    },
+    {
+      "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "description": "Amazon Corretto 25 JDK - headless minimal runtime (Amazon Linux 2023)",
+      "repository": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "total_versions": 0,
+      "latest_version": null,
+      "updated": "",
+      "size": "",
+      "layers": 0,
+      "stars": 0,
+      "platforms": [
+        "AMD64",
+        "ARM64"
+      ],
+      "versions": []
+    },
     {
       "name": "library/elasticsearch",
       "description": "Distributed, RESTful search and analytics engine",
@@ -634,5 +714,15 @@
       ]
     }
   ],
-  "failed_images": []
+  "failed_images": [
+    {
+      "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
+      "source": "public.ecr.aws/amazoncorretto/amazoncorretto:8-al2023-headless",
+      "target": "ghcr.io/freemankevin/public.ecr.aws/amazoncorretto/amazoncorretto:8-al2023-headless",
+      "version": "8-al2023-headless",
+      "description": "Amazon Corretto 8 JDK - headless minimal runtime (Amazon Linux 2023)",
+      "sync_status": "failed",
+      "failed_at": "2026-04-22T04:54:18.518215+00:00"
+    }
+  ]
 }
