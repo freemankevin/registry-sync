@@ -154,15 +154,92 @@ function processData(data) {
 }
 
 // ── Helpers ───────────────────────────────────
+const OFFICIAL_IMAGES = [
+  'nacos/nacos-server',
+  'kartoza/geoserver',
+  'library/nginx',
+  'library/redis',
+  'library/rabbitmq',
+  'library/elasticsearch',
+  'library/mariadb',
+  'library/postgres',
+  'library/mysql',
+  'library/mongo',
+  'library/python',
+  'library/node',
+  'library/java',
+  'library/ubuntu',
+  'library/debian',
+  'library/alpine',
+  'library/centos',
+  'library/redis',
+  'library/golang',
+  'library/rust',
+  'library/php',
+  'library/ruby',
+  'gcr.io/google-containers/etcd',
+  'quay.io/minio/aistor/minio',
+  'public.ecr.aws/amazoncorretto/amazoncorretto'
+];
+
+const DISPLAY_NAME_MAP = {
+  'nacos-server': 'Nacos Server',
+  'geoserver': 'GeoServer',
+  'nginx': 'Nginx',
+  'redis': 'Redis',
+  'rabbitmq': 'RabbitMQ',
+  'elasticsearch': 'Elasticsearch',
+  'mariadb': 'MariaDB',
+  'postgres': 'PostgreSQL',
+  'postgresql': 'PostgreSQL',
+  'mysql': 'MySQL',
+  'mongo': 'MongoDB',
+  'mongodb': 'MongoDB',
+  'python': 'Python',
+  'node': 'Node.js',
+  'java': 'Java',
+  'openjdk': 'OpenJDK',
+  'ubuntu': 'Ubuntu',
+  'debian': 'Debian',
+  'alpine': 'Alpine',
+  'centos': 'CentOS',
+  'golang': 'Go',
+  'rust': 'Rust',
+  'php': 'PHP',
+  'ruby': 'Ruby',
+  'minio': 'MinIO',
+  'etcd': 'etcd',  // etcd official name is lowercase
+  'amazoncorretto': 'Amazon Corretto',
+  'netkit': 'NetKit',
+  'postgresql-postgis': 'PostgreSQL PostGIS',
+  'postgresql-backup': 'PostgreSQL Backup'
+};
+
 function getDisplayName(name) {
   const parts = name.split('/');
-  return parts[parts.length - 1];
+  const rawName = parts[parts.length - 1];
+  
+  // Check if we have a custom display name mapping
+  if (DISPLAY_NAME_MAP[rawName]) {
+    return DISPLAY_NAME_MAP[rawName];
+  }
+  
+  // Otherwise, capitalize first letter
+  return rawName.charAt(0).toUpperCase() + rawName.slice(1);
 }
 
 function isOfficial(name, sourceType) {
-  // Only Docker Hub official images (library/*) are marked as official
-  // Other registries (GHCR, GCR, Quay) don't have official images in the same sense
-  return sourceType === 'dockerhub' && (name.startsWith('library/') || !name.includes('/'));
+  // Check if image is in official list
+  if (OFFICIAL_IMAGES.includes(name)) {
+    return true;
+  }
+  
+  // Docker Hub library images are official
+  if (sourceType === 'dockerhub' && (name.startsWith('library/') || !name.includes('/'))) {
+    return true;
+  }
+  
+  return false;
 }
 
 function formatAgo(dateStr) {
@@ -385,11 +462,11 @@ function setText(id, val) {
 // ── Card rendering ────────────────────────────
   function buildIcon(sourceType) {
     const icons = {
-      dockerhub: `<div class="card-icon icon-docker"><i class="fa-brands fa-docker" style="color: #2496ED; font-size: 20px;"></i></div>`,
-      github:    `<div class="card-icon icon-github"><i class="fa-brands fa-github" style="color: #181717; font-size: 20px;"></i></div>`,
-      google:    `<div class="card-icon icon-google"><i class="fa-brands fa-google" style="color: #4285F4; font-size: 20px;"></i></div>`,
-      redhat:    `<div class="card-icon icon-redhat"><svg viewBox="0 0 256 256" width="20" height="20"><circle cx="128" cy="128" r="128" fill="#CC0000"/><path fill="white" d="M155 118c12 0 30-5 30-18 0-9-7-14-19-14h-47l-10 32h46zm-53 61h-30l6-18h30l-6 18zm-8-33l6-18h50c7 0 11 2 15.385-1.757 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></div>`,
-      aws:       `<div class="card-icon icon-aws"><i class="fa-brands fa-aws" style="color: #FF9900; font-size: 20px;"></i></div>`
+      dockerhub: `<div class="card-icon icon-docker"><img src="/public/logo/docker.svg" style="width: 20px; height: 20px;" alt="Docker"></div>`,
+      github:    `<div class="card-icon icon-github"><img src="/public/logo/GitHub.svg" style="width: 20px; height: 20px;" alt="GitHub"></div>`,
+      google:    `<div class="card-icon icon-google"><img src="/public/logo/google.svg" style="width: 20px; height: 20px;" alt="Google"></div>`,
+      redhat:    `<div class="card-icon icon-redhat"><img src="/public/logo/redhat.svg" style="width: 20px; height: 20px;" alt="Red Hat"></div>`,
+      aws:       `<div class="card-icon icon-aws"><img src="/public/logo/AWS.svg" style="width: 20px; height: 20px;" alt="AWS"></div>`
     };
     return icons[sourceType] || icons.dockerhub;
   }
@@ -462,15 +539,15 @@ function buildCard(img, index) {
 
     let iconHtml;
     if (img.sourceType === 'dockerhub') {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-docker border flex items-center justify-center flex-shrink-0"><i class="fa-brands fa-docker w-8 h-8 flex items-center justify-center" style="color: #2496ED; font-size: 28px;"></i></div>`;
+      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-docker border flex items-center justify-center flex-shrink-0"><img src="/public/logo/docker.svg" style="width: 26px; height: 26px;" alt="Docker"></div>`;
     } else if (img.sourceType === 'google') {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-google border flex items-center justify-center flex-shrink-0"><img src="/public/google.svg" class="w-8 h-8" alt="Google"></div>`;
+      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-google border flex items-center justify-center flex-shrink-0"><img src="/public/logo/google.svg" style="width: 26px; height: 26px;" alt="Google"></div>`;
     } else if (img.sourceType === 'redhat') {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-redhat border flex items-center justify-center flex-shrink-0"><img src="/public/redhat.svg" class="w-8 h-8" alt="Red Hat"></div>`;
+      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-redhat border flex items-center justify-center flex-shrink-0"><img src="/public/logo/redhat.svg" style="width: 26px; height: 26px;" alt="Red Hat"></div>`;
     } else if (img.sourceType === 'aws') {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-aws border flex items-center justify-center flex-shrink-0"><i class="fa-brands fa-aws w-8 h-8 flex items-center justify-center" style="color: #FF9900; font-size: 28px;"></i></div>`;
+      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-aws border flex items-center justify-center flex-shrink-0"><img src="/public/logo/AWS.svg" style="width: 26px; height: 26px;" alt="AWS"></div>`;
     } else {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-github border flex items-center justify-center flex-shrink-0"><i class="fa-brands fa-github w-8 h-8 flex items-center justify-center" style="font-size: 28px;"></i></div>`;
+      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-github border flex items-center justify-center flex-shrink-0"><img src="/public/logo/GitHub.svg" style="width: 26px; height: 26px;" alt="GitHub"></div>`;
     }
 
     const versionEl = buildVersionSelect(img, ver);
@@ -479,60 +556,60 @@ function buildCard(img, index) {
       ? `<span class="badge badge-official">${t('card.official')}</span>`
       : '';
 
-  return `
-<article class="surface rounded-lg p-4 animate-fade-in" role="listitem" data-name="${img.name}" style="animation-delay:${index * 0.05}s" aria-label="${escHtml(img.displayName)} mirror">
-  <div class="flex flex-col lg:flex-row gap-4">
-    <div class="flex gap-3 flex-1 min-w-0 items-center">
+return `
+<article class="surface rounded-xl p-5 animate-fade-in" role="listitem" data-name="${img.name}" style="animation-delay:${index * 0.05}s" aria-label="${escHtml(img.displayName)} mirror">
+  <div class="flex flex-col lg:flex-row gap-5">
+    <div class="flex gap-4 flex-1 min-w-0 items-center">
       ${iconHtml}
       
       <div class="min-w-0 flex-1">
-        <div class="flex items-center gap-2 mb-1 flex-wrap">
-          <h3 class="text-base font-semibold text-primary truncate">${escHtml(img.displayName)}</h3>
+        <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+          <h3 class="text-base font-bold text-primary truncate">${escHtml(img.displayName)}</h3>
           ${officialBadge}
           <span class="tag">${sourceLabel}</span>
         </div>
         
-        <p class="text-sm text-secondary mb-2 line-clamp-1">${escHtml(img.description)}</p>
+        <p class="text-sm text-secondary mb-3 line-clamp-1">${escHtml(img.description)}</p>
         
-        <div class="flex items-center gap-3 text-xs text-tertiary mono flex-wrap">
-          ${img.stars ? `<button onclick="toggleStar('${img.name}')" class="star-btn flex items-center gap-1 hover:text-amber-500 transition-colors" aria-label="Star ${escHtml(img.displayName)}" aria-pressed="false">
-            <i class="fas fa-star"></i>
-            <span>${img.stars}</span>
+        <div class="flex items-center gap-3 text-sm text-tertiary mono flex-wrap">
+          ${img.stars ? `<button onclick="toggleStar('${img.name}')" class="star-btn flex items-center gap-1.5 hover:text-amber-500 transition-colors" aria-label="Star ${escHtml(img.displayName)}" aria-pressed="false">
+            <i class="fas fa-star" style="font-size: 12px;"></i>
+            <span style="font-size: 12px;">${img.stars}</span>
           </button>` : ''}
-          ${img.layers ? `<span class="flex items-center gap-1">
-            <i class="fas fa-layer-group text-purple-500/60"></i>
+          ${img.layers ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
+            <i class="fas fa-layer-group text-purple-500/60" style="font-size: 12px;"></i>
             ${img.layers} ${t('card.layers')}
           </span>` : ''}
-          ${ago ? `<span class="flex items-center gap-1">
-            <i class="far fa-clock text-tertiary/60"></i>
+          ${ago ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
+            <i class="far fa-clock text-tertiary/60" style="font-size: 12px;"></i>
             ${ago}
           </span>` : ''}
         </div>
       </div>
     </div>
     
-    <div class="flex items-center gap-2 flex-shrink-0">
+    <div class="flex items-center gap-3 flex-shrink-0">
       ${versionEl}
     </div>
   </div>
   
-  <div class="mt-3">
-    <div class="terminal-window rounded-lg flex items-center gap-2 group">
+  <div class="mt-4">
+    <div class="terminal-window rounded-xl flex items-center gap-3 group">
       <code class="code-block text-primary truncate flex-1">
-        <span class="text-purple-500 select-none">$</span>
-        <span class="text-secondary">${t('card.dockerPull')}</span>
-        <span class="text-blue-500">${escHtml(path)}</span>:<span class="text-amber-500">${escHtml(ver)}</span>
+        <span class="text-purple-500 select-none" style="font-size: 13px;">$</span>
+        <span class="text-secondary" style="font-size: 13px;">${t('card.dockerPull')}</span>
+        <span class="text-blue-500" style="font-size: 13px;">${escHtml(path)}</span>:<span class="text-amber-500" style="font-size: 13px;">${escHtml(ver)}</span>
       </code>
       <button onclick="copyCmd('${img.name}')"
               class="copy-btn flex items-center justify-center"
               aria-label="${t('buttons.copy')}">
-        <i id="copy-icon-${img.name}" class="fas fa-copy" style="font-size: 13px;"></i>
+        <i id="copy-icon-${img.name}" class="fas fa-copy" style="font-size: 14px;"></i>
       </button>
     </div>
     
-    <div class="mt-2.5 flex items-center justify-between text-xs text-tertiary mono">
-      <span class="truncate" title="${escHtml(img.source || '')}">${t('card.source')}: ${escHtml(img.source || '')}</span>
-      ${size ? `<span class="flex-shrink-0 ml-2">${size}</span>` : ''}
+    <div class="mt-3 flex items-center justify-between text-sm text-tertiary mono">
+      <span class="truncate" style="font-size: 12px;" title="${escHtml(img.source || '')}">${t('card.source')}: ${escHtml(img.source || '')}</span>
+      ${size ? `<span class="flex-shrink-0 ml-3" style="font-size: 12px;">${size}</span>` : ''}
     </div>
   </div>
 </article>`;
@@ -554,41 +631,41 @@ function buildFailedCard(img, index) {
 
   let iconHtml;
   if (img.sourceType === 'dockerhub') {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-docker border flex items-center justify-center flex-shrink-0 opacity-50"><i class="fa-brands fa-docker w-8 h-8 flex items-center justify-center grayscale" style="color: #2496ED; font-size: 28px;"></i></div>`;
+    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-docker border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/docker.svg" class="grayscale" style="width: 26px; height: 26px;" alt="Docker"></div>`;
   } else if (img.sourceType === 'google') {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-google border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/google.svg" class="w-8 h-8 grayscale" alt="Google"></div>`;
+    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-google border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/google.svg" class="grayscale" style="width: 26px; height: 26px;" alt="Google"></div>`;
   } else if (img.sourceType === 'redhat') {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-redhat border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/redhat.svg" class="w-8 h-8 grayscale" alt="Red Hat"></div>`;
+    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-redhat border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/redhat.svg" class="grayscale" style="width: 26px; height: 26px;" alt="Red Hat"></div>`;
   } else if (img.sourceType === 'aws') {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-aws border flex items-center justify-center flex-shrink-0 opacity-50"><i class="fa-brands fa-aws w-8 h-8 flex items-center justify-center grayscale" style="color: #FF9900; font-size: 28px;"></i></div>`;
+    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-aws border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/AWS.svg" class="grayscale" style="width: 26px; height: 26px;" alt="AWS"></div>`;
   } else {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-github border flex items-center justify-center flex-shrink-0 opacity-50"><i class="fa-brands fa-github w-8 h-8 flex items-center justify-center grayscale" style="font-size: 28px;"></i></div>`;
+    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-github border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/GitHub.svg" class="grayscale" style="width: 26px; height: 26px;" alt="GitHub"></div>`;
   }
 
   const failedText = lang === 'zh' ? t('time.failed') : t('time.failed');
 
   return `
-<article class="surface rounded-lg p-4 animate-fade-in border-2 border-red-500/30 bg-red-500/5" role="listitem" data-name="${img.name}" style="animation-delay:${index * 0.05}s" aria-label="${escHtml(img.displayName)} - ${t('aria.failedLabel')}">
-  <div class="flex flex-col lg:flex-row gap-4">
-    <div class="flex gap-3 flex-1 min-w-0 items-center">
+<article class="surface rounded-xl p-5 animate-fade-in border-2 border-red-500/30 bg-red-500/5" role="listitem" data-name="${img.name}" style="animation-delay:${index * 0.05}s" aria-label="${escHtml(img.displayName)} - ${t('aria.failedLabel')}">
+  <div class="flex flex-col lg:flex-row gap-5">
+    <div class="flex gap-4 flex-1 min-w-0 items-center">
       ${iconHtml}
       
       <div class="min-w-0 flex-1">
-        <div class="flex items-center gap-2 mb-1 flex-wrap">
-          <h3 class="text-base font-semibold text-gray-400 truncate">${escHtml(img.displayName)}</h3>
+        <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+          <h3 class="text-base font-bold text-gray-400 truncate">${escHtml(img.displayName)}</h3>
           <span class="badge badge-failed">${t('card.syncFailed')}</span>
           <span class="tag">${sourceLabel}</span>
         </div>
         
-        <p class="text-sm text-gray-400 mb-2 line-clamp-1">${escHtml(img.description)}</p>
+        <p class="text-sm text-gray-400 mb-3 line-clamp-1">${escHtml(img.description)}</p>
         
-        <div class="flex items-center gap-3 text-xs text-gray-400 mono flex-wrap">
-          ${ago ? `<span class="flex items-center gap-1">
-            <i class="far fa-clock text-gray-400/60"></i>
+        <div class="flex items-center gap-3 text-sm text-gray-400 mono flex-wrap">
+          ${ago ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
+            <i class="far fa-clock text-gray-400/60" style="font-size: 12px;"></i>
             ${failedText} ${ago}
           </span>` : ''}
-          ${img.version ? `<span class="flex items-center gap-1">
-            <i class="fas fa-tag text-gray-400/60"></i>
+          ${img.version ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
+            <i class="fas fa-tag text-gray-400/60" style="font-size: 12px;"></i>
             ${escHtml(img.version)}
           </span>` : ''}
         </div>
@@ -596,21 +673,21 @@ function buildFailedCard(img, index) {
     </div>
   </div>
   
-  <div class="mt-3">
-    <div class="terminal-window rounded-lg flex items-center gap-2 group opacity-50">
+  <div class="mt-4">
+    <div class="terminal-window rounded-xl flex items-center gap-3 group opacity-50">
       <code class="code-block text-gray-400 truncate flex-1">
-        <span class="text-gray-400 select-none">$</span>
-        <span class="text-gray-400">${t('card.dockerPull')}</span>
-        <span class="text-gray-400">${escHtml(img.source || 'N/A')}</span>
+        <span class="text-gray-400 select-none" style="font-size: 13px;">$</span>
+        <span class="text-gray-400" style="font-size: 13px;">${t('card.dockerPull')}</span>
+        <span class="text-gray-400" style="font-size: 13px;">${escHtml(img.source || 'N/A')}</span>
       </code>
       <button disabled class="copy-btn flex items-center justify-center opacity-50 cursor-not-allowed" aria-label="${t('card.syncFailed')} - ${t('card.imageNotSynced')}">
-        <i class="fas fa-exclamation-triangle text-red-400" style="font-size: 13px;"></i>
+        <i class="fas fa-exclamation-triangle text-red-400" style="font-size: 14px;"></i>
       </button>
     </div>
     
-    <div class="mt-2.5 flex items-center justify-between text-xs text-gray-400 mono">
-      <span class="truncate" title="${escHtml(img.source || '')}">${t('card.source')}: ${escHtml(img.source || 'N/A')}</span>
-      <span class="flex-shrink-0 ml-2 text-red-400">⚠️ ${t('card.imageNotSynced')}</span>
+    <div class="mt-3 flex items-center justify-between text-sm text-gray-400 mono">
+      <span class="truncate" style="font-size: 12px;" title="${escHtml(img.source || '')}">${t('card.source')}: ${escHtml(img.source || 'N/A')}</span>
+      <span class="flex-shrink-0 ml-3 text-red-400" style="font-size: 12px;">⚠️ ${t('card.imageNotSynced')}</span>
     </div>
   </div>
 </article>`;
@@ -1064,7 +1141,39 @@ function initBackToTop() {
   }, { passive: true });
 }
 
+// ── Full Page Background Carousel ───────────────────────────────
+function initPageBackground() {
+  const bgImages = [
+    '/public/background/wallhaven-j5g3zy.jpg',
+    '/public/background/wallhaven-135j73.jpg'
+  ];
+
+  const pageBg = document.getElementById('pageBg');
+  if (!pageBg) return;
+
+  const totalBgs = bgImages.length;
+  let currentBg = 0;
+
+  function showBg(index) {
+    currentBg = index;
+    pageBg.style.backgroundImage = `url('${bgImages[index]}')`;
+  }
+
+  function nextBg() {
+    currentBg = (currentBg + 1) % totalBgs;
+    showBg(currentBg);
+  }
+
+  // Random background on page refresh
+  const randomIndex = Math.floor(Math.random() * totalBgs);
+  showBg(randomIndex);
+
+  // Auto-rotate every 30 minutes
+  setInterval(nextBg, 30 * 60 * 1000);
+}
+
 // ── Boot ──────────────────────────────────────
 initTheme();
+initPageBackground();
 loadImages();
 initBackToTop();

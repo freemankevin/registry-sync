@@ -4,6 +4,11 @@ const translations = {
   en: {
     title: 'Registry Sync',
     subtitle: 'Fast container image mirror service',
+    hero: {
+      title: 'Registry Sync',
+      subtitle: 'Mirror and sync container images from Docker Hub, GHCR, GCR, QUAY and AWS ECR',
+      description: 'Fast container image mirror service for better availability and faster pulls'
+    },
     stats: {
       totalMirrors: 'Total Mirrors',
       storageSpace: 'Storage Space',
@@ -21,9 +26,9 @@ const translations = {
     filters: {
       all: 'All',
       dockerHub: 'Docker Hub',
-      github: 'GitHub Container',
-      google: 'Google Container',
-      redhat: 'Red Hat Quay',
+      github: 'GHCR',
+      google: 'GCR',
+      redhat: 'QUAY',
       aws: 'AWS ECR'
     },
     search: {
@@ -102,6 +107,11 @@ const translations = {
   zh: {
     title: 'Registry Sync',
     subtitle: '快速容器镜像同步服务',
+    hero: {
+      title: 'Registry Sync',
+      subtitle: '镜像同步容器镜像，来自 Docker Hub、GHCR、GCR、QUAY 和 AWS ECR',
+      description: '快速容器镜像同步服务，提供更好的可用性和更快的拉取速度'
+    },
     stats: {
       totalMirrors: '镜像总数',
       storageSpace: '存储空间',
@@ -119,9 +129,9 @@ const translations = {
     filters: {
       all: '全部',
       dockerHub: 'Docker Hub',
-      github: 'GitHub Container',
-      google: 'Google Container',
-      redhat: 'Red Hat Quay',
+      github: 'GHCR',
+      google: 'GCR',
+      redhat: 'Quay',
       aws: 'AWS ECR'
     },
     search: {
@@ -206,7 +216,9 @@ function initLang() {
   if (saved && (saved === 'en' || saved === 'zh')) {
     currentLang = saved;
   } else {
-    currentLang = 'en';
+    const browserLang = navigator.language || navigator.userLanguage || 'en';
+    const isChinese = browserLang.toLowerCase().startsWith('zh');
+    currentLang = isChinese ? 'zh' : 'en';
   }
   updateLangButton();
   applyTranslations();
@@ -226,7 +238,7 @@ function updateLangButton() {
   const langIcon = document.getElementById('langIcon');
   const langBtn = document.getElementById('langBtn');
   if (langIcon) {
-    langIcon.textContent = currentLang === 'en' ? 'EN' : '中文';
+    langIcon.textContent = currentLang === 'en' ? '中文' : 'EN';
   }
   if (langBtn) {
     langBtn.title = currentLang === 'en' ? '切换到中文' : 'Switch to English';

@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="">
 <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Early theme and language detection -->
+    <script>
+        // Detect browser theme preference before page renders
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.classList.add(savedTheme);
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
+        }
+        
+        // Detect browser language before page renders
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang && (savedLang === 'en' || savedLang === 'zh')) {
+            document.documentElement.lang = savedLang;
+        } else {
+            const browserLang = navigator.language || navigator.userLanguage || 'en';
+            const isChinese = browserLang.toLowerCase().startsWith('zh');
+            document.documentElement.lang = isChinese ? 'zh' : 'en';
+        }
+    </script>
     
     <!-- SEO Meta Tags -->
     <title>Registry Sync</title>
@@ -27,7 +49,10 @@
     <meta name="twitter:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='1200' height='630' fill='%230f0f15'/%3E%3Ctext x='50%25' y='50%25' font-family='Inter' font-size='48' fill='%238ab4f8' text-anchor='middle' dominant-baseline='middle'%3ERegistry Sync%3C/text%3E%3C/svg%3E">
     
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233b82f6' d='M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.186m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.185-.186h-2.12a.186.186 0 0 0-.185.186v1.887c0 .102.084.185.186.185m-2.929 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.887c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288z'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
     
     <!-- Preconnect and Preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,8 +61,10 @@
     
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Apple Style Fonts: SF Pro Display, PingFang SC, and elegant serif -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:wght@400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <!-- Adoptium-inspired fonts: Hanken Grotesk for titles, Inter for body, JetBrains Mono for code -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
@@ -46,115 +73,137 @@
 
     <!-- Header -->
     <header class="surface border-b sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3 group">
-                <div class="w-10 h-10 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-                    <i class="fa-brands fa-docker text-xl group-hover:rotate-6 transition-transform" style="color: #3b82f6;"></i>
+        <div class="max-w-[1400px] mx-auto px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4 group">
+                <div class="w-11 h-11 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+                    <svg class="w-8 h-8 group-hover:rotate-6 transition-transform" viewBox="0 0 24 24" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.186m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.185-.186h-2.12a.186.186 0 0 0-.185.186v1.887c0 .102.084.185.186.185m-2.929 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.887c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288z"/></svg>
                 </div>
                 <div>
-                    <h1 class="text-2xl luxury-title tracking-tight group-hover:text-accent-blue transition-colors" data-i18n="title">Registry Sync</h1>
-                    <p class="text-xs text-secondary hidden md:block" data-i18n="subtitle">Fast container image mirror service</p>
+                    <h1 class="text-2xl luxury-title tracking-wide group-hover:text-accent-blue transition-colors" data-i18n="title">Registry Sync</h1>
+                    <p class="text-sm text-secondary hidden md:block luxury-subtitle tracking-wider" data-i18n="subtitle">Fast container image mirror service</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-1.5">
-                <button onclick="toggleLang()" class="px-3 h-11 rounded-xl flex items-center gap-1.5 text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-105 group lang-btn" id="langBtn" title="Switch to Chinese" aria-label="Toggle language">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages h-4 w-4 text-secondary group-hover:text-accent-blue transition-colors"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>
-                    <span id="langIcon" class="text-xs font-medium text-secondary group-hover:text-accent-blue transition-colors">EN</span>
+                <button onclick="toggleLang()" class="px-4 h-12 rounded-xl flex items-center gap-2 text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-105 group lang-btn" id="langBtn" title="Switch to Chinese" aria-label="Toggle language">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages h-5 w-5 text-secondary group-hover:text-accent-blue transition-colors"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>
+                    <span id="langIcon" class="text-sm font-medium text-secondary group-hover:text-accent-blue transition-colors">EN</span>
                 </button>
 
-                <button onclick="toggleTheme()" class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110 group" id="themeBtn" title="Dark Mode" aria-label="Toggle theme">
+                <button onclick="toggleTheme()" class="w-12 h-12 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110 group" id="themeBtn" title="Dark Mode" aria-label="Toggle theme">
                     <i id="themeIcon" class="fas fa-sun text-xl text-secondary group-hover:text-amber-400 transition-colors"></i>
                 </button>
 
                 <a href="https://github.com/freemankevin/registry-sync" target="_blank"
                    rel="noopener noreferrer"
-                   class="w-11 h-11 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110"
+                   class="w-12 h-12 rounded-xl flex items-center justify-center text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-110"
                    aria-label="View on GitHub" title="freemankevin/registry-sync">
-                    <i class="fa-brands fa-github text-xl"></i>
+                    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-8 pb-16">
+<!-- Full Page Background -->
+    <div class="page-bg" id="pageBg" style="background-image: url('/public/background/wallhaven-j5g3zy.jpg')"></div>
+    <div class="page-bg-overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" aria-label="Hero banner">
+        <div class="max-w-[1400px] mx-auto px-8 py-12 relative z-10">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 hero-title" data-i18n="hero.title">
+                    Registry Sync
+                </h1>
+                <p class="text-xl md:text-2xl mb-5 hero-subtitle" data-i18n="hero.subtitle">
+                    Mirror and sync container images from Docker Hub, GHCR, GCR, QUAY and AWS ECR
+                </p>
+                <p class="text-lg hero-description" data-i18n="hero.description">
+                    Fast container image mirror service for better availability and faster pulls
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-[1400px] mx-auto px-8 py-8 pb-16">
         
-        <!-- Stats Grid -->
-        <section class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-8" aria-label="Service statistics summary">
-            <article class="surface rounded-2xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-medium mb-1" data-i18n="stats.totalMirrors">Total Mirrors</div>
-                <div class="text-2xl font-semibold text-primary mono stat-value" id="statTotal">–</div>
-                <div class="mt-1 text-xs accent-green font-medium" id="statSub">loading…</div>
-                <div class="mt-0.5 text-xs text-red-400 font-medium hidden" id="statFailedInfo"></div>
+        <!-- Stats Grid - Compact Cards -->
+        <section class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-8" aria-label="Service statistics summary">
+            <article class="surface rounded-xl p-4 stat-card">
+                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.totalMirrors">Total Mirrors</div>
+                <div class="text-2xl font-bold text-primary mono stat-value" id="statTotal">–</div>
+                <div class="mt-1 text-sm accent-green font-semibold" id="statSub">loading…</div>
+                <div class="mt-1 text-sm text-red-400 font-semibold hidden" id="statFailedInfo"></div>
             </article>
             
-            <article class="surface rounded-2xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-medium mb-1" data-i18n="stats.storageSpace">Storage Space</div>
-                <div class="text-2xl font-semibold accent-blue mono stat-value" id="statStorage">–</div>
-                <div class="mt-1 text-xs text-secondary" data-i18n="stats.totalSize">total size</div>
+            <article class="surface rounded-xl p-4 stat-card">
+                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.storageSpace">Storage Space</div>
+                <div class="text-2xl font-bold accent-blue mono stat-value" id="statStorage">–</div>
+                <div class="mt-1 text-sm text-secondary" data-i18n="stats.totalSize">total size</div>
             </article>
             
-            <article class="surface rounded-2xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-medium mb-1" data-i18n="stats.avgImageSize">Avg Image Size</div>
-                <div class="text-2xl font-semibold text-primary mono stat-value" id="statAvg">–</div>
-                <div class="mt-1 text-xs text-secondary" data-i18n="stats.perImage">per image</div>
+            <article class="surface rounded-xl p-4 stat-card">
+                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.avgImageSize">Avg Image Size</div>
+                <div class="text-2xl font-bold text-primary mono stat-value" id="statAvg">–</div>
+                <div class="mt-1 text-sm text-secondary" data-i18n="stats.perImage">per image</div>
             </article>
             
-            <article class="surface rounded-2xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-medium mb-1" data-i18n="stats.latestUpdates">Latest Updates</div>
-                <div class="text-2xl font-semibold accent-green mono stat-value" id="statLatestCount">–</div>
-                <div class="mt-1 text-xs text-secondary" data-i18n="stats.updatedThisWeek">updated this week</div>
+            <article class="surface rounded-xl p-4 stat-card">
+                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.latestUpdates">Latest Updates</div>
+                <div class="text-2xl font-bold accent-green mono stat-value" id="statLatestCount">–</div>
+                <div class="mt-1 text-sm text-secondary" data-i18n="stats.updatedThisWeek">updated this week</div>
             </article>
             
-            <article class="surface rounded-2xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-medium mb-1" data-i18n="stats.availableVersions">Available Versions</div>
-                <div class="text-2xl font-semibold accent-purple mono stat-value" id="statAvgVersions">–</div>
-                <div class="mt-1 text-xs text-secondary" data-i18n="stats.perImage">per image</div>
+            <article class="surface rounded-xl p-4 stat-card">
+                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.availableVersions">Available Versions</div>
+                <div class="text-2xl font-bold accent-purple mono stat-value" id="statAvgVersions">–</div>
+                <div class="mt-1 text-sm text-secondary" data-i18n="stats.perImage">per image</div>
             </article>
             
-            <article class="surface rounded-2xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-medium mb-1" data-i18n="stats.lastSync">Last Sync</div>
-                <div class="text-xl font-semibold text-primary mono" id="statLastSyncAge">–</div>
-                <div class="mt-1 text-xs text-secondary truncate" id="statLastSyncName">–</div>
+            <article class="surface rounded-xl p-4 stat-card">
+                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.lastSync">Last Sync</div>
+                <div class="text-2xl font-bold text-primary mono stat-value" id="statLastSyncAge">–</div>
+                <div class="mt-1 text-sm text-secondary" id="statLastSyncName">–</div>
             </article>
         </section>
 
-        <!-- Filter Tabs -->
-<nav class="flex items-center gap-1 flex-wrap border-b border-muted mb-6 pb-2" aria-label="Filter mirrors by registry">
+        <!-- Filter Tabs - Larger Style -->
+<nav class="flex items-center gap-2 flex-wrap border-b border-muted mb-6 pb-3" aria-label="Filter mirrors by registry">
             <button onclick="setFilter('all')" class="filter-tab active" data-filter="all" aria-pressed="true">
-                <span data-i18n="filters.all">All</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-all">0</span>
+                <span data-i18n="filters.all">All</span> <span class="ml-1.5 px-2 py-0.5 text-sm rounded-full bg-emphasis text-secondary" id="cnt-all">0</span>
             </button>
             <button onclick="setFilter('dockerhub')" class="filter-tab text-secondary" data-filter="dockerhub" aria-pressed="false">
-                <i class="fa-brands fa-docker mr-1.5" style="color: #2496ED;"></i>
-                <span data-i18n="filters.dockerHub">Docker Hub</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-dockerhub">0</span>
+                <img src="/public/logo/docker.svg" class="mr-2 inline align-middle filter-tab-icon" style="width: 16px; height: 16px;" alt="Docker">
+                <span data-i18n="filters.dockerHub">Docker Hub</span> <span class="ml-1.5 px-2 py-0.5 text-sm rounded-full bg-emphasis text-secondary" id="cnt-dockerhub">0</span>
             </button>
             <button onclick="setFilter('github')" class="filter-tab text-secondary" data-filter="github" aria-pressed="false">
-                <i class="fa-brands fa-github mr-1.5"></i>
-                <span data-i18n="filters.github">GitHub Container</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-github">0</span>
+                <img src="/public/logo/GitHub.svg" class="mr-2 inline align-middle filter-tab-icon" style="width: 16px; height: 16px;" alt="GitHub">
+                <span data-i18n="filters.github">GHCR</span> <span class="ml-1.5 px-2 py-0.5 text-sm rounded-full bg-emphasis text-secondary" id="cnt-github">0</span>
             </button>
             <button onclick="setFilter('google')" class="filter-tab text-secondary" data-filter="google" aria-pressed="false">
-                <img src="/public/google.svg" class="mr-1.5 inline align-middle" width="16" height="16" alt="Google">
-                <span data-i18n="filters.google">Google Container</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-google">0</span>
+                <img src="/public/logo/google.svg" class="mr-2 inline align-middle filter-tab-icon" style="width: 16px; height: 16px;" alt="Google">
+                <span data-i18n="filters.google">GCR</span> <span class="ml-1.5 px-2 py-0.5 text-sm rounded-full bg-emphasis text-secondary" id="cnt-google">0</span>
             </button>
             <button onclick="setFilter('redhat')" class="filter-tab text-secondary" data-filter="redhat" aria-pressed="false">
-                <img src="/public/redhat.svg" class="mr-1.5 inline align-middle" width="16" height="16" alt="Red Hat">
-                <span data-i18n="filters.redhat">Red Hat Quay</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-redhat">0</span>
+                <img src="/public/logo/redhat.svg" class="mr-2 inline align-middle filter-tab-icon" style="width: 16px; height: 16px;" alt="Red Hat">
+                <span data-i18n="filters.redhat">Red Hat Quay</span> <span class="ml-1.5 px-2 py-0.5 text-sm rounded-full bg-emphasis text-secondary" id="cnt-redhat">0</span>
             </button>
             <button onclick="setFilter('aws')" class="filter-tab text-secondary" data-filter="aws" aria-pressed="false">
-                <i class="fa-brands fa-aws mr-1.5" style="color: #FF9900;"></i>
-                <span data-i18n="filters.aws">AWS ECR</span> <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-emphasis text-secondary" id="cnt-aws">0</span>
+                <img src="/public/logo/AWS.svg" class="mr-2 inline align-middle filter-tab-icon" style="width: 16px; height: 16px;" alt="AWS">
+                <span data-i18n="filters.aws">AWS ECR</span> <span class="ml-1.5 px-2 py-0.5 text-sm rounded-full bg-emphasis text-secondary" id="cnt-aws">0</span>
             </button>
         </nav>
 
         <!-- Search Box -->
         <div class="mb-6">
             <div class="relative group">
-                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-tertiary group-focus-within:text-accent-blue transition-colors" aria-hidden="true"></i>
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-tertiary group-focus-within:text-accent-blue transition-colors" style="font-size: 16px;" aria-hidden="true"></i>
                 <input
                     type="search"
                     id="searchInput"
                     placeholder="Search ..."
-                    class="w-full pl-10 pr-4 py-2.5 rounded-2xl border transition-all focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/20"
+                    class="w-full pl-12 pr-4 py-3 rounded-xl border transition-all focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/20"
+                    style="font-size: 15px;"
                     oninput="handleSearch(this.value)"
                     aria-label="Search container images"
                     autocomplete="off"
@@ -164,10 +213,10 @@
             </div>
         </div>
 
-        <!-- Loading State -->
-        <div id="loadingState" class="py-20 text-center" role="status" aria-live="polite">
-            <div class="inline-block w-6 h-6 border-2 border-accent-blue/30 border-t-accent-blue rounded-full animate-spin mb-4"></div>
-            <p class="text-sm text-secondary mb-8" data-i18n="loading.text">Loading container images...</p>
+        <!-- Loading State - Compact -->
+        <div id="loadingState" class="py-12 text-center" role="status" aria-live="polite">
+            <div class="inline-block w-5 h-5 border-2 border-accent-blue/30 border-t-accent-blue rounded-full animate-spin mb-3"></div>
+            <p class="text-xs text-secondary mb-6" data-i18n="loading.text">Loading container images...</p>
             <!-- Skeleton Screen -->
             <div class="space-y-3 max-w-6xl mx-auto px-6">
                 <div class="surface rounded-lg p-4 skeleton-card">
@@ -229,51 +278,51 @@
             </div>
         </div>
 
-        <!-- Error State -->
-        <div id="errorState" class="hidden py-20 text-center">
-            <div class="w-12 h-12 rounded-2xl bg-emphasis flex items-center justify-center mx-auto mb-3 border border-default">
-                <i class="fas fa-exclamation-triangle text-lg text-amber-500"></i>
+        <!-- Error State - Compact -->
+        <div id="errorState" class="hidden py-12 text-center">
+            <div class="w-10 h-10 rounded-xl bg-emphasis flex items-center justify-center mx-auto mb-2 border border-default">
+                <i class="fas fa-exclamation-triangle text-base text-amber-500"></i>
             </div>
-            <h3 class="text-sm font-medium text-secondary" data-i18n="error.title">Failed to load images</h3>
-            <p class="text-xs text-tertiary mt-1" data-i18n="error.subtitle">Using cached data instead</p>
+            <h3 class="text-xs font-medium text-secondary" data-i18n="error.title">Failed to load images</h3>
+            <p class="text-xs text-tertiary mt-0.5" data-i18n="error.subtitle">Using cached data instead</p>
         </div>
 
-        <!-- Failed Images Section -->
-        <section id="failedSection" class="hidden mb-8" aria-label="Failed image syncs">
-            <div class="flex items-center justify-between mb-4 pb-2 border-b border-red-500/30">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-exclamation-triangle text-red-500"></i>
-                    <h2 class="text-lg font-semibold text-primary" data-i18n="failedSection.title">Failed Syncs</h2>
-                    <span class="ml-2 px-2 py-1 text-xs rounded-full bg-red-500/20 text-red-400 font-medium" id="failedSectionCount">0</span>
+        <!-- Failed Images Section - Compact -->
+        <section id="failedSection" class="hidden mb-6" aria-label="Failed image syncs">
+            <div class="flex items-center justify-between mb-3 pb-1.5 border-b border-red-500/30">
+                <div class="flex items-center gap-1.5">
+                    <i class="fas fa-exclamation-triangle text-red-500" style="font-size: 12px;"></i>
+                    <h2 class="text-sm font-semibold text-primary" data-i18n="failedSection.title">Failed Syncs</h2>
+                    <span class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-red-500/20 text-red-400 font-medium" id="failedSectionCount">0</span>
                 </div>
-                <p class="text-sm text-secondary" data-i18n="failedSection.description">These images failed to sync and may not be available</p>
+                <p class="text-xs text-secondary" data-i18n="failedSection.description">These images failed to sync and may not be available</p>
             </div>
-            <div id="failedMirrorList" class="space-y-3" role="list" aria-label="Failed container image syncs"></div>
+            <div id="failedMirrorList" class="space-y-4" role="list" aria-label="Failed container image syncs"></div>
         </section>
 
         <!-- Mirror List -->
-        <div id="mirrorList" class="space-y-3" role="list" aria-label="Container image mirrors"></div>
+        <div id="mirrorList" class="space-y-4" role="list" aria-label="Container image mirrors"></div>
         
         <!-- Pagination -->
         <nav id="pagination" aria-label="Pagination navigation" class="mt-8"></nav>
 
-        <!-- Empty State -->
-        <div id="emptyState" class="hidden py-20 text-center" role="status">
-            <div class="w-12 h-12 rounded-2xl bg-emphasis flex items-center justify-center mx-auto mb-3 border border-default empty-icon">
-                <i class="fas fa-search text-lg text-tertiary"></i>
+        <!-- Empty State - Compact -->
+        <div id="emptyState" class="hidden py-12 text-center" role="status">
+            <div class="w-10 h-10 rounded-xl bg-emphasis flex items-center justify-center mx-auto mb-2 border border-default empty-icon">
+                <i class="fas fa-search text-base text-tertiary"></i>
             </div>
-            <h3 class="text-sm font-medium text-secondary" data-i18n="empty.title">No mirrors found</h3>
-            <p class="text-xs text-tertiary mt-1" data-i18n="empty.description">Try adjusting your search or filters</p>
+            <h3 class="text-xs font-medium text-secondary" data-i18n="empty.title">No mirrors found</h3>
+            <p class="text-xs text-tertiary mt-0.5" data-i18n="empty.description">Try adjusting your search or filters</p>
         </div>
     </main>
 
 
 
-    <!-- Footer -->
+    <!-- Footer - Larger -->
     <footer class="border-t border-muted mt-auto">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div class="max-w-[1400px] mx-auto px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <div class="text-sm text-secondary tracking-wide">
-                Made with <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mx-0.5" style="vertical-align: middle;"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> by Freeman
+                Made with <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mx-1" style="vertical-align: middle;"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> by Freeman
             </div>
             <div class="text-sm text-secondary tracking-wide">
                 © 2026 Registry Sync
