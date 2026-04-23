@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-22T06:44:34.411883+00:00",
+  "updated_at": "2026-04-23T01:37:58.272031+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 12,
@@ -71,7 +71,8 @@
           "size": "256 MB",
           "layers": 8
         }
-      ]
+      ],
+      "description_zh": "Amazon Corretto JDK（Amazon Linux 2023）"
     },
     {
       "name": "library/elasticsearch",
@@ -79,7 +80,7 @@
       "repository": "library/elasticsearch",
       "total_versions": 2,
       "latest_version": "9.3.3",
-      "updated": "2026-04-21T04:34:41+00:00",
+      "updated": "2026-04-23T01:37:32+00:00",
       "size": "1.2 GB",
       "layers": 12,
       "stars": 0,
@@ -90,9 +91,9 @@
       "versions": [
         {
           "version": "9.3.3",
-          "digest": "sha256:2f3054e283b5fc121cb011fc2423fdb737ba72e8af6e88619c7aebf637ed792c",
-          "created_at": "2026-04-21T04:34:41+00:00",
-          "synced_at": "2026-04-21T04:34:41+00:00",
+          "digest": "sha256:1d9ddbe28380c3305ef24c4364168030e4b8ce44834121f7c7dbdaedd2bb9cdf",
+          "created_at": "2026-04-23T01:37:32+00:00",
+          "synced_at": "2026-04-23T01:37:32+00:00",
           "target": "ghcr.io/freemankevin/library/elasticsearch:9.3.3",
           "source": "docker.io/library/elasticsearch:9.3.3",
           "size": "1.2 GB",
@@ -108,7 +109,8 @@
           "size": "1.2 GB",
           "layers": 12
         }
-      ]
+      ],
+      "description_zh": "分布式、RESTful 搜索和分析引擎"
     },
     {
       "name": "nacos/nacos-server",
@@ -135,7 +137,8 @@
           "size": "856 MB",
           "layers": 15
         }
-      ]
+      ],
+      "description_zh": "动态服务发现、配置和服务管理平台"
     },
     {
       "name": "library/nginx",
@@ -182,7 +185,8 @@
           "size": "67 MB",
           "layers": 7
         }
-      ]
+      ],
+      "description_zh": "官方构建的高性能 HTTP 和反向代理服务器"
     },
     {
       "name": "library/rabbitmq",
@@ -209,7 +213,8 @@
           "size": "215 MB",
           "layers": 9
         }
-      ]
+      ],
+      "description_zh": "开源消息代理软件，支持多种消息协议"
     },
     {
       "name": "library/redis",
@@ -217,7 +222,7 @@
       "repository": "library/redis",
       "total_versions": 1,
       "latest_version": "8.6.2",
-      "updated": "2026-04-22T06:24:58+00:00",
+      "updated": "2026-04-23T01:37:25+00:00",
       "size": "138 MB",
       "layers": 6,
       "stars": 0,
@@ -228,15 +233,16 @@
       "versions": [
         {
           "version": "8.6.2",
-          "digest": "sha256:125f446fbd4c4345cdbd0f60c61ed83c35a10e09436dd797e0e82377325034f5",
-          "created_at": "2026-04-22T06:24:58+00:00",
-          "synced_at": "2026-04-22T06:24:58+00:00",
+          "digest": "sha256:d372cf7cd5ab47fb6ad1a73c45ea1104d6f3fa11cc833ff0b3ac997890b4ccec",
+          "created_at": "2026-04-23T01:37:25+00:00",
+          "synced_at": "2026-04-23T01:37:25+00:00",
           "target": "ghcr.io/freemankevin/library/redis:8.6.2",
           "source": "docker.io/library/redis:8.6.2",
           "size": "138 MB",
           "layers": 6
         }
-      ]
+      ],
+      "description_zh": "高性能内存数据结构存储，用作数据库、缓存和消息代理"
     },
     {
       "name": "kartoza/geoserver",
@@ -244,7 +250,7 @@
       "repository": "kartoza/geoserver",
       "total_versions": 2,
       "latest_version": "2.28.3",
-      "updated": "2026-04-22T04:31:51+00:00",
+      "updated": "2026-04-23T01:37:53+00:00",
       "size": "1.8 GB",
       "layers": 15,
       "stars": 0,
@@ -255,9 +261,9 @@
       "versions": [
         {
           "version": "2.28.3",
-          "digest": "sha256:b4b1cf1275fce63d8f72a32ed4ea075964619747377b40e66af0be78de596afd",
-          "created_at": "2026-04-22T04:31:51+00:00",
-          "synced_at": "2026-04-22T04:31:51+00:00",
+          "digest": "sha256:023476b4c153f9c94d0f8596ac28ad5eea1aac81fc76d7985002d58c0d48c3b3",
+          "created_at": "2026-04-23T01:37:53+00:00",
+          "synced_at": "2026-04-23T01:37:53+00:00",
           "target": "ghcr.io/freemankevin/kartoza/geoserver:2.28.3",
           "source": "docker.io/kartoza/geoserver:2.28.3",
           "size": "1.8 GB",
@@ -273,7 +279,8 @@
           "size": "1.8 GB",
           "layers": 15
         }
-      ]
+      ],
+      "description_zh": "开源地理信息系统服务器"
     },
     {
       "name": "freelabspace/postgresql-postgis",
@@ -570,7 +577,8 @@
           "size": "856 MB",
           "layers": 15
         }
-      ]
+      ],
+      "description_zh": "PostgreSQL 数据库，包含 PostGIS 空间数据扩展"
     },
     {
       "name": "freelabspace/postgresql-backup",
@@ -597,7 +605,8 @@
           "size": "45 MB",
           "layers": 5
         }
-      ]
+      ],
+      "description_zh": "PostgreSQL 数据库备份工具"
     },
     {
       "name": "ghcr.io/freemankevin/netkit",
@@ -624,7 +633,8 @@
           "size": "45 MB",
           "layers": 4
         }
-      ]
+      ],
+      "description_zh": "容器化环境的网络诊断工具集（curl、wget、ping、nslookup、dig、telnet、nc、tcpdump）"
     },
     {
       "name": "gcr.io/google-containers/etcd",
@@ -651,7 +661,8 @@
           "size": "256 MB",
           "layers": 8
         }
-      ]
+      ],
+      "description_zh": "分布式键值存储，用于共享配置和服务发现"
     },
     {
       "name": "quay.io/minio/aistor/minio",
@@ -698,7 +709,8 @@
           "size": "284 MB",
           "layers": 8
         }
-      ]
+      ],
+      "description_zh": "高性能对象存储服务器，兼容 Amazon S3 API"
     }
   ],
   "failed_images": []
