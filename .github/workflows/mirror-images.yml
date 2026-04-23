@@ -123,22 +123,13 @@ jobs:
             echo "fail_count=$failed" >> $GITHUB_OUTPUT
           fi
       
-      - name: Cleanup old images (optional)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.cleanup == 'true' }}
+      - name: Cleanup old images
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           GHCR_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           echo "::group::🗑️ Cleanup old images"
           python3 scripts/main.py cleanup --owner ${{ env.GITHUB_OWNER }} --force
-          echo "::endgroup::"
-      
-      - name: Cleanup preview (scheduled)
-        if: ${{ github.event_name == 'schedule' }}
-        env:
-          GHCR_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          echo "::group::🗑️ Preview old images to cleanup"
-          python3 scripts/main.py cleanup --owner ${{ env.GITHUB_OWNER }}
           echo "::endgroup::"
 
       - name: Commit sync results
