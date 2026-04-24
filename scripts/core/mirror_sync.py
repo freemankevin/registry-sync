@@ -10,13 +10,104 @@ import subprocess
 import sys
 import time
 import random
+import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
+from collections import defaultdict
 
 from scripts.utils import convert_to_ghcr_path, get_ghcr_image_name, parse_image_name
+
+
+def parse_version_tag(tag: str):
+    """解析版本标签，返回 (major, minor, patch)"""
+    match = re.match(r'^v?(\d+)\.(\d+)\.(\d+)$', tag)
+    if match:
+        return (int(match.group(1)), int(match.group(2)), int(match.group(3)))
+    
+    match = re.match(r'^v?(\d+)\.(\d+)$', tag)
+    if match:
+        return (int(match.group(1)), int(match.group(2)), 0)
+    
+    return None
+
+
+def get_major_version(tag: str):
+    """获取主版本号"""
+    parsed = parse_version_tag(tag)
+    return parsed[0] if parsed else None
+
+
+def apply_retention_strategy(
+    versions: List[str],
+    strategy: str,
+    max_versions: int,
+    major_versions: List[int] = None,
+    keep_minor_versions: List[str] = None
+) -> List[str]:
+    """应用清理策略，返回需要保留的版本列表
+    
+    Args:
+        versions: 所有版本列表
+        strategy: 清理策略 (max_versions, latest_per_major, latest_per_minor)
+        max_versions: 最大保留版本数
+        major_versions: 需要保留的大版本列表
+        keep_minor_versions: 需要保留的小版本系列列表
+        
+    Returns:
+        需要保留的版本列表
+    """
+    if not versions:
+        return []
+    
+    if strategy == 'latest_per_major' and major_versions:
+        versions_by_major = defaultdict(list)
+        
+        for v in versions:
+            parsed = parse_version_tag(v)
+            if parsed:
+                major = parsed[0]
+                if major in major_versions:
+                    versions_by_major[major].append({
+                        'version': v,
+                        'major': parsed[0],
+                        'minor': parsed[1],
+                        'patch': parsed[2]
+                    })
+        
+        retained = []
+        for major, v_list in versions_by_major.items():
+            v_list.sort(key=lambda x: (x['minor'], x['patch']), reverse=True)
+            if v_list:
+                retained.append(v_list[0]['version'])
+        
+        return retained
+    
+    elif strategy == 'latest_per_minor' and keep_minor_versions:
+        versions_by_minor = defaultdict(list)
+        
+        for v in versions:
+            parsed = parse_version_tag(v)
+            if parsed:
+                minor_key = f"{parsed[0]}.{parsed[1]}"
+                if minor_key in keep_minor_versions or not keep_minor_versions:
+                    versions_by_minor[minor_key].append({
+                        'version': v,
+                        'patch': parsed[2]
+                    })
+        
+        retained = []
+        for minor_key, v_list in versions_by_minor.items():
+            v_list.sort(key=lambda x: x['patch'], reverse=True)
+            if v_list:
+                retained.append(v_list[0]['version'])
+        
+        return retained
+    
+    else:
+        return versions[:max_versions] if len(versions) > max_versions else versions
 
 
 class MirrorSync:
@@ -274,11 +365,17 @@ class MirrorSync:
             tag_pattern = img.get('tag_pattern')
             exclude_pattern = img.get('exclude_pattern')
             sync_all = img.get('sync_all_matching', False)
+            
+            retention = img.get('retention', {})
+            global_retention = manifest.get('config', {}).get('retention', {})
+            
+            strategy = retention.get('strategy', global_retention.get('strategy', 'max_versions'))
+            max_versions = retention.get('max_versions', global_retention.get('max_versions', 3))
+            major_versions = retention.get('major_versions', [])
+            keep_minor_versions = retention.get('keep_minor_versions', [])
 
-            # 提取镜像名
             image_name = source.split(':')[0]
 
-            # 确定要同步的版本列表
             versions_to_sync = []
 
             if sync_all:
@@ -287,7 +384,21 @@ class MirrorSync:
                 )
 
                 if all_versions:
-                    versions_to_sync = all_versions
+                    if self.logger:
+                        self.logger.info(f"找到 {len(all_versions)} 个匹配版本，应用清理策略...")
+                    
+                    retained_versions = apply_retention_strategy(
+                        all_versions,
+                        strategy,
+                        max_versions,
+                        major_versions,
+                        keep_minor_versions
+                    )
+                    
+                    if self.logger:
+                        self.logger.info(f"清理策略 '{strategy}' 保留 {len(retained_versions)} 个版本: {retained_versions}")
+                    
+                    versions_to_sync = retained_versions
                 else:
                     if self.logger:
                         self.logger.warning(f"No matching versions found for {image_name}")

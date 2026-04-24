@@ -132,6 +132,15 @@ jobs:
           python3 scripts/main.py cleanup --owner ${{ env.GITHUB_OWNER }} --force
           echo "::endgroup::"
 
+      - name: Regenerate images.json after cleanup
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          GHCR_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          echo "::group::📝 Regenerate images.json"
+          python3 scripts/main.py generate --owner ${{ env.GITHUB_OWNER }}
+          echo "::endgroup::"
+
       - name: Commit sync results
         if: always()
         run: |

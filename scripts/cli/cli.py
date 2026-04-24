@@ -151,6 +151,40 @@ def cmd_run(args):
     return ret
 
 
+def cmd_generate(args):
+    """生成 images.json"""
+    logger = setup_logger('generate', args.debug, LOGS_DIR)
+    
+    manifest_file = args.manifest or MANIFEST_FILE
+    
+    if not manifest_file.exists():
+        logger.error(f"清单文件不存在: {manifest_file}")
+        return 1
+    
+    output_file = args.output or OUTPUT_FILE
+    ghcr_token = get_env_variable('GHCR_TOKEN')
+    
+    if not ghcr_token:
+        logger.error("未设置 GHCR_TOKEN 环境变量")
+        return 1
+    
+    try:
+        from scripts.core.generate_images_json import generate_images_json
+        
+        generate_images_json(
+            manifest_file,
+            output_file,
+            args.registry,
+            args.owner,
+            token=ghcr_token,
+            logger=logger
+        )
+        return 0
+    except Exception as e:
+        logger.error(f"生成镜像列表失败: {str(e)}")
+        return 1
+
+
 def cmd_cleanup(args):
     """清理旧镜像"""
     logger = setup_logger('cleanup', args.debug, LOGS_DIR)
@@ -325,9 +359,22 @@ def main():
     parser_run.add_argument('--no-concurrency',
                            action='store_true',
                            help='禁用并发处理')
-    parser_run.set_defaults(func=cmd_run)
+parser_run.set_defaults(func=cmd_run)
     
-    # cleanup 命令
+    parser_generate = subparsers.add_parser('generate', help='生成 images.json')
+    parser_generate.add_argument('--owner',
+                               type=str,
+                               required=True,
+                               help='目标仓库所有者')
+    parser_generate.add_argument('--registry',
+                               type=str,
+                               default='ghcr.io',
+                               help='目标镜像仓库 (默认: ghcr.io)')
+    parser_generate.add_argument('--output',
+                               type=Path,
+                               help=f'输出 JSON 文件路径 (默认: {OUTPUT_FILE})')
+    parser_generate.set_defaults(func=cmd_generate)
+    
     parser_cleanup = subparsers.add_parser('cleanup', help='清理旧镜像')
     parser_cleanup.add_argument('--owner',
                               type=str,
