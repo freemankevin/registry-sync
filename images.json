@@ -1,18 +1,18 @@
 {
-  "updated_at": "2026-04-24T04:53:23.669600+00:00",
+  "updated_at": "2026-04-24T05:07:28.178749+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 17,
-  "total_versions": 21,
+  "total_versions": 25,
   "total_failed": 0,
   "images": [
     {
       "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
       "description": "Amazon Corretto JDK (Amazon Linux 2023)",
       "repository": "amazoncorretto/amazoncorretto",
-      "total_versions": 1,
-      "latest_version": "8-al2023",
-      "updated": "2026-04-23T04:36:31+00:00",
+      "total_versions": 5,
+      "latest_version": "25-al2023",
+      "updated": "2026-04-22T06:32:15+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -21,6 +21,46 @@
         "ARM64"
       ],
       "versions": [
+        {
+          "version": "25-al2023",
+          "digest": "sha256:baa5d9d71db795ace56201e5e311ee67837560b0ecf05f2cf5748ad4677bd0f1",
+          "created_at": "2026-04-22T06:32:15+00:00",
+          "synced_at": "2026-04-22T06:32:15+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:25-al2023",
+          "source": "public.ecr.aws/amazoncorretto/amazoncorretto:25-al2023",
+          "size": "256 MB",
+          "layers": 8
+        },
+        {
+          "version": "21-al2023",
+          "digest": "sha256:1f9c84b30ca4a492f71b02a775c4dee8c24a2eea555dc1256090058d220f0718",
+          "created_at": "2026-04-22T06:32:13+00:00",
+          "synced_at": "2026-04-22T06:32:13+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:21-al2023",
+          "source": "public.ecr.aws/amazoncorretto/amazoncorretto:21-al2023",
+          "size": "256 MB",
+          "layers": 8
+        },
+        {
+          "version": "17-al2023",
+          "digest": "sha256:8b9c5294f9393fe8f8b05e4ab607548757a898fc3011c9f61ff81a0292b9c5a6",
+          "created_at": "2026-04-22T06:32:06+00:00",
+          "synced_at": "2026-04-22T06:32:06+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:17-al2023",
+          "source": "public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023",
+          "size": "256 MB",
+          "layers": 8
+        },
+        {
+          "version": "11-al2023",
+          "digest": "sha256:557f4d5f3a8ce2f866d63c34daefcded67369686714c2b4e6770c8a41887c277",
+          "created_at": "2026-04-22T06:32:07+00:00",
+          "synced_at": "2026-04-22T06:32:07+00:00",
+          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:11-al2023",
+          "source": "public.ecr.aws/amazoncorretto/amazoncorretto:11-al2023",
+          "size": "256 MB",
+          "layers": 8
+        },
         {
           "version": "8-al2023",
           "digest": "sha256:b3175a5fc49ad602677e47bc6baa6cd9a7423c386f0fb1d7629b6c088abecbb4",
