@@ -10,7 +10,7 @@
             inset: 0;
             z-index: -1;
             background-size: cover;
-            background-position: center calc(100% + 90px);
+            background-position: center bottom;
             background-repeat: no-repeat;
             transition: background-image 1s ease-in-out;
             animation: bgPulse 20s ease-in-out infinite;
