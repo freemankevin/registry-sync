@@ -1,18 +1,18 @@
 {
-  "updated_at": "2026-04-24T04:48:53.401271+00:00",
+  "updated_at": "2026-04-24T04:53:23.669600+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 17,
-  "total_versions": 33,
+  "total_versions": 21,
   "total_failed": 0,
   "images": [
     {
       "name": "public.ecr.aws/amazoncorretto/amazoncorretto",
       "description": "Amazon Corretto JDK (Amazon Linux 2023)",
       "repository": "amazoncorretto/amazoncorretto",
-      "total_versions": 5,
-      "latest_version": "25-al2023",
-      "updated": "2026-04-22T06:32:15+00:00",
+      "total_versions": 1,
+      "latest_version": "8-al2023",
+      "updated": "2026-04-23T04:36:31+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -21,46 +21,6 @@
         "ARM64"
       ],
       "versions": [
-        {
-          "version": "25-al2023",
-          "digest": "sha256:baa5d9d71db795ace56201e5e311ee67837560b0ecf05f2cf5748ad4677bd0f1",
-          "created_at": "2026-04-22T06:32:15+00:00",
-          "synced_at": "2026-04-22T06:32:15+00:00",
-          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:25-al2023",
-          "source": "public.ecr.aws/amazoncorretto/amazoncorretto:25-al2023",
-          "size": "256 MB",
-          "layers": 8
-        },
-        {
-          "version": "21-al2023",
-          "digest": "sha256:1f9c84b30ca4a492f71b02a775c4dee8c24a2eea555dc1256090058d220f0718",
-          "created_at": "2026-04-22T06:32:13+00:00",
-          "synced_at": "2026-04-22T06:32:13+00:00",
-          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:21-al2023",
-          "source": "public.ecr.aws/amazoncorretto/amazoncorretto:21-al2023",
-          "size": "256 MB",
-          "layers": 8
-        },
-        {
-          "version": "17-al2023",
-          "digest": "sha256:8b9c5294f9393fe8f8b05e4ab607548757a898fc3011c9f61ff81a0292b9c5a6",
-          "created_at": "2026-04-22T06:32:06+00:00",
-          "synced_at": "2026-04-22T06:32:06+00:00",
-          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:17-al2023",
-          "source": "public.ecr.aws/amazoncorretto/amazoncorretto:17-al2023",
-          "size": "256 MB",
-          "layers": 8
-        },
-        {
-          "version": "11-al2023",
-          "digest": "sha256:557f4d5f3a8ce2f866d63c34daefcded67369686714c2b4e6770c8a41887c277",
-          "created_at": "2026-04-22T06:32:07+00:00",
-          "synced_at": "2026-04-22T06:32:07+00:00",
-          "target": "ghcr.io/freemankevin/amazoncorretto/amazoncorretto:11-al2023",
-          "source": "public.ecr.aws/amazoncorretto/amazoncorretto:11-al2023",
-          "size": "256 MB",
-          "layers": 8
-        },
         {
           "version": "8-al2023",
           "digest": "sha256:b3175a5fc49ad602677e47bc6baa6cd9a7423c386f0fb1d7629b6c088abecbb4",
@@ -78,7 +38,7 @@
       "name": "library/elasticsearch",
       "description": "Distributed, RESTful search and analytics engine",
       "repository": "library/elasticsearch",
-      "total_versions": 2,
+      "total_versions": 1,
       "latest_version": "9.3.3",
       "updated": "2026-04-23T01:37:32+00:00",
       "size": "1.2 GB",
@@ -98,16 +58,6 @@
           "source": "docker.io/library/elasticsearch:9.3.3",
           "size": "1.2 GB",
           "layers": 12
-        },
-        {
-          "version": "9.3.2",
-          "digest": "sha256:56282e41f1d9c8dc437e4c99d132cf9f154def73b6ea8a25ac969a28c2f529c6",
-          "created_at": "2026-04-03T04:51:02+00:00",
-          "synced_at": "2026-04-03T04:51:02+00:00",
-          "target": "ghcr.io/freemankevin/library/elasticsearch:9.3.2",
-          "source": "docker.io/library/elasticsearch:9.3.2",
-          "size": "1.2 GB",
-          "layers": 12
         }
       ],
       "description_zh": "分布式、RESTful 搜索和分析引擎"
@@ -116,7 +66,7 @@
       "name": "nacos/nacos-server",
       "description": "Dynamic service discovery, configuration and service management",
       "repository": "nacos/nacos-server",
-      "total_versions": 2,
+      "total_versions": 1,
       "latest_version": "v3.2.1",
       "updated": "2026-04-24T03:25:02+00:00",
       "size": "856 MB",
@@ -136,16 +86,6 @@
           "source": "docker.io/nacos/nacos-server:v3.2.1",
           "size": "856 MB",
           "layers": 15
-        },
-        {
-          "version": "v3.2.0",
-          "digest": "sha256:b49dd396fef871fcc4fc16ee805303d0a3ed1dc05df9cf919c84909402dc2a31",
-          "created_at": "2026-04-03T04:51:13+00:00",
-          "synced_at": "2026-04-03T04:51:13+00:00",
-          "target": "ghcr.io/freemankevin/nacos/nacos-server:v3.2.0",
-          "source": "docker.io/nacos/nacos-server:v3.2.0",
-          "size": "856 MB",
-          "layers": 15
         }
       ],
       "description_zh": "动态服务发现、配置和服务管理平台"
@@ -154,7 +94,7 @@
       "name": "library/nginx",
       "description": "High-performance HTTP server and reverse proxy",
       "repository": "library/nginx",
-      "total_versions": 3,
+      "total_versions": 1,
       "latest_version": "1.30.0-alpine",
       "updated": "2026-04-18T04:15:56+00:00",
       "size": "67 MB",
@@ -174,26 +114,6 @@
           "source": "docker.io/library/nginx:1.30.0-alpine",
           "size": "67 MB",
           "layers": 7
-        },
-        {
-          "version": "1.29.8-alpine",
-          "digest": "sha256:582c496ccf79d8aa6f8203a79d32aaf7ffd8b13362c60a701a2f9ac64886c93d",
-          "created_at": "2026-04-11T04:04:48+00:00",
-          "synced_at": "2026-04-11T04:04:48+00:00",
-          "target": "ghcr.io/freemankevin/library/nginx:1.29.8-alpine",
-          "source": "docker.io/library/nginx:1.29.8-alpine",
-          "size": "67 MB",
-          "layers": 7
-        },
-        {
-          "version": "1.29.7-alpine",
-          "digest": "sha256:e7257f1ef28ba17cf7c248cb8ccf6f0c6e0228ab9c315c152f9c203cd34cf6d1",
-          "created_at": "2026-04-04T00:33:25+00:00",
-          "synced_at": "2026-04-04T00:33:25+00:00",
-          "target": "ghcr.io/freemankevin/library/nginx:1.29.7-alpine",
-          "source": "docker.io/library/nginx:1.29.7-alpine",
-          "size": "67 MB",
-          "layers": 7
         }
       ],
       "description_zh": "官方构建的高性能 HTTP 和反向代理服务器"
@@ -202,7 +122,7 @@
       "name": "library/rabbitmq",
       "description": "Message broker with management plugin",
       "repository": "library/rabbitmq",
-      "total_versions": 2,
+      "total_versions": 1,
       "latest_version": "4.3.0-management-alpine",
       "updated": "2026-04-24T03:25:09+00:00",
       "size": "215 MB",
@@ -220,16 +140,6 @@
           "synced_at": "2026-04-24T03:25:09+00:00",
           "target": "ghcr.io/freemankevin/library/rabbitmq:4.3.0-management-alpine",
           "source": "docker.io/library/rabbitmq:4.3.0-management-alpine",
-          "size": "215 MB",
-          "layers": 9
-        },
-        {
-          "version": "4.2.5-management-alpine",
-          "digest": "sha256:5554af48743bc2a5fc8735f345c918edd4bfde19863f4fbbc905d3b6dd2fe91f",
-          "created_at": "2026-04-22T04:31:45+00:00",
-          "synced_at": "2026-04-22T04:31:45+00:00",
-          "target": "ghcr.io/freemankevin/library/rabbitmq:4.2.5-management-alpine",
-          "source": "docker.io/library/rabbitmq:4.2.5-management-alpine",
           "size": "215 MB",
           "layers": 9
         }
@@ -268,17 +178,28 @@
       "name": "kartoza/geoserver",
       "description": "Open-source geospatial data server",
       "repository": "kartoza/geoserver",
-      "total_versions": 0,
-      "latest_version": null,
-      "updated": "",
-      "size": "",
-      "layers": 0,
+      "total_versions": 1,
+      "latest_version": "2.28.3",
+      "updated": "2026-04-23T01:37:53+00:00",
+      "size": "1.8 GB",
+      "layers": 15,
       "stars": 0,
       "platforms": [
         "AMD64",
         "ARM64"
       ],
-      "versions": [],
+      "versions": [
+        {
+          "version": "2.28.3",
+          "digest": "sha256:023476b4c153f9c94d0f8596ac28ad5eea1aac81fc76d7985002d58c0d48c3b3",
+          "created_at": "2026-04-23T01:37:53+00:00",
+          "synced_at": "2026-04-23T01:37:53+00:00",
+          "target": "ghcr.io/freemankevin/kartoza/geoserver:2.28.3",
+          "source": "docker.io/kartoza/geoserver:2.28.3",
+          "size": "1.8 GB",
+          "layers": 15
+        }
+      ],
       "description_zh": "开源地理信息系统服务器"
     },
     {
@@ -435,7 +356,7 @@
       "name": "freelabspace/java-local",
       "description": "Java development environment with common tools",
       "repository": "freelabspace/java-local",
-      "total_versions": 2,
+      "total_versions": 1,
       "latest_version": "8-amd64",
       "updated": "2026-04-24T03:33:18+00:00",
       "size": "256 MB",
@@ -455,16 +376,6 @@
           "source": "docker.io/freelabspace/java-local:8-amd64",
           "size": "256 MB",
           "layers": 8
-        },
-        {
-          "version": "8-arm64",
-          "digest": "sha256:30305a689810b8be5a399819c644f318150d2c99a3367b363a6216244ab8b1d2",
-          "created_at": "2026-04-24T03:26:02+00:00",
-          "synced_at": "2026-04-24T03:26:02+00:00",
-          "target": "ghcr.io/freemankevin/freelabspace/java-local:8-arm64",
-          "source": "docker.io/freelabspace/java-local:8-arm64",
-          "size": "256 MB",
-          "layers": 8
         }
       ]
     },
@@ -472,9 +383,9 @@
       "name": "freelabspace/python-local",
       "description": "Python development environment with PyTorch",
       "repository": "freelabspace/python-local",
-      "total_versions": 2,
-      "latest_version": "3.10-arm64",
-      "updated": "2026-04-24T04:41:16+00:00",
+      "total_versions": 1,
+      "latest_version": "3.10-amd64",
+      "updated": "2026-04-24T03:25:59+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -483,16 +394,6 @@
         "ARM64"
       ],
       "versions": [
-        {
-          "version": "3.10-arm64",
-          "digest": "sha256:4642d80afca30bdafdabf14cad699ba54a8ad8357ee3895ee3cf60637fcae39f",
-          "created_at": "2026-04-24T04:41:16+00:00",
-          "synced_at": "2026-04-24T04:41:16+00:00",
-          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-arm64",
-          "source": "docker.io/freelabspace/python-local:3.10-arm64",
-          "size": "256 MB",
-          "layers": 8
-        },
         {
           "version": "3.10-amd64",
           "digest": "sha256:c5fa1c3a9a1becde25fca5c003f8151226ed9d903d948731475c7598c2c5aa52",
@@ -592,7 +493,7 @@
       "name": "quay.io/minio/aistor/minio",
       "description": "MinIO AIStor - High-performance object storage for AI workloads",
       "repository": "minio/aistor/minio",
-      "total_versions": 3,
+      "total_versions": 1,
       "latest_version": "RELEASE.2026-04-14T21-32-45Z",
       "updated": "2026-04-15T04:30:43+00:00",
       "size": "284 MB",
@@ -610,26 +511,6 @@
           "synced_at": "2026-04-15T04:30:43+00:00",
           "target": "ghcr.io/freemankevin/minio/aistor/minio:RELEASE.2026-04-14T21-32-45Z",
           "source": "quay.io/minio/aistor/minio:RELEASE.2026-04-14T21-32-45Z",
-          "size": "284 MB",
-          "layers": 8
-        },
-        {
-          "version": "RELEASE.2026-04-11T03-20-12Z",
-          "digest": "sha256:c98e3f121a9208290f1b718345408d9084877ba4e2826ba82117ad7cf0ee3ddf",
-          "created_at": "2026-04-12T04:33:16+00:00",
-          "synced_at": "2026-04-12T04:33:16+00:00",
-          "target": "ghcr.io/freemankevin/minio/aistor/minio:RELEASE.2026-04-11T03-20-12Z",
-          "source": "quay.io/minio/aistor/minio:RELEASE.2026-04-11T03-20-12Z",
-          "size": "284 MB",
-          "layers": 8
-        },
-        {
-          "version": "RELEASE.2026-03-26T21-24-40Z",
-          "digest": "sha256:dfd89c5b568cc1e570b329eaaa3bb9f06522c013b9064874a752662ea7772599",
-          "created_at": "2026-04-03T04:54:33+00:00",
-          "synced_at": "2026-04-03T04:54:33+00:00",
-          "target": "ghcr.io/freemankevin/minio/aistor/minio:RELEASE.2026-03-26T21-24-40Z",
-          "source": "quay.io/minio/aistor/minio:RELEASE.2026-03-26T21-24-40Z",
           "size": "284 MB",
           "layers": 8
         }
