@@ -81,7 +81,7 @@ images:
   description: Java development environment with common tools
   tag_pattern: ^[0-9]+(-amd64|-arm64)?$
   sync_all_matching: false
-- source: freelabspace/python-local:3.10-arm64
+- source: freelabspace/python-local:3.10-amd64
   enabled: true
   description: Python development environment with PyTorch
   tag_pattern: ^[0-9]+\.[0-9]+(-amd64|-arm64)?$
@@ -117,4 +117,4 @@ config:
     strategy: max_versions
     max_versions: 3
     cleanup_old_versions: true
-  last_checked: '2026-04-24T04:40:20.943920+00:00'
+  last_checked: '2026-04-24T04:52:55.865486+00:00'
