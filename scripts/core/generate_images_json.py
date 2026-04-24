@@ -216,6 +216,7 @@ def generate_images_json(
         tag_pattern = img.get('tag_pattern')
         exclude_pattern = img.get('exclude_pattern')
         retention = img.get('retention', {})
+        sync_all = img.get('sync_all_matching', False)
         
         if ':' in source:
             image_name, version = source.rsplit(':', 1)
@@ -230,6 +231,8 @@ def generate_images_json(
                 'tag_patterns': [],
                 'exclude_pattern': exclude_pattern,
                 'retention': retention,
+                'sync_all': sync_all,
+                'current_version': version,
             }
         if tag_pattern:
             image_groups[image_name]['tag_patterns'].append(tag_pattern)
@@ -242,6 +245,8 @@ def generate_images_json(
         tag_patterns = group_info['tag_patterns']
         exclude_pattern = group_info['exclude_pattern']
         retention = group_info['retention']
+        sync_all = group_info.get('sync_all', False)
+        current_version = group_info.get('current_version', 'latest')
         
         strategy = retention.get('strategy', default_strategy)
         max_versions = retention.get('max_versions', default_max_versions)
@@ -307,25 +312,28 @@ def generate_images_json(
                             'digest': tag.get('digest', ''),
                             'created_at': tag.get('created_at'),
                             'synced_at': tag.get('created_at'),
-                            'target': full_source,  # GHCR 源镜像本身就是目标
+                            'target': full_source,
                             'source': full_source,
                             'size': tag.get('size', ''),
                             'layers': tag.get('layers', 0)
                         })
                     
-                    version_names = [v['version'] for v in versions]
-                    retained_names = apply_retention_strategy(
-                        version_names,
-                        strategy,
-                        max_versions,
-                        major_versions,
-                        keep_minor_versions
-                    )
-                    
-                    versions = [v for v in versions if v['version'] in retained_names]
+                    if sync_all:
+                        version_names = [v['version'] for v in versions]
+                        retained_names = apply_retention_strategy(
+                            version_names,
+                            strategy,
+                            max_versions,
+                            major_versions,
+                            keep_minor_versions
+                        )
+                        versions = [v for v in versions if v['version'] in retained_names]
+                    else:
+                        versions = [v for v in versions if v['version'] == current_version]
                     
                     if versions:
-                        versions.sort(key=lambda x: retained_names.index(x['version']) if x['version'] in retained_names else len(retained_names))
+                        if sync_all:
+                            versions.sort(key=lambda x: retained_names.index(x['version']) if x['version'] in retained_names else len(retained_names))
                     
                     total_versions += len(versions)
                     
@@ -416,19 +424,22 @@ def generate_images_json(
                         'layers': tag.get('layers', 0)
                     })
                 
-                version_names = [v['version'] for v in versions]
-                retained_names = apply_retention_strategy(
-                    version_names,
-                    strategy,
-                    max_versions,
-                    major_versions,
-                    keep_minor_versions
-                )
-                
-                versions = [v for v in versions if v['version'] in retained_names]
+                if sync_all:
+                    version_names = [v['version'] for v in versions]
+                    retained_names = apply_retention_strategy(
+                        version_names,
+                        strategy,
+                        max_versions,
+                        major_versions,
+                        keep_minor_versions
+                    )
+                    versions = [v for v in versions if v['version'] in retained_names]
+                else:
+                    versions = [v for v in versions if v['version'] == current_version]
                 
                 if versions:
-                    versions.sort(key=lambda x: retained_names.index(x['version']) if x['version'] in retained_names else len(retained_names))
+                    if sync_all:
+                        versions.sort(key=lambda x: retained_names.index(x['version']) if x['version'] in retained_names else len(retained_names))
                 
                 total_versions += len(versions)
                 
