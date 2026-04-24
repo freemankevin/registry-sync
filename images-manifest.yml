@@ -60,11 +60,46 @@ images:
   tag_pattern: ^latest$|^[0-9]+\.[0-9]+$
   exclude_pattern: ^buildcache-.*
   sync_all_matching: false
+- source: freelabspace/harbor-export:latest
+  enabled: true
+  description: Harbor registry metrics exporter
+  tag_pattern: ^latest$
+  sync_all_matching: false
+- source: freelabspace/harbor-export-ui:latest
+  enabled: true
+  description: Harbor registry metrics exporter UI
+  tag_pattern: ^latest$
+  sync_all_matching: false
+- source: freelabspace/java-local:8
+  enabled: true
+  description: Java development environment with common tools
+  tag_pattern: ^[0-9]+(-amd64|-arm64)?$
+  sync_all_matching: false
+- source: freelabspace/python-local:3.10
+  enabled: true
+  description: Python development environment with PyTorch
+  tag_pattern: ^[0-9]+\.[0-9]+(-amd64|-arm64)?$
+  sync_all_matching: false
+- source: ghcr.io/freemankevin/loadstrike:latest
+  enabled: true
+  description: Load testing tool with web interface
+  tag_pattern: ^latest$
+  sync_all_matching: false
+- source: ghcr.io/freemankevin/dao-de-jing:latest
+  enabled: true
+  description: Dao De Jing (道德经) web application
+  tag_pattern: ^latest$
+  sync_all_matching: false
 - source: ghcr.io/freemankevin/netkit:latest
   enabled: true
   description: Network diagnostic tools for containerized environments including curl,
     wget, ping, nslookup, dig, telnet, nc, tcpdump
   tag_pattern: ^latest$|^[0-9]+\.[0-9]+$
+  sync_all_matching: false
+- source: ghcr.io/freemankevin/freemankevin:latest
+  enabled: true
+  description: Personal GitHub Pages site container
+  tag_pattern: ^latest$
   sync_all_matching: false
 - source: gcr.io/google-containers/etcd:3.4.9
   enabled: true

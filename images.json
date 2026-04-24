@@ -2,8 +2,8 @@
   "updated_at": "2026-04-23T09:51:41.230032+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
-  "total_images": 12,
-  "total_versions": 46,
+  "total_images": 19,
+  "total_versions": 53,
   "total_failed": 0,
   "images": [
     {
@@ -605,6 +605,201 @@
         }
       ],
       "description_zh": "容器化环境的网络诊断工具集（curl、wget、ping、nslookup、dig、telnet、nc、tcpdump）"
+    },
+    {
+      "name": "ghcr.io/freemankevin/freemankevin",
+      "description": "Personal GitHub Pages site container",
+      "repository": "freemankevin",
+      "total_versions": 1,
+      "latest_version": "latest",
+      "updated": "2026-04-24T02:55:37+00:00",
+      "size": "N/A",
+      "layers": 0,
+      "stars": 0,
+      "platforms": [],
+      "versions": [
+        {
+          "version": "latest",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T02:55:37+00:00",
+          "synced_at": "2026-04-24T02:55:37+00:00",
+          "target": "ghcr.io/freemankevin/freemankevin:latest",
+          "source": "ghcr.io/freemankevin/freemankevin:latest",
+          "size": "N/A",
+          "layers": 0
+        }
+      ],
+      "description_zh": "个人 GitHub Pages 网站容器"
+    },
+    {
+      "name": "freelabspace/harbor-export",
+      "description": "Harbor registry metrics exporter",
+      "repository": "freelabspace/harbor-export",
+      "total_versions": 1,
+      "latest_version": "latest",
+      "updated": "2026-04-24T00:00:00+00:00",
+      "size": "N/A",
+      "layers": 0,
+      "stars": 0,
+      "platforms": ["AMD64", "ARM64"],
+      "versions": [
+        {
+          "version": "latest",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T00:00:00+00:00",
+          "synced_at": "2026-04-24T00:00:00+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/harbor-export:latest",
+          "source": "docker.io/freelabspace/harbor-export:latest",
+          "size": "N/A",
+          "layers": 0
+        }
+      ],
+      "description_zh": "Harbor 镜像仓库指标导出器"
+    },
+    {
+      "name": "freelabspace/harbor-export-ui",
+      "description": "Harbor registry metrics exporter UI",
+      "repository": "freelabspace/harbor-export-ui",
+      "total_versions": 1,
+      "latest_version": "latest",
+      "updated": "2026-04-24T00:00:00+00:00",
+      "size": "N/A",
+      "layers": 0,
+      "stars": 0,
+      "platforms": ["AMD64", "ARM64"],
+      "versions": [
+        {
+          "version": "latest",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T00:00:00+00:00",
+          "synced_at": "2026-04-24T00:00:00+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/harbor-export-ui:latest",
+          "source": "docker.io/freelabspace/harbor-export-ui:latest",
+          "size": "N/A",
+          "layers": 0
+        }
+      ],
+      "description_zh": "Harbor 镜像仓库指标导出器 UI"
+    },
+    {
+      "name": "freelabspace/java-local",
+      "description": "Java development environment with common tools",
+      "repository": "freelabspace/java-local",
+      "total_versions": 2,
+      "latest_version": "8",
+      "updated": "2026-04-24T00:00:00+00:00",
+      "size": "N/A",
+      "layers": 0,
+      "stars": 0,
+      "platforms": ["AMD64", "ARM64"],
+      "versions": [
+        {
+          "version": "8-amd64",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T00:00:00+00:00",
+          "synced_at": "2026-04-24T00:00:00+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/java-local:8-amd64",
+          "source": "docker.io/freelabspace/java-local:8-amd64",
+          "size": "N/A",
+          "layers": 0
+        },
+        {
+          "version": "8-arm64",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T00:00:00+00:00",
+          "synced_at": "2026-04-24T00:00:00+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/java-local:8-arm64",
+          "source": "docker.io/freelabspace/java-local:8-arm64",
+          "size": "N/A",
+          "layers": 0
+        }
+      ],
+      "description_zh": "Java 开发环境容器"
+    },
+    {
+      "name": "freelabspace/python-local",
+      "description": "Python development environment with PyTorch",
+      "repository": "freelabspace/python-local",
+      "total_versions": 2,
+      "latest_version": "3.10",
+      "updated": "2026-04-24T00:00:00+00:00",
+      "size": "N/A",
+      "layers": 0,
+      "stars": 0,
+      "platforms": ["AMD64", "ARM64"],
+      "versions": [
+        {
+          "version": "3.10-amd64",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T00:00:00+00:00",
+          "synced_at": "2026-04-24T00:00:00+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-amd64",
+          "source": "docker.io/freelabspace/python-local:3.10-amd64",
+          "size": "N/A",
+          "layers": 0
+        },
+        {
+          "version": "3.10-arm64",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T00:00:00+00:00",
+          "synced_at": "2026-04-24T00:00:00+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-arm64",
+          "source": "docker.io/freelabspace/python-local:3.10-arm64",
+          "size": "N/A",
+          "layers": 0
+        }
+      ],
+      "description_zh": "Python 开发环境容器（含 PyTorch）"
+    },
+    {
+      "name": "ghcr.io/freemankevin/loadstrike",
+      "description": "Load testing tool with web interface",
+      "repository": "loadstrike",
+      "total_versions": 1,
+      "latest_version": "latest",
+      "updated": "2026-04-24T00:00:00+00:00",
+      "size": "N/A",
+      "layers": 0,
+      "stars": 0,
+      "platforms": ["AMD64", "ARM64"],
+      "versions": [
+        {
+          "version": "latest",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T00:00:00+00:00",
+          "synced_at": "2026-04-24T00:00:00+00:00",
+          "target": "ghcr.io/freemankevin/loadstrike:latest",
+          "source": "ghcr.io/freemankevin/loadstrike:latest",
+          "size": "N/A",
+          "layers": 0
+        }
+      ],
+      "description_zh": "负载测试工具（带 Web 界面）"
+    },
+    {
+      "name": "ghcr.io/freemankevin/dao-de-jing",
+      "description": "Dao De Jing (道德经) web application",
+      "repository": "dao-de-jing",
+      "total_versions": 1,
+      "latest_version": "latest",
+      "updated": "2026-04-24T00:00:00+00:00",
+      "size": "N/A",
+      "layers": 0,
+      "stars": 0,
+      "platforms": ["AMD64", "ARM64"],
+      "versions": [
+        {
+          "version": "latest",
+          "digest": "sha256:placeholder",
+          "created_at": "2026-04-24T00:00:00+00:00",
+          "synced_at": "2026-04-24T00:00:00+00:00",
+          "target": "ghcr.io/freemankevin/dao-de-jing:latest",
+          "source": "ghcr.io/freemankevin/dao-de-jing:latest",
+          "size": "N/A",
+          "layers": 0
+        }
+      ],
+      "description_zh": "道德经 Web 应用"
     },
     {
       "name": "gcr.io/google-containers/etcd",
