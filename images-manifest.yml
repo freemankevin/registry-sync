@@ -72,6 +72,8 @@ images:
   tag_pattern: ^latest$|^[0-9]+\.[0-9]+$
   exclude_pattern: ^buildcache-.*
   sync_all_matching: false
+  retention:
+    max_versions: 10
 - source: freelabspace/harbor-export:latest
   enabled: true
   description: Harbor registry metrics exporter

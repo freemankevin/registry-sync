@@ -255,6 +255,9 @@ class ImageCleanup:
                     ghcr_path = repo
                 else:
                     continue
+                print(f"\n📦 检查 {ghcr_path}...")
+                print(f"   {COLOR_GREEN}GHCR 源镜像，跳过清理{COLOR_RESET}")
+                continue
             else:
                 ghcr_path = convert_to_ghcr_path(image_name)
             
