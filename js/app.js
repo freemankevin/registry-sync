@@ -13,7 +13,14 @@ let currentFilter = 'all';
 let currentSearch = '';
 let currentPage   = 1;
 
-// ── Source detection ──────────────────────────
+function getLocalizedDescription(img) {
+  const lang = window.i18n ? window.i18n.currentLang : 'en';
+  if (lang === 'zh' && img.description_zh) {
+    return img.description_zh;
+  }
+  return img.description || '';
+}
+
 function getSourceType(img) {
   const src = (img.source || img.name || '').toLowerCase();
   if (src.startsWith('gcr.io/')   || src.startsWith('us.gcr.io/') ||
@@ -78,15 +85,6 @@ function processData(data) {
   const records = Array.isArray(data) ? data : (data.images || Object.values(data));
   const failedRecords = data.failed_images || [];
 
-  // Helper to get description based on current language
-  function getLocalizedDescription(img) {
-    const lang = window.i18n ? window.i18n.currentLang : 'en';
-    if (lang === 'zh' && img.description_zh) {
-      return img.description_zh;
-    }
-    return img.description || '';
-  }
-
   records.forEach(img => {
     const name = img.name || img.image || '';
     if (!name) return;
@@ -105,7 +103,8 @@ function processData(data) {
     const record = {
       name,
       displayName: getDisplayName(name),
-      description: getLocalizedDescription(img),
+      description: img.description || '',
+      description_zh: img.description_zh || '',
       stars,
       layers,
       updated:     img.updated || img.last_updated || img.synced_at || '',
@@ -133,7 +132,8 @@ function processData(data) {
     const record = {
       name,
       displayName: getDisplayName(name),
-      description: img.description_zh || img.description || '同步失败 - 镜像不可用',
+      description: img.description || '',
+      description_zh: img.description_zh || '',
       source: img.source || '',
       sourceType: sourceType,
       version: img.version || '',
@@ -324,6 +324,7 @@ function getFiltered() {
       const searchableFields = [
         img.displayName.toLowerCase(),
         img.description.toLowerCase(),
+        (img.description_zh || '').toLowerCase(),
         img.name.toLowerCase(),
         fullMirrorPath,
         sourcePath,
@@ -569,7 +570,7 @@ return `
           <span class="tag">${sourceLabel}</span>
         </div>
         
-        <p class="text-sm text-secondary mb-3 line-clamp-1">${escHtml(img.description)}</p>
+        <p class="text-sm text-secondary mb-3 line-clamp-1">${escHtml(getLocalizedDescription(img))}</p>
         
         <div class="flex items-center gap-3 text-sm text-tertiary mono flex-wrap">
           ${img.stars ? `<button onclick="toggleStar('${img.name}')" class="star-btn flex items-center gap-1.5 hover:text-amber-500 transition-colors" aria-label="Star ${escHtml(img.displayName)}" aria-pressed="false">
@@ -656,7 +657,7 @@ function buildFailedCard(img, index) {
           <span class="tag">${sourceLabel}</span>
         </div>
         
-        <p class="text-sm text-gray-400 mb-3 line-clamp-1">${escHtml(img.description)}</p>
+        <p class="text-sm text-gray-400 mb-3 line-clamp-1">${escHtml(getLocalizedDescription(img))}</p>
         
         <div class="flex items-center gap-3 text-sm text-gray-400 mono flex-wrap">
           ${ago ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
