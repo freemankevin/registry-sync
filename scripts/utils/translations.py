@@ -5,7 +5,7 @@
 """
 
 IMAGE_DESCRIPTION_ZH = {
-    'amazoncorretto': 'Amazon Corretto JDK（Amazon Linux 2023）',
+    'amazoncorretto': 'Amazon 官方维护的 OpenJDK 发行版（Amazon Linux 2023）',
     'elasticsearch': '分布式、RESTful 搜索和分析引擎',
     'nacos-server': '动态服务发现、配置和服务管理平台',
     'nginx': '官方构建的高性能 HTTP 和反向代理服务器',
