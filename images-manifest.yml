@@ -84,12 +84,12 @@ images:
   description: Harbor registry metrics exporter UI
   tag_pattern: ^latest$
   sync_all_matching: false
-- source: freelabspace/java-local:8-amd64
+- source: freelabspace/java-local:8-arm64
   enabled: true
   description: Java development environment with common tools
   tag_pattern: ^[0-9]+(-amd64|-arm64)?$
   sync_all_matching: false
-- source: freelabspace/python-local:3.10-arm64
+- source: freelabspace/python-local:3.10-amd64
   enabled: true
   description: Python development environment with PyTorch
   tag_pattern: ^[0-9]+\.[0-9]+(-amd64|-arm64)?$
@@ -125,4 +125,4 @@ config:
     strategy: max_versions
     max_versions: 3
     cleanup_old_versions: true
-  last_checked: '2026-04-27T03:48:02.887932+00:00'
+  last_checked: '2026-04-27T04:31:26.893983+00:00'
