@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-27T03:24:45.576155+00:00",
+  "updated_at": "2026-04-27T03:40:16.624210+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
-  "total_images": 15,
-  "total_versions": 19,
+  "total_images": 17,
+  "total_versions": 25,
   "total_failed": 0,
   "images": [
     {
@@ -243,6 +243,102 @@
       "description_zh": "开源地理信息系统服务器"
     },
     {
+      "name": "ghcr.io/freemankevin/postgresql-postgis",
+      "description": "PostgreSQL database with PostGIS spatial extension",
+      "repository": "postgresql-postgis",
+      "total_versions": 5,
+      "latest_version": "18.3",
+      "updated": "2026-04-27T03:35:47+00:00",
+      "size": "856 MB",
+      "layers": 15,
+      "stars": 0,
+      "platforms": [
+        "AMD64",
+        "ARM64"
+      ],
+      "versions": [
+        {
+          "version": "18.3",
+          "digest": "sha256:6f93da574db511cd88028a69fc73185ccb24332827b22f344f03b1d990620440",
+          "created_at": "2026-04-27T03:35:47+00:00",
+          "synced_at": "2026-04-27T03:35:47+00:00",
+          "target": "ghcr.io/freemankevin/postgresql-postgis:18.3",
+          "source": "ghcr.io/freemankevin/postgresql-postgis:18.3",
+          "size": "856 MB",
+          "layers": 15
+        },
+        {
+          "version": "17.9",
+          "digest": "sha256:16bff0c9667126893a039bb5e0f69a7524ed40bdc9710544e2fc24f4f7ca801c",
+          "created_at": "2026-04-27T03:35:33+00:00",
+          "synced_at": "2026-04-27T03:35:33+00:00",
+          "target": "ghcr.io/freemankevin/postgresql-postgis:17.9",
+          "source": "ghcr.io/freemankevin/postgresql-postgis:17.9",
+          "size": "856 MB",
+          "layers": 15
+        },
+        {
+          "version": "16.13",
+          "digest": "sha256:e704c3af3952cbae73281be3baec0007742476fb030ff7a0f346ba547ac0c2dd",
+          "created_at": "2026-04-27T03:35:39+00:00",
+          "synced_at": "2026-04-27T03:35:39+00:00",
+          "target": "ghcr.io/freemankevin/postgresql-postgis:16.13",
+          "source": "ghcr.io/freemankevin/postgresql-postgis:16.13",
+          "size": "856 MB",
+          "layers": 15
+        },
+        {
+          "version": "15.17",
+          "digest": "sha256:c9d4607a61f569399b7d175481d3ef8aaba36fed9272c7e38ad32aca4f64652e",
+          "created_at": "2026-04-27T03:32:26+00:00",
+          "synced_at": "2026-04-27T03:32:26+00:00",
+          "target": "ghcr.io/freemankevin/postgresql-postgis:15.17",
+          "source": "ghcr.io/freemankevin/postgresql-postgis:15.17",
+          "size": "856 MB",
+          "layers": 15
+        },
+        {
+          "version": "14.22",
+          "digest": "sha256:e05c318d48b090d2de02c86deecfb4193c7d44597b9323ee6777e12e2f908df4",
+          "created_at": "2026-04-27T03:35:44+00:00",
+          "synced_at": "2026-04-27T03:35:44+00:00",
+          "target": "ghcr.io/freemankevin/postgresql-postgis:14.22",
+          "source": "ghcr.io/freemankevin/postgresql-postgis:14.22",
+          "size": "856 MB",
+          "layers": 15
+        }
+      ],
+      "description_zh": "PostgreSQL 数据库，包含 PostGIS 空间数据扩展"
+    },
+    {
+      "name": "ghcr.io/freemankevin/postgresql-backup",
+      "description": "Backup utility for PostgreSQL databases",
+      "repository": "postgresql-backup",
+      "total_versions": 1,
+      "latest_version": "latest",
+      "updated": "2026-04-27T03:36:57+00:00",
+      "size": "45 MB",
+      "layers": 5,
+      "stars": 0,
+      "platforms": [
+        "AMD64",
+        "ARM64"
+      ],
+      "versions": [
+        {
+          "version": "latest",
+          "digest": "sha256:dd6135e6c6179d61ae9cdd080d79fae305136d09a2f3d715f2a6d11925f84093",
+          "created_at": "2026-04-27T03:36:57+00:00",
+          "synced_at": "2026-04-27T03:36:57+00:00",
+          "target": "ghcr.io/freemankevin/postgresql-backup:latest",
+          "source": "ghcr.io/freemankevin/postgresql-backup:latest",
+          "size": "45 MB",
+          "layers": 5
+        }
+      ],
+      "description_zh": "PostgreSQL 数据库备份工具"
+    },
+    {
       "name": "freelabspace/harbor-export",
       "description": "Harbor registry metrics exporter",
       "repository": "freelabspace/harbor-export",
@@ -328,8 +424,8 @@
       "description": "Python development environment with PyTorch",
       "repository": "freelabspace/python-local",
       "total_versions": 1,
-      "latest_version": "3.10-amd64",
-      "updated": "2026-04-24T03:25:59+00:00",
+      "latest_version": "3.10-arm64",
+      "updated": "2026-04-24T04:41:16+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -339,12 +435,12 @@
       ],
       "versions": [
         {
-          "version": "3.10-amd64",
-          "digest": "sha256:c5fa1c3a9a1becde25fca5c003f8151226ed9d903d948731475c7598c2c5aa52",
-          "created_at": "2026-04-24T03:25:59+00:00",
-          "synced_at": "2026-04-24T03:25:59+00:00",
-          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-amd64",
-          "source": "docker.io/freelabspace/python-local:3.10-amd64",
+          "version": "3.10-arm64",
+          "digest": "sha256:4642d80afca30bdafdabf14cad699ba54a8ad8357ee3895ee3cf60637fcae39f",
+          "created_at": "2026-04-24T04:41:16+00:00",
+          "synced_at": "2026-04-24T04:41:16+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-arm64",
+          "source": "docker.io/freelabspace/python-local:3.10-arm64",
           "size": "256 MB",
           "layers": 8
         }
