@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-27T03:48:27.070985+00:00",
+  "updated_at": "2026-04-29T04:58:13.162158+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 17,
@@ -72,7 +72,7 @@
           "layers": 8
         }
       ],
-      "description_zh": "Amazon Corretto JDK（Amazon Linux 2023）"
+      "description_zh": "Amazon 官方维护的 OpenJDK 发行版（Amazon Linux 2023）"
     },
     {
       "name": "library/elasticsearch",
@@ -248,7 +248,7 @@
       "repository": "postgresql-postgis",
       "total_versions": 5,
       "latest_version": "18.3",
-      "updated": "2026-04-27T03:35:47+00:00",
+      "updated": "2026-04-27T06:54:13+00:00",
       "size": "856 MB",
       "layers": 15,
       "stars": 0,
@@ -259,9 +259,9 @@
       "versions": [
         {
           "version": "18.3",
-          "digest": "sha256:6f93da574db511cd88028a69fc73185ccb24332827b22f344f03b1d990620440",
-          "created_at": "2026-04-27T03:35:47+00:00",
-          "synced_at": "2026-04-27T03:35:47+00:00",
+          "digest": "sha256:937432628dc4bfa0fcb57c0f79d83cde4b7d28437eb1d25fd02aefba7d9a0914",
+          "created_at": "2026-04-27T06:54:13+00:00",
+          "synced_at": "2026-04-27T06:54:13+00:00",
           "target": "ghcr.io/freemankevin/postgresql-postgis:18.3",
           "source": "ghcr.io/freemankevin/postgresql-postgis:18.3",
           "size": "856 MB",
@@ -269,9 +269,9 @@
         },
         {
           "version": "17.9",
-          "digest": "sha256:16bff0c9667126893a039bb5e0f69a7524ed40bdc9710544e2fc24f4f7ca801c",
-          "created_at": "2026-04-27T03:35:33+00:00",
-          "synced_at": "2026-04-27T03:35:33+00:00",
+          "digest": "sha256:2480b7dab4e4b47db4e5047d7f61aba2ebb3806595e0c9b83cba54ff96426c9c",
+          "created_at": "2026-04-27T06:53:54+00:00",
+          "synced_at": "2026-04-27T06:53:54+00:00",
           "target": "ghcr.io/freemankevin/postgresql-postgis:17.9",
           "source": "ghcr.io/freemankevin/postgresql-postgis:17.9",
           "size": "856 MB",
@@ -279,9 +279,9 @@
         },
         {
           "version": "16.13",
-          "digest": "sha256:e704c3af3952cbae73281be3baec0007742476fb030ff7a0f346ba547ac0c2dd",
-          "created_at": "2026-04-27T03:35:39+00:00",
-          "synced_at": "2026-04-27T03:35:39+00:00",
+          "digest": "sha256:fb1c3bb125311f1b5096a6e3ccf650810e7950e2046fb248caf9b5408dba6678",
+          "created_at": "2026-04-27T06:53:53+00:00",
+          "synced_at": "2026-04-27T06:53:53+00:00",
           "target": "ghcr.io/freemankevin/postgresql-postgis:16.13",
           "source": "ghcr.io/freemankevin/postgresql-postgis:16.13",
           "size": "856 MB",
@@ -289,9 +289,9 @@
         },
         {
           "version": "15.17",
-          "digest": "sha256:c9d4607a61f569399b7d175481d3ef8aaba36fed9272c7e38ad32aca4f64652e",
-          "created_at": "2026-04-27T03:32:26+00:00",
-          "synced_at": "2026-04-27T03:32:26+00:00",
+          "digest": "sha256:8e58906d7fde2cd63d6cdfaefa2d79aab431d533608d28a60c190aa9e54a0fa4",
+          "created_at": "2026-04-27T06:53:38+00:00",
+          "synced_at": "2026-04-27T06:53:38+00:00",
           "target": "ghcr.io/freemankevin/postgresql-postgis:15.17",
           "source": "ghcr.io/freemankevin/postgresql-postgis:15.17",
           "size": "856 MB",
@@ -299,9 +299,9 @@
         },
         {
           "version": "14.22",
-          "digest": "sha256:e05c318d48b090d2de02c86deecfb4193c7d44597b9323ee6777e12e2f908df4",
-          "created_at": "2026-04-27T03:35:44+00:00",
-          "synced_at": "2026-04-27T03:35:44+00:00",
+          "digest": "sha256:a58c5172d821c6817701b77003b59cb36514bbfedab5594c70ac8d677e848624",
+          "created_at": "2026-04-27T06:53:56+00:00",
+          "synced_at": "2026-04-27T06:53:56+00:00",
           "target": "ghcr.io/freemankevin/postgresql-postgis:14.22",
           "source": "ghcr.io/freemankevin/postgresql-postgis:14.22",
           "size": "856 MB",
@@ -316,7 +316,7 @@
       "repository": "postgresql-backup",
       "total_versions": 1,
       "latest_version": "latest",
-      "updated": "2026-04-27T03:44:07+00:00",
+      "updated": "2026-04-27T04:30:36+00:00",
       "size": "45 MB",
       "layers": 5,
       "stars": 0,
@@ -327,9 +327,9 @@
       "versions": [
         {
           "version": "latest",
-          "digest": "sha256:d9972f0654cc3908113d72dba9173ded8c0d154f2cc271439b3f2bc475adeeb4",
-          "created_at": "2026-04-27T03:44:07+00:00",
-          "synced_at": "2026-04-27T03:44:07+00:00",
+          "digest": "sha256:cd8aa2ec66ef73d6929fd108186a985c558cceb91cf3d0a1f6a09829e9cdf18f",
+          "created_at": "2026-04-27T04:30:36+00:00",
+          "synced_at": "2026-04-27T04:30:36+00:00",
           "target": "ghcr.io/freemankevin/postgresql-backup:latest",
           "source": "ghcr.io/freemankevin/postgresql-backup:latest",
           "size": "45 MB",
@@ -427,8 +427,8 @@
       "description": "Python development environment with PyTorch",
       "repository": "freelabspace/python-local",
       "total_versions": 1,
-      "latest_version": "3.10-arm64",
-      "updated": "2026-04-24T04:41:16+00:00",
+      "latest_version": "3.10-amd64",
+      "updated": "2026-04-24T03:25:59+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -438,12 +438,12 @@
       ],
       "versions": [
         {
-          "version": "3.10-arm64",
-          "digest": "sha256:4642d80afca30bdafdabf14cad699ba54a8ad8357ee3895ee3cf60637fcae39f",
-          "created_at": "2026-04-24T04:41:16+00:00",
-          "synced_at": "2026-04-24T04:41:16+00:00",
-          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-arm64",
-          "source": "docker.io/freelabspace/python-local:3.10-arm64",
+          "version": "3.10-amd64",
+          "digest": "sha256:c5fa1c3a9a1becde25fca5c003f8151226ed9d903d948731475c7598c2c5aa52",
+          "created_at": "2026-04-24T03:25:59+00:00",
+          "synced_at": "2026-04-24T03:25:59+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-amd64",
+          "source": "docker.io/freelabspace/python-local:3.10-amd64",
           "size": "256 MB",
           "layers": 8
         }
