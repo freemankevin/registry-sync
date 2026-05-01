@@ -12,7 +12,7 @@ images:
     - 17
     - 21
     - 25
-- source: library/elasticsearch:9.3.3
+- source: library/elasticsearch:9.3.4
   enabled: true
   description: Distributed, RESTful search and analytics engine
   tag_pattern: ^[0-9]+\.[0-9]+\.[0-9]+$
@@ -89,7 +89,7 @@ images:
   description: Java development environment with common tools
   tag_pattern: ^[0-9]+(-amd64|-arm64)?$
   sync_all_matching: false
-- source: freelabspace/python-local:3.10-amd64
+- source: freelabspace/python-local:3.10-arm64
   enabled: true
   description: Python development environment with PyTorch
   tag_pattern: ^[0-9]+\.[0-9]+(-amd64|-arm64)?$
@@ -125,4 +125,4 @@ config:
     strategy: max_versions
     max_versions: 3
     cleanup_old_versions: true
-  last_checked: '2026-04-29T04:57:42.825733+00:00'
+  last_checked: '2026-05-01T05:11:23.573860+00:00'
