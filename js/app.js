@@ -5,13 +5,11 @@
 'use strict';
 
 // ── State ──────────────────────────────────────
-let itemsPerPage = parseInt(localStorage.getItem('itemsPerPage')) || 10;
 let allImages    = [];   // flat list of display objects
 let imageData    = {};   // name → full record (with versions[])
 let failedImages = [];   // failed images list
 let currentFilter = 'all';
 let currentSearch = '';
-let currentPage   = 1;
 
 function getLocalizedDescription(img) {
   const lang = window.i18n ? window.i18n.currentLang : 'en';
@@ -362,7 +360,6 @@ function getFiltered() {
 
 function setFilter(f) {
   currentFilter = f;
-  currentPage   = 1;
   document.querySelectorAll('.filter-tab').forEach(t => {
     t.classList.toggle('active', t.dataset.filter === f);
   });
@@ -371,7 +368,6 @@ function setFilter(f) {
 
 function handleSearch(val) {
   currentSearch = val.trim();
-  currentPage   = 1;
   render();
 }
 
@@ -434,7 +430,6 @@ function updateStats() {
 
   setText('statLastSyncAge', lastImg ? formatAgo(lastImg.updated) : '–');
   setText('statLastSyncName', lastImg ? lastImg.displayName : '–');
-  setText('statSub', '+' + total + ' ' + t('stats.thisWeek'));
 
   // Update failed info in Total Mirrors card
   const failedInfoEl = document.getElementById('statFailedInfo');
@@ -530,61 +525,98 @@ function setText(id, val) {
   return { path: mirrorPath, ver };
 }
 
+function getAppIcon(name) {
+  const lowerName = name.toLowerCase();
+  
+  // Java/JDK images
+  if (lowerName.includes('corretto') || lowerName.includes('openjdk') || lowerName === 'java' || lowerName.includes('java-local')) {
+    return `<img src="/public/logo/java.svg" class="app-icon" alt="Java">`;
+  }
+  
+  // Elasticsearch
+  if (lowerName.includes('elasticsearch')) {
+    return `<img src="/public/logo/elasticsearch.svg" class="app-icon" alt="Elasticsearch">`;
+  }
+  
+  // Nacos
+  if (lowerName.includes('nacos')) {
+    return `<img src="/public/logo/nacos.svg" class="app-icon" alt="Nacos">`;
+  }
+  
+  // Nginx
+  if (lowerName.includes('nginx')) {
+    return `<img src="/public/logo/nginx.svg" class="app-icon" alt="Nginx">`;
+  }
+  
+  // RabbitMQ
+  if (lowerName.includes('rabbitmq')) {
+    return `<img src="/public/logo/rabbitmq.svg" class="app-icon" alt="RabbitMQ">`;
+  }
+  
+  // Redis
+  if (lowerName.includes('redis')) {
+    return `<img src="/public/logo/redis.svg" class="app-icon" alt="Redis">`;
+  }
+  
+  // PostgreSQL
+  if (lowerName.includes('postgres') || lowerName.includes('postgis')) {
+    return `<img src="/public/logo/postgresql.svg" class="app-icon" alt="PostgreSQL">`;
+  }
+  
+  // MinIO
+  if (lowerName.includes('minio')) {
+    return `<img src="/public/logo/minio-bird.svg" class="app-icon" alt="MinIO">`;
+  }
+  
+  // etcd
+  if (lowerName.includes('etcd')) {
+    return `<img src="/public/logo/etcd.svg" class="app-icon" alt="etcd">`;
+  }
+  
+  // Python
+  if (lowerName.includes('python')) {
+    return `<img src="/public/logo/python.svg" class="app-icon" alt="Python">`;
+  }
+  
+  // GeoServer
+  if (lowerName.includes('geoserver')) {
+    return `<img src="/public/logo/geoserver.svg" class="app-icon" alt="GeoServer">`;
+  }
+  
+  // Harbor
+  if (lowerName.includes('harbor')) {
+    return `<img src="/public/logo/harbor.svg" class="app-icon" alt="Harbor">`;
+  }
+  
+  // Network tools (netkit)
+  if (lowerName.includes('netkit')) {
+    return `<img src="/public/logo/netkit.svg" class="app-icon" alt="Network">`;
+  }
+  
+  // Freemankevin personal site
+  if (lowerName.includes('freemankevin')) {
+    return `<img src="/public/logo/freemankevin.svg" class="app-icon" alt="FreemanKevin">`;
+  }
+  
+  return '';
+}
+
 function buildCard(img, index) {
     const t = window.i18n ? window.i18n.t : (key) => key;
     const { path, ver } = buildPullCmd(img);
-    const sourceLabel = getSourceLabel(img.sourceType);
-    const ago = formatAgo(img.updated);
     const size = formatSize(img.size);
-    const isDark = document.documentElement.classList.contains('dark');
-
-    let iconHtml;
-    if (img.sourceType === 'dockerhub') {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-docker border flex items-center justify-center flex-shrink-0"><img src="/public/logo/docker.svg" style="width: 26px; height: 26px;" alt="Docker"></div>`;
-    } else if (img.sourceType === 'google') {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-google border flex items-center justify-center flex-shrink-0"><img src="/public/logo/google.svg" style="width: 26px; height: 26px;" alt="Google"></div>`;
-    } else if (img.sourceType === 'redhat') {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-redhat border flex items-center justify-center flex-shrink-0"><img src="/public/logo/redhat.svg" style="width: 26px; height: 26px;" alt="Red Hat"></div>`;
-    } else if (img.sourceType === 'aws') {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-aws border flex items-center justify-center flex-shrink-0"><img src="/public/logo/AWS.svg" style="width: 26px; height: 26px;" alt="AWS"></div>`;
-    } else {
-      iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-github border flex items-center justify-center flex-shrink-0"><img src="/public/logo/GitHub.svg" style="width: 26px; height: 26px;" alt="GitHub"></div>`;
-    }
+    const appIcon = getAppIcon(img.name);
 
     const versionEl = buildVersionSelect(img, ver);
-
-    const officialBadge = img.official
-      ? `<span class="badge badge-official">${t('card.official')}</span>`
-      : '';
 
 return `
 <article class="surface rounded-xl p-5 animate-fade-in" role="listitem" data-name="${img.name}" style="animation-delay:${index * 0.05}s" aria-label="${escHtml(img.displayName)} mirror">
   <div class="flex flex-col lg:flex-row gap-5">
     <div class="flex gap-4 flex-1 min-w-0 items-center">
-      ${iconHtml}
-      
       <div class="min-w-0 flex-1">
         <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+          ${appIcon ? `<span class="app-icon-wrapper">${appIcon}</span>` : ''}
           <h3 class="text-base font-bold text-primary truncate">${escHtml(img.displayName)}</h3>
-          ${officialBadge}
-          <span class="tag">${sourceLabel}</span>
-        </div>
-        
-        <p class="text-sm text-secondary mb-3 line-clamp-1">${escHtml(getLocalizedDescription(img))}</p>
-        
-        <div class="flex items-center gap-3 text-sm text-tertiary mono flex-wrap">
-          ${img.stars ? `<button onclick="toggleStar('${img.name}')" class="star-btn flex items-center gap-1.5 hover:text-amber-500 transition-colors" aria-label="Star ${escHtml(img.displayName)}" aria-pressed="false">
-            <i class="fas fa-star" style="font-size: 12px;"></i>
-            <span style="font-size: 12px;">${img.stars}</span>
-          </button>` : ''}
-          ${img.layers ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
-            <i class="fas fa-layer-group text-purple-500/60" style="font-size: 12px;"></i>
-            ${img.layers} ${t('card.layers')}
-          </span>` : ''}
-          ${ago ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
-            <i class="far fa-clock text-tertiary/60" style="font-size: 12px;"></i>
-            ${ago}
-          </span>` : ''}
         </div>
       </div>
     </div>
@@ -596,9 +628,9 @@ return `
   
   <div class="mt-4">
     <div class="terminal-window rounded-xl flex items-center gap-3 group">
-      <code class="code-block text-primary truncate flex-1">
-        <span class="text-purple-500 select-none" style="font-size: 13px;">$</span>
-        <span class="text-blue-500" style="font-size: 13px;">${t('card.dockerPull')} ${escHtml(path)}:${escHtml(ver)}</span>
+      <code class="code-block cmd-text truncate flex-1">
+        <span class="cmd-prompt select-none" style="font-size: 13px;">$</span>
+        <span style="font-size: 13px;">${t('card.dockerPull')} ${escHtml(path)}:${escHtml(ver)}</span>
       </code>
       <button onclick="copyCmd('${img.name}')"
               class="copy-btn flex items-center justify-center"
@@ -625,49 +657,15 @@ function escHtml(s) {
 
 function buildFailedCard(img, index) {
   const t = window.i18n ? window.i18n.t : (key) => key;
-  const lang = window.i18n ? window.i18n.currentLang : 'en';
-  const sourceLabel = getSourceLabel(img.sourceType);
-  const ago = formatAgo(img.failedAt);
-
-  let iconHtml;
-  if (img.sourceType === 'dockerhub') {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-docker border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/docker.svg" class="grayscale" style="width: 26px; height: 26px;" alt="Docker"></div>`;
-  } else if (img.sourceType === 'google') {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-google border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/google.svg" class="grayscale" style="width: 26px; height: 26px;" alt="Google"></div>`;
-  } else if (img.sourceType === 'redhat') {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-redhat border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/redhat.svg" class="grayscale" style="width: 26px; height: 26px;" alt="Red Hat"></div>`;
-  } else if (img.sourceType === 'aws') {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-aws border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/AWS.svg" class="grayscale" style="width: 26px; height: 26px;" alt="AWS"></div>`;
-  } else {
-    iconHtml = `<div class="w-12 h-12 rounded-xl source-icon-github border flex items-center justify-center flex-shrink-0 opacity-50"><img src="/public/logo/GitHub.svg" class="grayscale" style="width: 26px; height: 26px;" alt="GitHub"></div>`;
-  }
-
-  const failedText = lang === 'zh' ? t('time.failed') : t('time.failed');
 
   return `
 <article class="surface rounded-xl p-5 animate-fade-in border-2 border-red-500/30 bg-red-500/5" role="listitem" data-name="${img.name}" style="animation-delay:${index * 0.05}s" aria-label="${escHtml(img.displayName)} - ${t('aria.failedLabel')}">
   <div class="flex flex-col lg:flex-row gap-5">
     <div class="flex gap-4 flex-1 min-w-0 items-center">
-      ${iconHtml}
-      
       <div class="min-w-0 flex-1">
         <div class="flex items-center gap-2 mb-1.5 flex-wrap">
           <h3 class="text-base font-bold text-gray-400 truncate">${escHtml(img.displayName)}</h3>
           <span class="badge badge-failed">${t('card.syncFailed')}</span>
-          <span class="tag">${sourceLabel}</span>
-        </div>
-        
-        <p class="text-sm text-gray-400 mb-3 line-clamp-1">${escHtml(getLocalizedDescription(img))}</p>
-        
-        <div class="flex items-center gap-3 text-sm text-gray-400 mono flex-wrap">
-          ${ago ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
-            <i class="far fa-clock text-gray-400/60" style="font-size: 12px;"></i>
-            ${failedText} ${ago}
-          </span>` : ''}
-          ${img.version ? `<span class="flex items-center gap-1.5" style="font-size: 12px;">
-            <i class="fas fa-tag text-gray-400/60" style="font-size: 12px;"></i>
-            ${escHtml(img.version)}
-          </span>` : ''}
         </div>
       </div>
     </div>
@@ -702,15 +700,32 @@ function toggleVersionSelect(name) {
   
   const isOpen = selectEl.classList.contains('open');
   
-  // Close all other selects
+  // Close all other selects and reset their parent card z-index
   document.querySelectorAll('.custom-select.open').forEach(el => {
     if (el.id !== `version-select-${safeId}`) {
       el.classList.remove('open');
+      // Reset parent card z-index
+      const parentCard = el.closest('article.surface');
+      if (parentCard) {
+        parentCard.style.zIndex = '';
+      }
     }
   });
   
   // Toggle current select
   selectEl.classList.toggle('open', !isOpen);
+  
+  // Set parent card z-index when opening
+  const parentCard = selectEl.closest('article.surface');
+  if (parentCard) {
+    if (!isOpen) {
+      // Opening - set high z-index
+      parentCard.style.zIndex = '1000';
+    } else {
+      // Closing - reset z-index
+      parentCard.style.zIndex = '';
+    }
+  }
 }
 
 function selectVersion(name, tag) {
@@ -882,111 +897,11 @@ function showToast(msg, type = 'green') {
   }, 3000);
 }
 
-// ── Pagination ────────────────────────────────
-function changePageSize(size) {
-  itemsPerPage = parseInt(size);
-  localStorage.setItem('itemsPerPage', itemsPerPage);
-  currentPage = 1;
-  render();
-}
-
-function togglePageSizeSelect() {
-  const selectEl = document.getElementById('pag-size-select');
-  if (!selectEl) return;
-  
-  // Close all other selects first
-  document.querySelectorAll('.pag-size-select.open').forEach(el => {
-    if (el.id !== 'pag-size-select') {
-      el.classList.remove('open');
-    }
-  });
-  
-  selectEl.classList.toggle('open');
-}
-
-function selectPageSize(size) {
-  itemsPerPage = parseInt(size);
-  localStorage.setItem('itemsPerPage', itemsPerPage);
-  currentPage = 1;
-  
-  // Close dropdown
-  const selectEl = document.getElementById('pag-size-select');
-  if (selectEl) selectEl.classList.remove('open');
-  
-  render();
-}
-
-function buildPagination(total, filtered) {
-  const t = window.i18n ? window.i18n.t : (key) => key;
-  const totalPages = Math.ceil(filtered / itemsPerPage);
-  const container  = document.getElementById('pagination');
-  if (!container) return;
-
-  if (filtered === 0) { container.innerHTML = ''; return; }
-
-  const from = (currentPage - 1) * itemsPerPage + 1;
-  const to   = Math.min(currentPage * itemsPerPage, filtered);
-
-  const pages = [];
-  const maxVisible = 5;
-  let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-  let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-  
-  if (endPage - startPage + 1 < maxVisible) {
-    startPage = Math.max(1, endPage - maxVisible + 1);
-  }
-
-  for (let p = startPage; p <= endPage; p++) {
-    pages.push(p);
-  }
-
-  const btns = pages.map(p => {
-    return `<button class="pag-btn num ${p === currentPage ? 'active' : ''}" onclick="goToPage(${p})">${p}</button>`;
-  }).join('');
-
-  const sizeOptions = [10, 20, 50, 100].map(size => 
-    `<div class="pag-size-option ${size === itemsPerPage ? 'selected' : ''}" onclick="selectPageSize(${size})">${size}</div>`
-  ).join('');
-
-  container.innerHTML = `
-    <div class="pag-wrap">
-      <span class="pag-info">${t('pagination.showing')} ${from}–${to} ${t('pagination.of')} ${filtered}</span>
-      <div class="pag-controls">
-        <div class="pag-size-select" id="pag-size-select">
-          <div class="pag-size-trigger" onclick="togglePageSizeSelect()">
-            <span>${itemsPerPage}</span>
-            <i class="fas fa-chevron-down" style="font-size: 10px; transition: transform 0.2s ease;"></i>
-          </div>
-          <div class="pag-size-options">${sizeOptions}</div>
-        </div>
-        <div class="pag-btns">
-          <button class="pag-btn nav" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
-            <i class="fas fa-chevron-left" style="font-size: 12px;"></i>
-          </button>
-          ${btns}
-          <button class="pag-btn nav" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>
-            <i class="fas fa-chevron-right" style="font-size: 12px;"></i>
-          </button>
-        </div>
-      </div>
-    </div>`;
-}
-
-function goToPage(p) {
-  const filtered = getFiltered();
-  const totalPages = Math.ceil(filtered.length / itemsPerPage);
-  if (p < 1 || p > totalPages) return;
-  currentPage = p;
-  renderList(filtered);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
 // ── Render ────────────────────────────────────
 function renderList(filtered) {
   const list     = document.getElementById('mirrorList');
   const failedList = document.getElementById('failedMirrorList');
   const empty    = document.getElementById('emptyState');
-  const pagEl    = document.getElementById('pagination');
   const failedSection = document.getElementById('failedSection');
 
   // Filter failed images by current source type
@@ -1012,19 +927,14 @@ function renderList(filtered) {
   // Render successful images
   if (!filtered.length) {
     list.innerHTML  = '';
-    pagEl.innerHTML = '';
     empty.classList.remove('hidden');
     return;
   }
 
   empty.classList.add('hidden');
 
-  const start = (currentPage - 1) * itemsPerPage;
-  const page  = filtered.slice(start, start + itemsPerPage);
-
-  list.innerHTML = page.map((img, i) => buildCard(img, i)).join('');
-
-  buildPagination(allImages.length, filtered.length);
+  // Show all images without pagination
+  list.innerHTML = filtered.map((img, i) => buildCard(img, i)).join('');
 }
 
 function render() {
@@ -1171,6 +1081,219 @@ function initPageBackground() {
   // Auto-rotate every 30 minutes
   setInterval(nextBg, 30 * 60 * 1000);
 }
+
+// ── Command Palette (Railway-style Search) ───────────────────────────────
+let modalSearchQuery = '';
+let modalSearchResults = [];
+let activeResultIndex = -1;
+
+function openSearchModal() {
+    const modal = document.getElementById('searchModal');
+    const input = document.getElementById('modalSearchInput');
+    
+    if (!modal || !input) return;
+    
+    modal.classList.remove('hidden');
+    modalSearchQuery = '';
+    activeResultIndex = -1;
+    input.value = '';
+    
+    // Focus input after a short delay for animation
+    setTimeout(() => input.focus(), 50);
+    
+    // Clear previous results
+    renderModalResults([]);
+}
+
+function closeSearchModal() {
+    const modal = document.getElementById('searchModal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+    modalSearchQuery = '';
+    activeResultIndex = -1;
+}
+
+function closeSearchModalOnOverlay(event) {
+    // Close when clicking on the overlay (not the container)
+    if (event.target === event.currentTarget) {
+        closeSearchModal();
+    }
+}
+
+function handleModalSearch(query) {
+    modalSearchQuery = query.trim().toLowerCase();
+    
+    if (!modalSearchQuery) {
+        modalSearchResults = [];
+        activeResultIndex = -1;
+        renderModalResults([]);
+        return;
+    }
+    
+    // Filter images based on search query
+    modalSearchResults = allImages.filter(img => {
+        const name = (img.displayName || img.name || '').toLowerCase();
+        const description = (img.description || '').toLowerCase();
+        const source = (img.source || '').toLowerCase();
+        return name.includes(modalSearchQuery) || 
+               description.includes(modalSearchQuery) || 
+               source.includes(modalSearchQuery);
+    }).slice(0, 10); // Limit to 10 results
+    
+    activeResultIndex = modalSearchResults.length > 0 ? 0 : -1;
+    renderModalResults(modalSearchResults);
+}
+
+function renderModalResults(results) {
+    const resultsContainer = document.getElementById('searchResults');
+    const emptyState = document.getElementById('searchEmptyState');
+    
+    if (!resultsContainer || !emptyState) return;
+    
+    if (results.length === 0) {
+        resultsContainer.innerHTML = '';
+        if (modalSearchQuery) {
+            emptyState.classList.remove('hidden');
+        } else {
+            emptyState.classList.add('hidden');
+        }
+        return;
+    }
+    
+    emptyState.classList.add('hidden');
+    
+    resultsContainer.innerHTML = results.map((img, index) => {
+        const isActive = index === activeResultIndex;
+        const sourceType = img.sourceType || getSourceType(img);
+        const iconUrl = getSourceIcon(sourceType);
+        const displayName = img.displayName || img.name || '';
+        const description = getLocalizedDescription(img);
+        const size = img.size || '';
+        
+        return `
+            <button class="search-result-item ${isActive ? 'active' : ''}" 
+                    data-index="${index}"
+                    onclick="selectModalResult(${index})"
+                    onmouseenter="setActiveResult(${index})">
+                <img src="${iconUrl}" class="search-result-icon" alt="">
+                <div class="search-result-content">
+                    <div class="search-result-title">${highlightMatch(displayName, modalSearchQuery)}</div>
+                    ${description ? `<div class="search-result-meta">${truncateText(description, 60)}</div>` : ''}
+                </div>
+                ${size ? `<span class="search-result-badge">${size}</span>` : ''}
+            </button>
+        `;
+    }).join('');
+}
+
+function setActiveResult(index) {
+    activeResultIndex = index;
+    const items = document.querySelectorAll('.search-result-item');
+    items.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+    });
+}
+
+function selectModalResult(index) {
+    const result = modalSearchResults[index];
+    if (!result) return;
+    
+    closeSearchModal();
+    
+    // Set the search in the main search box
+    const mainSearchInput = document.getElementById('searchInput');
+    if (mainSearchInput) {
+        mainSearchInput.value = result.displayName || result.name || '';
+        handleSearch(mainSearchInput.value);
+    }
+    
+    // Scroll to the result
+    setTimeout(() => {
+        const card = document.querySelector(`[data-image-name="${result.name}"]`);
+        if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.classList.add('highlight-pulse');
+            setTimeout(() => card.classList.remove('highlight-pulse'), 2000);
+        }
+    }, 100);
+}
+
+function handleModalKeyDown(event) {
+    if (!modalSearchResults.length) return;
+    
+    switch (event.key) {
+        case 'Escape':
+            event.preventDefault();
+            closeSearchModal();
+            break;
+        case 'ArrowDown':
+            event.preventDefault();
+            activeResultIndex = Math.min(activeResultIndex + 1, modalSearchResults.length - 1);
+            renderModalResults(modalSearchResults);
+            scrollActiveIntoView();
+            break;
+        case 'ArrowUp':
+            event.preventDefault();
+            activeResultIndex = Math.max(activeResultIndex - 1, 0);
+            renderModalResults(modalSearchResults);
+            scrollActiveIntoView();
+            break;
+        case 'Enter':
+            event.preventDefault();
+            if (activeResultIndex >= 0) {
+                selectModalResult(activeResultIndex);
+            }
+            break;
+    }
+}
+
+function scrollActiveIntoView() {
+    const activeItem = document.querySelector('.search-result-item.active');
+    if (activeItem) {
+        activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+}
+
+function highlightMatch(text, query) {
+    if (!query) return text;
+    const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+    return text.replace(regex, '<mark style="background: rgba(96, 165, 250, 0.3); color: inherit; border-radius: 2px; padding: 0 2px;">$1</mark>');
+}
+
+function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function truncateText(text, maxLength) {
+    if (!text) return '';
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+function getSourceIcon(sourceType) {
+    const icons = {
+        dockerhub: '/public/logo/docker.svg',
+        github: '/public/logo/GitHub.svg',
+        google: '/public/logo/google.svg',
+        redhat: '/public/logo/redhat.svg',
+        aws: '/public/logo/AWS.svg'
+    };
+    return icons[sourceType] || '/public/logo/docker.svg';
+}
+
+// Global keyboard shortcut for Command Palette
+document.addEventListener('keydown', (e) => {
+    // Cmd+K or Ctrl+K
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const modal = document.getElementById('searchModal');
+        if (modal && modal.classList.contains('hidden')) {
+            openSearchModal();
+        } else {
+            closeSearchModal();
+        }
+    }
+});
 
 // ── Boot ──────────────────────────────────────
 initTheme();

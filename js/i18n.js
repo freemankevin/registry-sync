@@ -57,7 +57,8 @@ const translations = {
     },
     pagination: {
       showing: 'Showing',
-      of: 'of'
+      of: 'of',
+      total: 'Total'
     },
     empty: {
       title: 'No mirrors found',
@@ -160,7 +161,8 @@ const translations = {
     },
     pagination: {
       showing: '显示',
-      of: '共'
+      of: '共',
+      total: '总计'
     },
     empty: {
       title: '未找到镜像',

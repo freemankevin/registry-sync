@@ -67,8 +67,8 @@
 
     <!-- Header -->
     <header class="surface border-b sticky top-0 z-50">
-        <div class="max-w-[1400px] mx-auto px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-4 group">
+        <div class="max-w-[1400px] mx-auto px-8 h-16 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-4 group shrink-0">
                 <div class="w-11 h-11 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                     <svg class="w-8 h-8 group-hover:rotate-6 transition-transform" viewBox="0 0 24 24" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.186m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.185-.186h-2.12a.186.186 0 0 0-.185.186v1.887c0 .102.084.185.186.185m-2.929 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.887c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 0 0-.75.748 11.376 11.376 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 0 0 3.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288z"/></svg>
                 </div>
@@ -77,8 +77,27 @@
                     <p class="text-sm text-secondary hidden md:block luxury-subtitle tracking-wider" data-i18n="subtitle">Fast container image mirror service</p>
                 </div>
             </div>
-            
-            <div class="flex items-center gap-1.5">
+
+            <!-- Centered Search Box -->
+            <div class="flex-1 flex justify-center max-w-md mx-4">
+                <div class="relative w-full group">
+                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-tertiary group-focus-within:text-accent-blue transition-colors" style="font-size: 14px;" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search ..."
+                        class="w-full pl-9 pr-3 py-2 rounded-lg border transition-all focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/20 bg-emphasis/50 text-sm"
+                        style="font-size: 14px;"
+                        oninput="handleSearch(this.value)"
+                        aria-label="Search container images"
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        spellcheck="false">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-1.5 shrink-0">
                 <button onclick="toggleLang()" class="px-4 h-12 rounded-xl flex items-center gap-2 text-secondary hover:text-primary hover:bg-emphasis transition-all duration-300 hover:scale-105 group lang-btn" id="langBtn" title="Switch to Chinese" aria-label="Toggle language">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages h-5 w-5 text-secondary group-hover:text-accent-blue transition-colors"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>
                     <span id="langIcon" class="text-sm font-medium text-secondary group-hover:text-accent-blue transition-colors">EN</span>
@@ -98,68 +117,7 @@
         </div>
     </header>
 
-<!-- Full Page Background -->
-    <div class="page-bg" id="pageBg" style="background-image: url('/public/background/wallhaven-j5g3zy.jpg')"></div>
-    <div class="page-bg-overlay"></div>
-
-    <!-- Hero Section -->
-    <section class="hero-section" aria-label="Hero banner">
-        <div class="max-w-[1400px] mx-auto px-8 py-12 relative z-10">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 hero-title" data-i18n="hero.title">
-                    Registry Sync
-                </h1>
-                <p class="text-xl md:text-2xl mb-5 hero-subtitle" data-i18n="hero.subtitle">
-                    Mirror and sync container images from Docker Hub, GHCR, GCR, QUAY and AWS ECR
-                </p>
-                <p class="text-lg hero-description" data-i18n="hero.description">
-                    Fast container image mirror service for better availability and faster pulls
-                </p>
-            </div>
-        </div>
-    </section>
-
     <main class="max-w-[1400px] mx-auto px-8 py-8 pb-16">
-        
-        <!-- Stats Grid - Compact Cards -->
-        <section class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-8" aria-label="Service statistics summary">
-            <article class="surface rounded-xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.totalMirrors">Total Mirrors</div>
-                <div class="text-2xl font-bold text-primary mono stat-value" id="statTotal">–</div>
-                <div class="mt-1 text-sm accent-green font-semibold" id="statSub">loading…</div>
-                <div class="mt-1 text-sm text-red-400 font-semibold hidden" id="statFailedInfo"></div>
-            </article>
-            
-            <article class="surface rounded-xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.storageSpace">Storage Space</div>
-                <div class="text-2xl font-bold accent-blue mono stat-value" id="statStorage">–</div>
-                <div class="mt-1 text-sm text-secondary" data-i18n="stats.totalSize">total size</div>
-            </article>
-            
-            <article class="surface rounded-xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.avgImageSize">Avg Image Size</div>
-                <div class="text-2xl font-bold text-primary mono stat-value" id="statAvg">–</div>
-                <div class="mt-1 text-sm text-secondary" data-i18n="stats.perImage">per image</div>
-            </article>
-            
-            <article class="surface rounded-xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.latestUpdates">Latest Updates</div>
-                <div class="text-2xl font-bold accent-green mono stat-value" id="statLatestCount">–</div>
-                <div class="mt-1 text-sm text-secondary" data-i18n="stats.updatedThisWeek">updated this week</div>
-            </article>
-            
-            <article class="surface rounded-xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.availableVersions">Available Versions</div>
-                <div class="text-2xl font-bold accent-purple mono stat-value" id="statAvgVersions">–</div>
-                <div class="mt-1 text-sm text-secondary" data-i18n="stats.perImage">per image</div>
-            </article>
-            
-            <article class="surface rounded-xl p-4 stat-card">
-                <div class="text-xs text-secondary uppercase tracking-wide font-semibold mb-1" data-i18n="stats.lastSync">Last Sync</div>
-                <div class="text-2xl font-bold text-primary mono stat-value" id="statLastSyncAge">–</div>
-                <div class="mt-1 text-sm text-secondary" id="statLastSyncName">–</div>
-            </article>
-        </section>
 
         <!-- Filter Tabs - Larger Style -->
 <nav class="flex items-center gap-2 flex-wrap border-b border-muted mb-6 pb-3" aria-label="Filter mirrors by registry">
@@ -187,25 +145,6 @@
                 <span data-i18n="filters.aws">AWS ECR</span> <span class="ml-1.5 px-2 py-0.5 text-sm rounded-full bg-emphasis text-secondary" id="cnt-aws">0</span>
             </button>
         </nav>
-
-        <!-- Search Box -->
-        <div class="mb-6">
-            <div class="relative group">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-tertiary group-focus-within:text-accent-blue transition-colors" style="font-size: 16px;" aria-hidden="true"></i>
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Search ..."
-                    class="w-full pl-12 pr-4 py-3 rounded-xl border transition-all focus:border-accent-blue focus:ring-2 focus:ring-accent-blue/20"
-                    style="font-size: 15px;"
-                    oninput="handleSearch(this.value)"
-                    aria-label="Search container images"
-                    autocomplete="off"
-                    autocorrect="off"
-                    autocapitalize="off"
-                    spellcheck="false">
-            </div>
-        </div>
 
         <!-- Loading State - Compact -->
         <div id="loadingState" class="py-12 text-center" role="status" aria-live="polite">
@@ -296,9 +235,6 @@
 
         <!-- Mirror List -->
         <div id="mirrorList" class="space-y-4" role="list" aria-label="Container image mirrors"></div>
-        
-        <!-- Pagination -->
-        <nav id="pagination" aria-label="Pagination navigation" class="mt-8"></nav>
 
         <!-- Empty State - Compact -->
         <div id="emptyState" class="hidden py-12 text-center" role="status">
@@ -310,19 +246,47 @@
         </div>
     </main>
 
-
-
-    <!-- Footer - Larger -->
-    <footer class="border-t border-muted mt-auto">
-        <div class="max-w-[1400px] mx-auto px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-            <div class="text-sm text-secondary tracking-wide">
-                Made with <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mx-1" style="vertical-align: middle;"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg> by Freeman
+    <!-- Command Palette Modal -->
+    <div id="searchModal" class="search-modal hidden" onclick="closeSearchModalOnOverlay(event)">
+        <div class="search-modal-container" onclick="event.stopPropagation()">
+            <!-- Input Row -->
+            <div class="search-input-row">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-input-icon"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                <input
+                    type="text"
+                    id="modalSearchInput"
+                    placeholder="Search images..."
+                    class="search-modal-input"
+                    oninput="handleModalSearch(this.value)"
+                    onkeydown="handleModalKeyDown(event)"
+                    aria-label="Search container images"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false">
             </div>
-            <div class="text-sm text-secondary tracking-wide">
-                © 2026 Registry Sync
+            
+            <!-- Results List -->
+            <div id="searchResults" class="search-results">
+                <!-- Results will be populated by JS -->
+            </div>
+            
+            <!-- Empty State -->
+            <div id="searchEmptyState" class="search-empty-state hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                <p>No results found</p>
+            </div>
+            
+            <!-- Footer -->
+            <div class="search-footer">
+                <div class="search-footer-hints">
+                    <span class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+                    <span class="search-hint"><kbd>↵</kbd> Select</span>
+                    <span class="search-hint"><kbd>esc</kbd> Close</span>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
 
     <!-- Toast Container -->
     <div id="toastWrap" class="toast-queue" aria-live="polite" aria-atomic="true"></div>
