@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-01T05:11:52.605611+00:00",
+  "updated_at": "2026-05-02T04:44:58.847660+00:00",
   "registry": "ghcr.io",
   "owner": "freemankevin",
   "total_images": 17,
@@ -427,8 +427,8 @@
       "description": "Python development environment with PyTorch",
       "repository": "freelabspace/python-local",
       "total_versions": 1,
-      "latest_version": "3.10-arm64",
-      "updated": "2026-04-24T04:41:16+00:00",
+      "latest_version": "3.10-amd64",
+      "updated": "2026-04-24T03:25:59+00:00",
       "size": "256 MB",
       "layers": 8,
       "stars": 0,
@@ -438,12 +438,12 @@
       ],
       "versions": [
         {
-          "version": "3.10-arm64",
-          "digest": "sha256:4642d80afca30bdafdabf14cad699ba54a8ad8357ee3895ee3cf60637fcae39f",
-          "created_at": "2026-04-24T04:41:16+00:00",
-          "synced_at": "2026-04-24T04:41:16+00:00",
-          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-arm64",
-          "source": "docker.io/freelabspace/python-local:3.10-arm64",
+          "version": "3.10-amd64",
+          "digest": "sha256:c5fa1c3a9a1becde25fca5c003f8151226ed9d903d948731475c7598c2c5aa52",
+          "created_at": "2026-04-24T03:25:59+00:00",
+          "synced_at": "2026-04-24T03:25:59+00:00",
+          "target": "ghcr.io/freemankevin/freelabspace/python-local:3.10-amd64",
+          "source": "docker.io/freelabspace/python-local:3.10-amd64",
           "size": "256 MB",
           "layers": 8
         }
